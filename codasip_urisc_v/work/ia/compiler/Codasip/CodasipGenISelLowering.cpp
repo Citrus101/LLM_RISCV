@@ -18,7 +18,7 @@
  * \project codasip_urisc_v.ia
  * \note          Codasip Studio version: 9.4.2
  *                Project: codasip_urisc_v.ia
- *                Date: 2025-04-13 19:12:34
+ *                Date: 2025-04-13 21:43:20
  *                Copyright (C) 2025 Codasip s.r.o.
  */
 

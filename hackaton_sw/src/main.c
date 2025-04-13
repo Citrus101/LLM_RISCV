@@ -92,25 +92,7 @@ int16_t b2[MODEL_DIM] = {
 // START OF HACKATHON CODE
 //=======================================================================================================
 
-// custom instruction to multiply two numbers
-static inline int16_t mul_shift_s7_8(int16_t a, int16_t b) {
-    int16_t result;
-    asm volatile(
-        "hackaton_custom_instr_a %0, %1, %2"
-        : "=r"(result)
-        : "r"(a), "r"(b)
-    );
-    return result;
-}
 
-static inline int16_t mac_shit_s7_8(int32_t acc, int16_t a, int16_t b){
-    asm volatile(
-        "hackaton_custom_instr_a %0, %1, %2"
-        : "+r"(acc)
-        : "r"(a), "r"(b)
-    );
-    return acc;
-}
 
 // Saturate 32-bit intermediate to 16-bit range
 static inline int16_t saturate_i16(int32_t x) {
@@ -137,6 +119,70 @@ int16_t dot_S7_8( int16_t *a, int16_t *b, int size) {
 // 2) Integer matrix-vector multiply: out = mat(rows x cols) * vec(cols x 1)
 //    Both stored in S7_8; final result also in S7_8
 // ---------------------------------------------------------
+void matvec_mul_S7_8_custom(int16_t *mat, // [rows * cols] in S7_8
+                   volatile int16_t *vec, // [cols] in S7_8
+                   int16_t       *out, // [rows] in S7_8
+                   int            rows,
+                   int            cols)
+{
+    for (int r = 0; r < rows; r++) {
+        // Accumulate in 32-bit
+        int32_t acc = 0;
+
+        asm volatile(
+            "hackaton_custom_instr_a %0, %1, %2"
+            : "+r"(acc)
+            : "r"(mat + r * cols), "r"(vec)
+        );
+
+        // Accumulate in 32-bit
+            // for (int c = 0; c < cols; c++) {
+            //     // S7_8 x S7_8 => Q16, then shift back to S7_8
+            //     int32_t mul = (int32_t)mat[r * cols + c] * (int32_t)vec[c];
+            //     printf("mat[%d]: %d  addr: %p\n", c, mat[r * cols + c], mat + r * cols + c);
+            //     printf("vec[%d]: %d addr: %p\n", c, vec[c], vec + c);
+            //     // shift down by Q_SHIFT to return to S7_8
+            //     acc += (mul >> Q_SHIFT); // Truncating
+            //     printf("acc value: %d \n", acc);
+            // }
+
+
+        // saturate to int16
+        out[r] = saturate_i16(acc);
+    }
+}
+void matvec_mul_S7_8_print(int16_t *mat, // [rows * cols] in S7_8
+                   volatile int16_t *vec, // [cols] in S7_8
+                   int16_t       *out, // [rows] in S7_8
+                   int            rows,
+                   int            cols)
+{
+    for (int r = 0; r < rows; r++) {
+        // Accumulate in 32-bit
+        int32_t acc = 0;
+
+        // asm volatile(
+        //     "hackaton_custom_instr_b %0, %1, %2"
+        //     : "+r"(acc)
+        //     : "r"(mat + r * cols), "r"(vec)
+        // );
+
+        // Accumulate in 32-bit
+            for (int c = 0; c < cols; c++) {
+                // S7_8 x S7_8 => Q16, then shift back to S7_8
+                int32_t mul = (int32_t)mat[r * cols + c] * (int32_t)vec[c];
+                printf("mat[%d]: %d  addr: %p\n", c, mat[r * cols + c], mat + r * cols + c);
+                printf("vec[%d]: %d addr: %p\n", c, vec[c], vec + c);
+                // shift down by Q_SHIFT to return to S7_8
+                acc += (mul >> Q_SHIFT); // Truncating
+                printf("acc value: %d \n", acc);
+            }
+
+
+        // saturate to int16
+        out[r] = saturate_i16(acc);
+    }
+}
 void matvec_mul_S7_8(int16_t *mat, // [rows * cols] in S7_8
                    volatile int16_t *vec, // [cols] in S7_8
                    int16_t       *out, // [rows] in S7_8
@@ -146,12 +192,25 @@ void matvec_mul_S7_8(int16_t *mat, // [rows * cols] in S7_8
     for (int r = 0; r < rows; r++) {
         // Accumulate in 32-bit
         int32_t acc = 0;
-        for (int c = 0; c < cols; c++) {
-            // S7_8 x S7_8 => Q16, then shift back to S7_8
-            int32_t mul = (int32_t)mat[r * cols + c] * (int32_t)vec[c];
-            // shift down by Q_SHIFT to return to S7_8
-            acc += (mul >> Q_SHIFT); // Truncating
-        }
+
+        // asm volatile(
+        //     "hackaton_custom_instr_b %0, %1, %2"
+        //     : "+r"(acc)
+        //     : "r"(mat + r * cols), "r"(vec)
+        // );
+
+        // Accumulate in 32-bit
+            for (int c = 0; c < cols; c++) {
+                // S7_8 x S7_8 => Q16, then shift back to S7_8
+                int32_t mul = (int32_t)mat[r * cols + c] * (int32_t)vec[c];
+                // printf("mat[%d]: %d  addr: %p\n", c, mat[r * cols + c], mat + r * cols + c);
+                // printf("vec[%d]: %d addr: %p\n", c, vec[c], vec + c);
+                // shift down by Q_SHIFT to return to S7_8
+                acc += (mul >> Q_SHIFT); // Truncating
+                // printf("acc value: %d \n", acc);
+            }
+
+
         // saturate to int16
         out[r] = saturate_i16(acc);
     }
@@ -280,7 +339,7 @@ void run_transformer_encoder(int16_t final_out[SEQ_LEN][MODEL_DIM] ,int16_t vola
     int16_t Vmat[SEQ_LEN][MODEL_DIM];
 
     for(int i = 0; i < SEQ_LEN; i++){
-        matvec_mul_S7_8(WQ, input[i], Qmat[i], MODEL_DIM, MODEL_DIM);
+        matvec_mul_S7_8_custom(WQ, input[i], Qmat[i], MODEL_DIM, MODEL_DIM);
         matvec_mul_S7_8(WK, input[i], Kmat[i], MODEL_DIM, MODEL_DIM);
         matvec_mul_S7_8(WV, input[i], Vmat[i], MODEL_DIM, MODEL_DIM);
     }
@@ -319,19 +378,23 @@ void run_transformer_encoder(int16_t final_out[SEQ_LEN][MODEL_DIM] ,int16_t vola
 void foo(void){
     int x = 10;
     int n = 10;
-    int16_t arr[10] = {1, 2, 3, 4, 5};
-    int16_t *p = arr;
+    int16_t arr1[10] = {1 << 4, 2 << 4, 3 << 4, 4 << 4, 5};
+    int16_t arr2[10] = {1 << 4, 2 << 4, 3 << 4, 4 << 4, 5};
+    int mac;
+    // int16_t *p = arr;
 
     // printf("%d", *p);
-    for(int i=0;i<n;i++, p++){
-        printf("not in instruction addr: %p value: %d \n", p, *p);
-    }
+    // for(int i=0;i<n;i++, p++){
+    //     printf("not in instruction addr: %p value: %d \n", p, *p);
+    // }
     
     asm volatile(
-        "hackaton_custom_instr_e %0, %1, %2"
-        : "=r"(x)
-        : "r"(arr), "r"(n)
+        "hackaton_custom_instr_a %0, %1, %2"
+        : "=r"(mac)
+        : "r"(arr1), "r"(arr2)
     );
+
+    printf("mac value = %d \n", mac);
 
     // printf("pointer: %p \n", p);
 
@@ -425,7 +488,7 @@ int main(void) {
     exectime = 0;
     a = GETCPUTIME();
 
-    foo();
+    // foo();
 
     b = GETCPUTIME();
     t = b-a;
@@ -435,7 +498,7 @@ int main(void) {
     exectime += t;
     
 
-    printf("Foo takes: %d Cycles \n", exectime);
+    // printf("Foo takes: %d Cycles \n", exectime);
 
 
     return 0;
