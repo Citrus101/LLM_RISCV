@@ -244,9 +244,6 @@
 -- Found PythonInterp: /tools/bin/cmdline (found version "3.9.11") 
 -- Constructing LLVMBuild project information
 -- Found Git: /usr/bin/git (found version "2.20.1") 
-fatal: ambiguous argument 'HEAD': unknown revision or path not in the working tree.
-Use '--' to separate paths from revisions, like this:
-'git <command> [<revision>...] -- [<file>...]'
 -- Linker detection: GNU Gold
 -- CODASIP_OPTIMIZATION: -O0
 -- CMAKE_CXX_FLAGS_RELEASE: -O3 

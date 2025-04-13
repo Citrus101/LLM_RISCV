@@ -92,6 +92,25 @@ int16_t b2[MODEL_DIM] = {
 // START OF HACKATHON CODE
 //=======================================================================================================
 
+// custom instruction to multiply two numbers
+static inline int16_t mul_shift_s7_8(int16_t a, int16_t b) {
+    int16_t result;
+    asm volatile(
+        "hackaton_custom_instr_a %0, %1, %2"
+        : "=r"(result)
+        : "r"(a), "r"(b)
+    );
+    return result;
+}
+
+static inline int16_t mac_shit_s7_8(int32_t acc, int16_t a, int16_t b){
+    asm volatile(
+        "hackaton_custom_instr_a %0, %1, %2"
+        : "+r"(acc)
+        : "r"(a), "r"(b)
+    );
+    return acc;
+}
 
 // Saturate 32-bit intermediate to 16-bit range
 static inline int16_t saturate_i16(int32_t x) {
@@ -297,6 +316,51 @@ void run_transformer_encoder(int16_t final_out[SEQ_LEN][MODEL_DIM] ,int16_t vola
     return;
 }
 
+void foo(void){
+    int x = 10;
+    int n = 10;
+    int16_t arr[10] = {1, 2, 3, 4, 5};
+    int16_t *p = arr;
+
+    // printf("%d", *p);
+    for(int i=0;i<n;i++, p++){
+        printf("not in instruction addr: %p value: %d \n", p, *p);
+    }
+    
+    asm volatile(
+        "hackaton_custom_instr_e %0, %1, %2"
+        : "=r"(x)
+        : "r"(arr), "r"(n)
+    );
+
+    // printf("pointer: %p \n", p);
+
+    // printf("pointer: %d \n", *p);
+    // printf("nice %d \n", f);
+
+
+
+    // asm volatile(
+    //     "hackaton_custom_instr_b %0, %1, %2"
+    //     : "+r"(c)
+    //     : "r"(a), "r"(b)
+    // );
+    // asm volatile(
+    //     "hackaton_custom_instr_b %0, %1, %2"
+    //     : "+r"(d)
+    //     : "r"(a), "r"(b)
+    // );
+    
+
+    // for(int i=0;i<6;i++){
+    //     sum += arr[i];
+    // }
+
+
+
+
+
+}
 //=======================================================================================================
 // END OF HACKATHON CODE
 //=======================================================================================================
@@ -357,8 +421,22 @@ int main(void) {
         printf("FAILED!\n");
     printf("\n== Performance ==\n");
     printf("Cycles = %d\n",exectime);
+    
+    exectime = 0;
+    a = GETCPUTIME();
 
-    // foo();
+    foo();
+
+    b = GETCPUTIME();
+    t = b-a;
+    if (t<0) {
+    t += 0x7fffffff;
+    }
+    exectime += t;
+    
+
+    printf("Foo takes: %d Cycles \n", exectime);
+
 
     return 0;
 }

@@ -469,6 +469,7 @@ element i_load
         codasip_compiler_schedule_class(sc_loads);
         addr = SEXT_XLEN(rf_gpr_read(src)) + SEXT_XLEN(simm12);
         val = load_val(opc, addr);
+        // codasip_print(13, "ncie I like opc: %x \n", opc);
         #pragma simulator
         {
             if (!r_pf_mem_error)

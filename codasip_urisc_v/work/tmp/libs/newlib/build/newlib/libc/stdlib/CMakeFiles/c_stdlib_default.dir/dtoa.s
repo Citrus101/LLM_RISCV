@@ -1816,8 +1816,7 @@ quorem:                                 //  @quorem
 	sra x13, x12, 16&31
 	add x11, x13, x11
 	and x12, x19, x12
-	sll x13, x11, 16&31
-	or x12, x12, x13
+	hackaton_custom_instr_c x12, x11, x12
 	sw x12, 0 ( x20 )
 	add x20, x20, 4
 	sra x26, x11, 16&31
@@ -1858,14 +1857,13 @@ quorem:                                 //  @quorem
 	and x15, x10, x13
 	srl x14, x16, 16&31
 	sub x14, x14, x15
-	and x15, x10, x12
-	sra x12, x12, 16&31
-	add x12, x12, x14
-	sll x14, x12, 16&31
-	or x14, x15, x14
-	sw x14, 0 ( x11 )
+	sra x15, x12, 16&31
+	add x14, x15, x14
+	and x12, x10, x12
+	hackaton_custom_instr_c x12, x14, x12
+	sw x12, 0 ( x11 )
 	add x11, x11, 4
-	sra x12, x12, 16&31
+	sra x12, x14, 16&31
 	srl x13, x13, 16&31
 	bgeu x24, x23, .LBB1_15
 .LBB1_16:                               //  %do.end64

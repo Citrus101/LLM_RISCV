@@ -12691,6 +12691,7 @@ instruction i_ext_hackaton__opc_hackaton_custom_e__reg0__reg0__regs__
     semantics
     {
     };
+    comment = "Found a loop. Instruction removed in extractor pass 'Make conditional register reads and memory loads unconditional'.";
     element_tree = "el:i_ext_hackaton(el:opc_hackaton_custom_e, el:reg0, el:reg0, el:regs)";
     slots = {{0}};
 };
@@ -12773,6 +12774,7 @@ instruction i_ext_hackaton__opc_hackaton_custom_e__reg0__regs__regs__
     semantics
     {
     };
+    comment = "Found a loop. Instruction removed in extractor pass 'Make conditional register reads and memory loads unconditional'.";
     element_tree = "el:i_ext_hackaton(el:opc_hackaton_custom_e, el:reg0, el:regs, el:regs)";
     slots = {{0}};
 };
@@ -12939,6 +12941,7 @@ instruction i_ext_hackaton__opc_hackaton_custom_e__regs__reg0__regs__
     semantics
     {
     };
+    comment = "Found a loop. Instruction removed in extractor pass 'Make conditional register reads and memory loads unconditional'.";
     element_tree = "el:i_ext_hackaton(el:opc_hackaton_custom_e, el:regs, el:reg0, el:regs)";
     slots = {{0}};
 };
@@ -13021,6 +13024,7 @@ instruction i_ext_hackaton__opc_hackaton_custom_e__regs__regs__regs__
     semantics
     {
     };
+    comment = "Found a loop. Instruction removed in extractor pass 'Make conditional register reads and memory loads unconditional'.";
     element_tree = "el:i_ext_hackaton(el:opc_hackaton_custom_e, el:regs, el:regs, el:regs)";
     slots = {{0}};
 };

@@ -23,11 +23,10 @@ rawmemchr:                              //  @rawmemchr
 .LBB0_3:                                //  %while.end
 	sll x12, x11, 8&31
 	or x12, x11, x12
-	sll x13, x12, 16&31
-	lui x14, %hi( -2139062144 )
-	or x12, x12, x13
 	lui x13, %hi( -16843009 )
+	lui x14, %hi( -2139062144 )
 	add x10, x10, -4
+	hackaton_custom_instr_c x12, x12, x12
 	add x13, x13, %lo( -16843009 )
 	add x14, x14, %lo( -2139062144 )
 .LBB0_4:                                //  %while.cond13

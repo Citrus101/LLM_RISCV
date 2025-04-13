@@ -11,7 +11,7 @@
  * in Codasip license agreement under which you obtained this file.
  *
  * \file
- * \date    2025-04-12
+ * \date    2025-04-13
  * \author  Codasip (c) simulator generator
  * \version 9.4.2
  * \brief   Source files for simulator
@@ -361,7 +361,10 @@ protected:
     resources::Signal<resources::VariableStorage<int32_t > > MI7simd_b1IH5_3isa3isa1_14i_ext_hackatonB0;
     resources::Signal<resources::VariableStorage<int32_t > > MI11accumulatorIH5_3isa3isa1_14i_ext_hackatonB0;
     resources::Signal<resources::VariableStorage<int64_t > > MI5summaIH5_3isa3isa1_14i_ext_hackatonB0;
+    resources::Signal<resources::VariableStorage<int8_t > > MI1iIH5_3isa3isa1_14i_ext_hackatonB0;
+    resources::Signal<resources::VariableStorage<uint32_t > > MI3valIH5_3isa3isa1_14i_ext_hackatonB0;
     resources::Signal<resources::VariableStorage<codasip::Integer<3, false> > > MI17codasip_tmp_var_0IH5_3isa3isa1_14i_ext_hackaton;
+    resources::Signal<resources::VariableStorage<codasip::Integer<1, false> > > MI17codasip_tmp_var_1IH5_3isa3isa1_14i_ext_hackaton;
 private:
     std::string m_Executable;
     std::unordered_map<std::string, codasip_address_t> m_Symbols;
@@ -8379,7 +8382,10 @@ inline void Sim::SignalsClockCycle()
     MI7simd_b1IH5_3isa3isa1_14i_ext_hackatonB0.clock_cycle();
     MI11accumulatorIH5_3isa3isa1_14i_ext_hackatonB0.clock_cycle();
     MI5summaIH5_3isa3isa1_14i_ext_hackatonB0.clock_cycle();
+    MI1iIH5_3isa3isa1_14i_ext_hackatonB0.clock_cycle();
+    MI3valIH5_3isa3isa1_14i_ext_hackatonB0.clock_cycle();
     MI17codasip_tmp_var_0IH5_3isa3isa1_14i_ext_hackaton.clock_cycle();
+    MI17codasip_tmp_var_1IH5_3isa3isa1_14i_ext_hackaton.clock_cycle();
 }
 /**
  *  \brief  codasip_symbol_address

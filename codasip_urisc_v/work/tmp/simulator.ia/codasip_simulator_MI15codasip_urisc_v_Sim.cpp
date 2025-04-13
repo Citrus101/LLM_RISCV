@@ -11,7 +11,7 @@
  * in Codasip license agreement under which you obtained this file.
  *
  * \file
- * \date    2025-04-12
+ * \date    2025-04-13
  * \author  Codasip (c) simulator generator
  * \version 9.4.2
  * \brief   Source files for simulator
@@ -22,8 +22,8 @@
 #include "getopt_common/interface/basicoptions.h"
 static const codasip::getopt::ToolInfoSetter g_ToolInfo(codasip::getopt::ToolInfo("Codasip  (C49_2265_2231)", 
 "codasip_urisc_v", 
-"4c6f93ad0f60f919dab8dfd964a404ec0de7acce526399ef4f21cbe724deba01", 
-"2025-04-12 20:13:15", 
+"93c548e21c7323c382d4ea9e562f7f2fcc7092cf8c4923a36b63ecada0f2ce3d", 
+"2025-04-13 19:13:45", 
 ""
 ));
 #include <sstream>
@@ -332,7 +332,10 @@ Sim::Sim(const std::string& name, const Uid uid, const char* codalParametersStri
     MI7simd_b1IH5_3isa3isa1_14i_ext_hackatonB0(m_Name + ".simd_b1", static_cast< ::codasip::resources::Uid>(304ULL)),
     MI11accumulatorIH5_3isa3isa1_14i_ext_hackatonB0(m_Name + ".accumulator", static_cast< ::codasip::resources::Uid>(305ULL)),
     MI5summaIH5_3isa3isa1_14i_ext_hackatonB0(m_Name + ".summa", static_cast< ::codasip::resources::Uid>(306ULL)),
-    MI17codasip_tmp_var_0IH5_3isa3isa1_14i_ext_hackaton(m_Name + ".codasip_tmp_var_0", static_cast< ::codasip::resources::Uid>(307ULL)),
+    MI1iIH5_3isa3isa1_14i_ext_hackatonB0(m_Name + ".i", static_cast< ::codasip::resources::Uid>(307ULL)),
+    MI3valIH5_3isa3isa1_14i_ext_hackatonB0(m_Name + ".val", static_cast< ::codasip::resources::Uid>(308ULL)),
+    MI17codasip_tmp_var_0IH5_3isa3isa1_14i_ext_hackaton(m_Name + ".codasip_tmp_var_0", static_cast< ::codasip::resources::Uid>(309ULL)),
+    MI17codasip_tmp_var_1IH5_3isa3isa1_14i_ext_hackaton(m_Name + ".codasip_tmp_var_1", static_cast< ::codasip::resources::Uid>(310ULL)),
     m_SysCalls(*this, 4, 4)
 {
     m_Executable = "";
@@ -678,7 +681,10 @@ Sim::Sim(const std::string& name, const Uid uid, const char* codalParametersStri
     MI7simd_b1IH5_3isa3isa1_14i_ext_hackatonB0.set_log(m_Log);
     MI11accumulatorIH5_3isa3isa1_14i_ext_hackatonB0.set_log(m_Log);
     MI5summaIH5_3isa3isa1_14i_ext_hackatonB0.set_log(m_Log);
+    MI1iIH5_3isa3isa1_14i_ext_hackatonB0.set_log(m_Log);
+    MI3valIH5_3isa3isa1_14i_ext_hackatonB0.set_log(m_Log);
     MI17codasip_tmp_var_0IH5_3isa3isa1_14i_ext_hackaton.set_log(m_Log);
+    MI17codasip_tmp_var_1IH5_3isa3isa1_14i_ext_hackaton.set_log(m_Log);
     m_SysCalls.SetMhz(100);
 }
 int Sim::Reset()
@@ -1679,7 +1685,19 @@ bool Sim::ResourceRead(MaxUint& data, const debugger::Tid tid, const debugger::D
         return true;
         }
         case 3000000307: {
+        data = MI1iIH5_3isa3isa1_14i_ext_hackatonB0.dread();
+        return true;
+        }
+        case 3000000308: {
+        data = MI3valIH5_3isa3isa1_14i_ext_hackatonB0.dread();
+        return true;
+        }
+        case 3000000309: {
         data = MI17codasip_tmp_var_0IH5_3isa3isa1_14i_ext_hackaton.dread();
+        return true;
+        }
+        case 3000000310: {
+        data = MI17codasip_tmp_var_1IH5_3isa3isa1_14i_ext_hackaton.dread();
         return true;
         }
         case 0: {
@@ -2781,7 +2799,19 @@ bool Sim::ResourceWrite(const debugger::Tid tid, const debugger::Did dwarf, cons
         return true;
         }
         case 3000000307: {
+        MI1iIH5_3isa3isa1_14i_ext_hackatonB0.dwrite(data);
+        return true;
+        }
+        case 3000000308: {
+        MI3valIH5_3isa3isa1_14i_ext_hackatonB0.dwrite(data);
+        return true;
+        }
+        case 3000000309: {
         MI17codasip_tmp_var_0IH5_3isa3isa1_14i_ext_hackaton.dwrite(data);
+        return true;
+        }
+        case 3000000310: {
+        MI17codasip_tmp_var_1IH5_3isa3isa1_14i_ext_hackaton.dwrite(data);
         return true;
         }
         case 0: {
@@ -3127,7 +3157,7 @@ bool Sim::MemoryWrite(const debugger::Tid tid, const debugger::Did dwarf, const 
 void Sim::InitRspJson()
 {
     std::stringstream rspJson;
-    rspJson << "{\"__generated_by\": \"Codasip Studio version 9.4.2\", \"__generated_date\": \"2025-04-12\", \"address_spaces\": [{\"addrsize\": 32, \"bytesize\": 8, \"default\": 1, \"description\": \"\", \"dwarf\": 0, \"encoding\": \"uint\", \"endian\": \"little\", \"format\": \"hex\", \"function-result\": [10, 11, 12, 13], \"interfaces\": [\"if_ldst\", \"if_fetch\"], \"name\": \"as_all\", \"set\": \"Address spaces\", \"type\": \"code-and-data\", \"uid\": 33, \"wordsize\": 32}], \"hostinfo\": {\"arch\": \"codasip_le\", \"callee-saved\": [9, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 8], \"datalayout\": \"e-p:32:32:32-S64-a0:0:32-n32\", \"endian\": \"little\", \"harts_count\": 1, \"hostname\": \"codasip_urisc_v\", \"instruction-sizes\": [32], \"ostype\": \"standalone\", \"ptrsize\": 4, \"stack_alignment\": 2, \"syscalls\": 1, \"triple\": \"codasip_le-Codasip-standalone\", \"vendor\": \"Codasip\", \"watchpoint_exceptions_received\": \"after\", \"watchpoint_simulator\": 0}, \"interfaces\": [{\"addrsize\": 32, \"bytesize\": 8, \"data_alignment\": [8, 16, 32], \"description\": \"Codasip s.r.o. CONFIDENTIAL Copyright 2022 C";
+    rspJson << "{\"__generated_by\": \"Codasip Studio version 9.4.2\", \"__generated_date\": \"2025-04-13\", \"address_spaces\": [{\"addrsize\": 32, \"bytesize\": 8, \"default\": 1, \"description\": \"\", \"dwarf\": 0, \"encoding\": \"uint\", \"endian\": \"little\", \"format\": \"hex\", \"function-result\": [10, 11, 12, 13], \"interfaces\": [\"if_ldst\", \"if_fetch\"], \"name\": \"as_all\", \"set\": \"Address spaces\", \"type\": \"code-and-data\", \"uid\": 33, \"wordsize\": 32}], \"hostinfo\": {\"arch\": \"codasip_le\", \"callee-saved\": [9, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 8], \"datalayout\": \"e-p:32:32:32-S64-a0:0:32-n32\", \"endian\": \"little\", \"harts_count\": 1, \"hostname\": \"codasip_urisc_v\", \"instruction-sizes\": [32], \"ostype\": \"standalone\", \"ptrsize\": 4, \"stack_alignment\": 2, \"syscalls\": 1, \"triple\": \"codasip_le-Codasip-standalone\", \"vendor\": \"Codasip\", \"watchpoint_exceptions_received\": \"after\", \"watchpoint_simulator\": 0}, \"interfaces\": [{\"addrsize\": 32, \"bytesize\": 8, \"data_alignment\": [8, 16, 32], \"description\": \"Codasip s.r.o. CONFIDENTIAL Copyright 2022 C";
     rspJson << "odasip\", \"dwarf\": 1, \"encoding\": \"uint\", \"endian\": \"little\", \"flag\": \"RW\", \"format\": \"hex\", \"name\": \"if_ldst\", \"set\": \"Memories\", \"uid\": 37, \"wordsize\": 32}, {\"addrsize\": 32, \"bytesize\": 8, \"data_alignment\": [32], \"description\": \"\", \"dwarf\": 2, \"encoding\": \"uint\", \"endian\": \"little\", \"flag\": \"R\", \"format\": \"hex\", \"name\": \"if_fetch\", \"set\": \"Memories\", \"uid\": 38, \"wordsize\": 32}, {\"addrsize\": 32, \"bytesize\": 8, \"data_alignment\": [8, 16, 32], \"description\": \"\", \"dwarf\": 4, \"encoding\": \"uint\", \"endian\": \"little\", \"flag\": \"RW\", \"format\": \"hex\", \"name\": \"testbench_m_memory_if_ldst\", \"set\": \"Memories\", \"uid\": 48, \"wordsize\": 32}, {\"addrsize\": 32, \"bytesize\": 8, \"data_alignment\": [8, 16, 32], \"description\": \"\", \"dwarf\": 5, \"encoding\": \"uint\", \"endian\": \"little\", \"flag\": \"R\", \"format\": \"hex\", \"name\": \"testbench_m_memory_if_fetch\", \"set\": \"Memories\", \"uid\": 49, \"wordsize\": 32}], \"ports\": [{\"bitsize\": 1, \"description\": \"\", \"direction\": \"IN\", \"dwarf\": 64, \"encoding\": \"uint\", \"format\": \"hex\", \"nam";
     rspJson << "e\": \"p_meip\", \"set\": \"In Port(s)\", \"type\": \"INTERRUPT\", \"uid\": 39}, {\"bitsize\": 1, \"description\": \"\", \"direction\": \"IN\", \"dwarf\": 65, \"encoding\": \"uint\", \"format\": \"hex\", \"name\": \"p_msip\", \"set\": \"In Port(s)\", \"type\": \"INTERRUPT\", \"uid\": 40}, {\"bitsize\": 1, \"description\": \"\", \"direction\": \"IN\", \"dwarf\": 66, \"encoding\": \"uint\", \"format\": \"hex\", \"name\": \"p_mtip\", \"set\": \"In Port(s)\", \"type\": \"INTERRUPT\", \"uid\": 41}, {\"bitsize\": 1, \"description\": \"\", \"direction\": \"OUT\", \"dwarf\": 67, \"encoding\": \"uint\", \"format\": \"hex\", \"name\": \"p_wfi\", \"set\": \"Out Port(s)\", \"type\": \"CONTROL\", \"uid\": 42}, {\"bitsize\": 1, \"description\": \"\", \"direction\": \"IN\", \"dwarf\": 68, \"encoding\": \"uint\", \"format\": \"hex\", \"name\": \"p_nmi\", \"set\": \"In Port(s)\", \"type\": \"INTERRUPT\", \"uid\": 43}, {\"bitsize\": 32, \"description\": \"\", \"direction\": \"IN\", \"dwarf\": 69, \"encoding\": \"uint\", \"format\": \"hex\", \"name\": \"p_nmi_mtval\", \"set\": \"In Port(s)\", \"type\": \"DATA\", \"uid\": 44}, {\"bitsize\": 32, \"description\": \"\", \"direction\": \"IN\", \"dwa";
     rspJson << "rf\": 70, \"encoding\": \"uint\", \"format\": \"hex\", \"name\": \"p_boot_addr\", \"set\": \"In Port(s)\", \"type\": \"DATA\", \"uid\": 45}], \"registers\": [{\"arch\": 0, \"bitsize\": 32, \"description\": \"Codasip s.r.o. CONFIDENTIAL Copyright 2022 Codasip\", \"dwarf\": 49, \"encoding\": \"uint\", \"format\": \"hex\", \"gcc\": 0, \"name\": \"r_instr_fetch\", \"set\": \"Micro-architectural Registers\", \"uid\": 1}, {\"arch\": 0, \"bitsize\": 1, \"description\": \"\", \"dwarf\": 50, \"encoding\": \"uint\", \"format\": \"hex\", \"gcc\": 1, \"name\": \"r_fetch_fault\", \"set\": \"Micro-architectural Registers\", \"uid\": 2}, {\"arch\": 0, \"bitsize\": 1, \"description\": \"\", \"dwarf\": 51, \"encoding\": \"uint\", \"format\": \"hex\", \"gcc\": 2, \"name\": \"r_pf_mem_error\", \"set\": \"Micro-architectural Registers\", \"uid\": 3}, {\"arch\": 0, \"bitsize\": 1, \"description\": \"\", \"dwarf\": 52, \"encoding\": \"uint\", \"format\": \"hex\", \"gcc\": 3, \"name\": \"r_minstret_written\", \"set\": \"Micro-architectural Registers\", \"uid\": 4}, {\"arch\": 0, \"bitsize\": 1, \"description\": \"\", \"dwarf\": 53, \"encoding\": \"uint\", \"format\"";
@@ -6704,30 +6734,55 @@ void Sim::MI7i_storeIH5_3isa3isa()
 void Sim::MI14i_ext_hackatonIH5_3isa3isa()
 {
     {
-        MI11rf_gpr_read(MI52codasip_return_MI7reg_anyIH5_3isa3isa9_7reg_any4rs_1.read());
-        MI11rf_gpr_read(MI52codasip_return_MI7reg_anyIH5_3isa3isa9_7reg_any4rs_2.read());
-        MI11rf_gpr_read(MI51codasip_return_MI7reg_anyIH5_3isa3isa9_7reg_any3dst.read());
+        MI2s1IH5_3isa3isa1_14i_ext_hackatonB0.write(MI11rf_gpr_read(MI52codasip_return_MI7reg_anyIH5_3isa3isa9_7reg_any4rs_1.read()));
+        MI2s2IH5_3isa3isa1_14i_ext_hackatonB0.write(MI11rf_gpr_read(MI52codasip_return_MI7reg_anyIH5_3isa3isa9_7reg_any4rs_2.read()));
+        MI2s3IH5_3isa3isa1_14i_ext_hackatonB0.write(MI11rf_gpr_read(MI51codasip_return_MI7reg_anyIH5_3isa3isa9_7reg_any3dst.read()));
         MI17codasip_tmp_var_0IH5_3isa3isa1_14i_ext_hackaton.write(MI82codasip_return_MI21opc_hackaton_custom_iIH5_3isa3isa24_21opc_hackaton_custom_i3opc.read());
         switch (static_cast<uint8_t>(MI17codasip_tmp_var_0IH5_3isa3isa1_14i_ext_hackaton.read()))
         {
             case 0:
             {
+                MI6resultIH5_3isa3isa1_14i_ext_hackatonB0.write(((MI2s1IH5_3isa3isa1_14i_ext_hackatonB0.read() * MI2s2IH5_3isa3isa1_14i_ext_hackatonB0.read()) >> int32_t(8)));
                 break;
             }
             case 1:
             {
+                MI6resultIH5_3isa3isa1_14i_ext_hackatonB0.write(MI2s3IH5_3isa3isa1_14i_ext_hackatonB0.read() + ((MI2s1IH5_3isa3isa1_14i_ext_hackatonB0.read() * MI2s2IH5_3isa3isa1_14i_ext_hackatonB0.read()) >> int32_t(8)));
                 break;
             }
             case 2:
             {
+                MI6resultIH5_3isa3isa1_14i_ext_hackatonB0.write((MI2s1IH5_3isa3isa1_14i_ext_hackatonB0.read() << int32_t(16)) | (MI2s2IH5_3isa3isa1_14i_ext_hackatonB0.read()));
                 break;
             }
             case 3:
             {
+                MI7simd_a0IH5_3isa3isa1_14i_ext_hackatonB0.write((MI2s1IH5_3isa3isa1_14i_ext_hackatonB0.read() & int32_t(65535)));
+                MI7simd_a1IH5_3isa3isa1_14i_ext_hackatonB0.write((MI2s1IH5_3isa3isa1_14i_ext_hackatonB0.read() >> int32_t(16)));
+                MI7simd_b0IH5_3isa3isa1_14i_ext_hackatonB0.write((MI2s2IH5_3isa3isa1_14i_ext_hackatonB0.read() & int32_t(65535)));
+                MI7simd_b1IH5_3isa3isa1_14i_ext_hackatonB0.write((MI2s2IH5_3isa3isa1_14i_ext_hackatonB0.read() >> int32_t(16)));
+                MI11accumulatorIH5_3isa3isa1_14i_ext_hackatonB0.write(MI7simd_a0IH5_3isa3isa1_14i_ext_hackatonB0.read() + MI7simd_a1IH5_3isa3isa1_14i_ext_hackatonB0.read() + MI7simd_b0IH5_3isa3isa1_14i_ext_hackatonB0.read() + MI7simd_b1IH5_3isa3isa1_14i_ext_hackatonB0.read());
+                MI6resultIH5_3isa3isa1_14i_ext_hackatonB0.write(MI11accumulatorIH5_3isa3isa1_14i_ext_hackatonB0.read());
                 break;
             }
             case 4:
             {
+                {
+                    MI1iIH5_3isa3isa1_14i_ext_hackatonB0.write(int32_t(0));
+                    MI17codasip_tmp_var_1IH5_3isa3isa1_14i_ext_hackaton.write(static_cast<int32_t>(MI1iIH5_3isa3isa1_14i_ext_hackatonB0.read()) < MI2s2IH5_3isa3isa1_14i_ext_hackatonB0.read());
+                    while (MI17codasip_tmp_var_1IH5_3isa3isa1_14i_ext_hackaton.read())
+                    {
+                        MI3valIH5_3isa3isa1_14i_ext_hackatonB0.write(MI8load_val(int32_t(3),MI2s1IH5_3isa3isa1_14i_ext_hackatonB0.read()));
+                        SIM_LOG(LOG_TYPE_PRINT, 1, m_SimCycleCounter)
+                             << "in instruction addr: 0x"
+                             <<  std::hex << (MI2s1IH5_3isa3isa1_14i_ext_hackatonB0.read()) << std::dec
+                             << " value: "
+                             <<  std::dec << (MI3valIH5_3isa3isa1_14i_ext_hackatonB0.read()) << std::dec
+                             << " \n";
+                        MI1iIH5_3isa3isa1_14i_ext_hackatonB0.write(static_cast<int8_t>(MI1iIH5_3isa3isa1_14i_ext_hackatonB0.read() + int8_t(1))), MI2s1IH5_3isa3isa1_14i_ext_hackatonB0.write(MI2s1IH5_3isa3isa1_14i_ext_hackatonB0.read() + (int32_t(2)));
+                        MI17codasip_tmp_var_1IH5_3isa3isa1_14i_ext_hackaton.write(static_cast<int32_t>(MI1iIH5_3isa3isa1_14i_ext_hackatonB0.read()) < MI2s2IH5_3isa3isa1_14i_ext_hackatonB0.read());
+                    }
+                }
                 break;
             }
             default:
@@ -7191,7 +7246,13 @@ MaxInt Sim::ResourceRead(const Uid resource, const simulator::Address addr)
     case 306:
         return (MI5summaIH5_3isa3isa1_14i_ext_hackatonB0.dread());
     case 307:
+        return (MI1iIH5_3isa3isa1_14i_ext_hackatonB0.dread());
+    case 308:
+        return (MI3valIH5_3isa3isa1_14i_ext_hackatonB0.dread());
+    case 309:
         return (MI17codasip_tmp_var_0IH5_3isa3isa1_14i_ext_hackaton.dread());
+    case 310:
+        return (MI17codasip_tmp_var_1IH5_3isa3isa1_14i_ext_hackaton.dread());
     default:
         SIM_LOG(LOG_TYPE_ERROR, 0, m_SimCycleCounter) << "unknown resource UID: '" << resource << "'" << std::endl;
     }
@@ -7898,7 +7959,16 @@ void Sim::ResourceWrite(const Uid resource, const MaxInt& data, const simulator:
         MI5summaIH5_3isa3isa1_14i_ext_hackatonB0.dwrite((data));
         break;
     case 307:
+        MI1iIH5_3isa3isa1_14i_ext_hackatonB0.dwrite((data));
+        break;
+    case 308:
+        MI3valIH5_3isa3isa1_14i_ext_hackatonB0.dwrite((data));
+        break;
+    case 309:
         MI17codasip_tmp_var_0IH5_3isa3isa1_14i_ext_hackaton.dwrite((data));
+        break;
+    case 310:
+        MI17codasip_tmp_var_1IH5_3isa3isa1_14i_ext_hackaton.dwrite((data));
         break;
     default:
         SIM_LOG(LOG_TYPE_ERROR, 0, m_SimCycleCounter) << "unknown resource UID: '" << resource << "'" << std::endl;

@@ -143,8 +143,7 @@ __multadd:                              //  @__multadd
 	srl x11, x9, 16&31
 	add x10, x10, x11
 	and x11, x23, x9
-	sll x12, x10, 16&31
-	or x11, x11, x12
+	hackaton_custom_instr_c x11, x10, x11
 	add x22, x22, 4
 	srl x9, x10, 16&31
 	add x21, x21, 1
@@ -785,8 +784,7 @@ __multiply:                             //  @__multiply
 	srl x11, x10, 16&31
 	add x11, x11, x19
 	and x10, x27, x10
-	sll x12, x11, 16&31
-	or x10, x10, x12
+	hackaton_custom_instr_c x10, x11, x10
 	add x18, x18, 4
 	sw x10, 0 ( x22 )
 	add x10, x18, x25
@@ -818,8 +816,7 @@ __multiply:                             //  @__multiply
 	add x11, x22, x11
 	add x19, x10, x11
 	and x10, x27, fp
-	sll x11, x19, 16&31
-	or x10, x10, x11
+	hackaton_custom_instr_c x10, x19, x10
 	sw x10, 0 ( x18 )
 	lhu x10, 2 ( x23 )
 	mv x11, x9
@@ -1395,9 +1392,8 @@ __mdiff:                                //  @__mdiff
 	sub x7, x28, x7
 	add x5, x7, x5
 	and x15, x14, x15
-	sll x6, x5, 16&31
-	or x15, x15, x6
 	add x6, x18, x12
+	hackaton_custom_instr_c x15, x5, x15
 	add x18, x18, 4
 	sw x15, 0 ( x6 )
 	add x6, x18, x16
@@ -1420,11 +1416,10 @@ __mdiff:                                //  @__mdiff
 	sra x7, x15, 16&31
 	srl x6, x6, 16&31
 	add x6, x6, x7
-	and x15, x14, x15
-	sll x7, x6, 16&31
-	or x15, x15, x7
 	add x7, x5, x12
+	and x15, x14, x15
 	add x7, x18, x7
+	hackaton_custom_instr_c x15, x6, x15
 	sw x15, 0 ( x7 )
 	add x7, x5, x17
 	add x5, x5, 4

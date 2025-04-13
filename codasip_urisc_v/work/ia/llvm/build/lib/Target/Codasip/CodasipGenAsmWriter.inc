@@ -2047,7 +2047,7 @@ void CodasipInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     875187U,	// i_ext_hackaton__opc_hackaton_custom_a__regs__reg0_alias__regs__
     134240947U,	// i_ext_hackaton__opc_hackaton_custom_a__regs__regs__reg0__
     151018163U,	// i_ext_hackaton__opc_hackaton_custom_a__regs__regs__reg0_alias__
-    1442863795U,	// i_ext_hackaton__opc_hackaton_custom_a__regs__regs__regs__
+    918575795U,	// i_ext_hackaton__opc_hackaton_custom_a__regs__regs__regs__
     8155U,	// i_ext_hackaton__opc_hackaton_custom_b__reg0__reg0__reg0__
     10624U,	// i_ext_hackaton__opc_hackaton_custom_b__reg0__reg0__reg0_alias__
     84719U,	// i_ext_hackaton__opc_hackaton_custom_b__reg0__reg0__regs__
@@ -2074,7 +2074,7 @@ void CodasipInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     875222U,	// i_ext_hackaton__opc_hackaton_custom_b__regs__reg0_alias__regs__
     134240982U,	// i_ext_hackaton__opc_hackaton_custom_b__regs__regs__reg0__
     151018198U,	// i_ext_hackaton__opc_hackaton_custom_b__regs__regs__reg0_alias__
-    1442863830U,	// i_ext_hackaton__opc_hackaton_custom_b__regs__regs__regs__
+    918575830U,	// i_ext_hackaton__opc_hackaton_custom_b__regs__regs__regs__
     8205U,	// i_ext_hackaton__opc_hackaton_custom_c__reg0__reg0__reg0__
     10678U,	// i_ext_hackaton__opc_hackaton_custom_c__reg0__reg0__reg0_alias__
     84765U,	// i_ext_hackaton__opc_hackaton_custom_c__reg0__reg0__regs__
@@ -2101,7 +2101,7 @@ void CodasipInstPrinter::printInstruction(const MCInst *MI, raw_ostream &O) {
     875260U,	// i_ext_hackaton__opc_hackaton_custom_c__regs__reg0_alias__regs__
     134241020U,	// i_ext_hackaton__opc_hackaton_custom_c__regs__regs__reg0__
     151018236U,	// i_ext_hackaton__opc_hackaton_custom_c__regs__regs__reg0_alias__
-    1442863868U,	// i_ext_hackaton__opc_hackaton_custom_c__regs__regs__regs__
+    918575868U,	// i_ext_hackaton__opc_hackaton_custom_c__regs__regs__regs__
     8240U,	// i_ext_hackaton__opc_hackaton_custom_d__reg0__reg0__reg0__
     10715U,	// i_ext_hackaton__opc_hackaton_custom_d__reg0__reg0__reg0_alias__
     84798U,	// i_ext_hackaton__opc_hackaton_custom_d__reg0__reg0__regs__

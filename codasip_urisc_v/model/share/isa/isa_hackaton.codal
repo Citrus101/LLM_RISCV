@@ -21,33 +21,54 @@ element i_ext_hackaton
     assembly { opc dst "," rs_1 "," rs_2 };
     binary { 0:bit[7] rs_2 rs_1 opc dst OPC_HACKATON };
 
+    
+
     semantics
     {
         int32 result,s1,s2,s3;
         int32 simd_a0,simd_a1,simd_b0,simd_b1,accumulator;
         int64 summa;
+        int8 i;
+        UXLEN_T val;
 
         s1 = rf_gpr_read(rs_1);
         s2 = rf_gpr_read(rs_2);
         s3 = rf_gpr_read(dst);
 
+        // codasip_print(13, "bla bla \n");
 
         switch (opc)
         {
             case OPC_HACKATON_CUSTOM_A:
-                // result = ((s1 * s2) >> 8) ;             
+                
+                result = ((s1 * s2) >> 8) ;             
                 break;
             case OPC_HACKATON_CUSTOM_B:
-                // result = s3 + ((s1 * s2) >> 8);
-                
+                result = s3 + ((s1 * s2) >> 8);
                 break;
             case OPC_HACKATON_CUSTOM_C:
+                result = (s1 << 16) | (s2); 
                 //result = ADD_OPERATION;
                 break;
             case OPC_HACKATON_CUSTOM_D:
+                //assuming s1, s2 are packed with 2 integers
+                simd_a0 = (s1 & 0xffff); //LSB
+                simd_a1 = (s1 >> 16); //MSB
+                simd_b0 = (s2 & 0xffff); //LSB
+                simd_b1 = (s2 >> 16); //MSB
+
+                accumulator = simd_a0 + simd_a1 + simd_b0 + simd_b1;
+                result = accumulator;
+
                 //result = ADD_OPERATION;
                 break;
             case OPC_HACKATON_CUSTOM_E:
+                for(i = 0;i<s2;i++, s1+=2){
+                    val = load_val(3, s1);
+                    codasip_print(1, "in instruction addr: 0x%x value: %d \n", s1, val);
+                    // codasip_print(1, "arr[%d] = %d \n", i, val);
+                }
+
                 //result = ADD_OPERATION;
                 break;
             default:

@@ -59,14 +59,12 @@ memmem:                                 //  @memmem
 	xor x10, x20, 2
 	bltu x0, x10, .LBB0_15
 .LBB0_7:                                //  %if.then11
-	lbu x11, 0 ( x9 )
-	lbu x10, 1 ( x9 )
-	lbu x12, 0 ( fp )
-	sll x11, x11, 16&31
-	or x10, x10, x11
-	lbu x11, 1 ( fp )
-	sll x12, x12, 16&31
-	or x11, x11, x12
+	lbu x10, 0 ( x9 )
+	lbu x11, 1 ( x9 )
+	lbu x12, 1 ( fp )
+	hackaton_custom_instr_c x10, x10, x11
+	lbu x11, 0 ( fp )
+	hackaton_custom_instr_c x11, x11, x12
 	beq x10, x11, .LBB0_13
 .LBB0_8:                                //  %if.then11
 	bge x0, x13, .LBB0_13
@@ -76,8 +74,7 @@ memmem:                                 //  @memmem
                                         //  =>This Inner Loop Header: Depth=1
 	mv x13, x12
 	lbu x12, 0 ( x13 )
-	sll x10, x10, 16&31
-	or x10, x12, x10
+	hackaton_custom_instr_c x10, x10, x12
 	add x12, x13, 1
 	beq x10, x11, .LBB0_12
 .LBB0_11:                               //  %for.body

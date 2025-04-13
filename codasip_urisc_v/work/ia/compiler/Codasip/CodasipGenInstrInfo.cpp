@@ -11,14 +11,14 @@
  * in Codasip license agreement under which you obtained this file.
  *
  * \file
- * \date    2025-04-12
+ * \date    2025-04-13
  * \author  Codasip (c) C compiler backend generator
  * \version 9.4.2
  * \brief   Source for compiler backend
  * \project codasip_urisc_v.ia
  * \note          Codasip Studio version: 9.4.2
  *                Project: codasip_urisc_v.ia
- *                Date: 2025-04-12 20:11:59
+ *                Date: 2025-04-13 19:12:34
  *                Copyright (C) 2025 Codasip s.r.o.
  */
 
@@ -2167,12 +2167,12 @@ void CodasipGenInstrInfo2::getAllPosInBundleImpl(int opc, SlotData &vec) {
     vec[0].reserve(1);
     vec[0].push_back(0);
     break;
-  case Codasip::i_ext_hackaton__opc_hackaton_custom_b__reg0__reg0__reg0__:
+  case Codasip::i_ext_hackaton__opc_hackaton_custom_a__regs__regs__regs__:
     vec.resize(1);
     vec[0].reserve(1);
     vec[0].push_back(0);
     break;
-  case Codasip::i_ext_hackaton__opc_hackaton_custom_b__regs__reg0__reg0__:
+  case Codasip::i_ext_hackaton__opc_hackaton_custom_b__reg0__reg0__reg0__:
     vec.resize(1);
     vec[0].reserve(1);
     vec[0].push_back(0);
@@ -2187,6 +2187,21 @@ void CodasipGenInstrInfo2::getAllPosInBundleImpl(int opc, SlotData &vec) {
     vec[0].reserve(1);
     vec[0].push_back(0);
     break;
+  case Codasip::i_ext_hackaton__opc_hackaton_custom_c__regs__reg0__regs__:
+    vec.resize(1);
+    vec[0].reserve(1);
+    vec[0].push_back(0);
+    break;
+  case Codasip::i_ext_hackaton__opc_hackaton_custom_c__regs__regs__reg0__:
+    vec.resize(1);
+    vec[0].reserve(1);
+    vec[0].push_back(0);
+    break;
+  case Codasip::i_ext_hackaton__opc_hackaton_custom_c__regs__regs__regs__:
+    vec.resize(1);
+    vec[0].reserve(1);
+    vec[0].push_back(0);
+    break;
   case Codasip::i_ext_hackaton__opc_hackaton_custom_d__reg0__reg0__reg0__:
     vec.resize(1);
     vec[0].reserve(1);
@@ -2197,12 +2212,22 @@ void CodasipGenInstrInfo2::getAllPosInBundleImpl(int opc, SlotData &vec) {
     vec[0].reserve(1);
     vec[0].push_back(0);
     break;
-  case Codasip::i_ext_hackaton__opc_hackaton_custom_e__reg0__reg0__reg0__:
+  case Codasip::i_ext_hackaton__opc_hackaton_custom_d__regs__reg0__regs__:
     vec.resize(1);
     vec[0].reserve(1);
     vec[0].push_back(0);
     break;
-  case Codasip::i_ext_hackaton__opc_hackaton_custom_e__regs__reg0__reg0__:
+  case Codasip::i_ext_hackaton__opc_hackaton_custom_d__regs__regs__reg0__:
+    vec.resize(1);
+    vec[0].reserve(1);
+    vec[0].push_back(0);
+    break;
+  case Codasip::i_ext_hackaton__opc_hackaton_custom_d__regs__regs__regs__:
+    vec.resize(1);
+    vec[0].reserve(1);
+    vec[0].push_back(0);
+    break;
+  case Codasip::i_ext_hackaton__opc_hackaton_custom_e__reg0__reg0__reg0__:
     vec.resize(1);
     vec[0].reserve(1);
     vec[0].push_back(0);
@@ -3520,6 +3545,11 @@ void CodasipGenInstrInfo2::getAllPosInBundleImpl(int opc, SlotData &vec) {
   case Codasip::e_movi32__JT:
   case Codasip::e_movi32__CP:
     vec.resize(0);
+    break;
+  case Codasip::i_ext_hackaton__opc_hackaton_custom_b__regs__regs__regs__:
+    vec.resize(1);
+    vec[0].reserve(1);
+    vec[0].push_back(0);
     break;
   case Codasip::i_jump_reg_alias__regs__TAILCALL_CLONE_:
     vec.resize(1);
@@ -10068,11 +10098,6 @@ void CodasipGenInstrInfo2::getAllPosInBundleImpl(int opc, SlotData &vec) {
     vec[0].reserve(1);
     vec[0].push_back(0);
     break;
-  case Codasip::i_ext_hackaton__opc_hackaton_custom_a__regs__regs__regs__:
-    vec.resize(1);
-    vec[0].reserve(1);
-    vec[0].push_back(0);
-    break;
   case Codasip::i_ext_hackaton__opc_hackaton_custom_b__reg0__reg0__regs__:
     vec.resize(1);
     vec[0].reserve(1);
@@ -10098,11 +10123,6 @@ void CodasipGenInstrInfo2::getAllPosInBundleImpl(int opc, SlotData &vec) {
     vec[0].reserve(1);
     vec[0].push_back(0);
     break;
-  case Codasip::i_ext_hackaton__opc_hackaton_custom_b__regs__regs__regs__:
-    vec.resize(1);
-    vec[0].reserve(1);
-    vec[0].push_back(0);
-    break;
   case Codasip::i_ext_hackaton__opc_hackaton_custom_c__reg0__reg0__regs__:
     vec.resize(1);
     vec[0].reserve(1);
@@ -10114,21 +10134,6 @@ void CodasipGenInstrInfo2::getAllPosInBundleImpl(int opc, SlotData &vec) {
     vec[0].push_back(0);
     break;
   case Codasip::i_ext_hackaton__opc_hackaton_custom_c__reg0__regs__regs__:
-    vec.resize(1);
-    vec[0].reserve(1);
-    vec[0].push_back(0);
-    break;
-  case Codasip::i_ext_hackaton__opc_hackaton_custom_c__regs__reg0__regs__:
-    vec.resize(1);
-    vec[0].reserve(1);
-    vec[0].push_back(0);
-    break;
-  case Codasip::i_ext_hackaton__opc_hackaton_custom_c__regs__regs__reg0__:
-    vec.resize(1);
-    vec[0].reserve(1);
-    vec[0].push_back(0);
-    break;
-  case Codasip::i_ext_hackaton__opc_hackaton_custom_c__regs__regs__regs__:
     vec.resize(1);
     vec[0].reserve(1);
     vec[0].push_back(0);
@@ -10148,21 +10153,6 @@ void CodasipGenInstrInfo2::getAllPosInBundleImpl(int opc, SlotData &vec) {
     vec[0].reserve(1);
     vec[0].push_back(0);
     break;
-  case Codasip::i_ext_hackaton__opc_hackaton_custom_d__regs__reg0__regs__:
-    vec.resize(1);
-    vec[0].reserve(1);
-    vec[0].push_back(0);
-    break;
-  case Codasip::i_ext_hackaton__opc_hackaton_custom_d__regs__regs__reg0__:
-    vec.resize(1);
-    vec[0].reserve(1);
-    vec[0].push_back(0);
-    break;
-  case Codasip::i_ext_hackaton__opc_hackaton_custom_d__regs__regs__regs__:
-    vec.resize(1);
-    vec[0].reserve(1);
-    vec[0].push_back(0);
-    break;
   case Codasip::i_ext_hackaton__opc_hackaton_custom_e__reg0__reg0__regs__:
     vec.resize(1);
     vec[0].reserve(1);
@@ -10174,6 +10164,11 @@ void CodasipGenInstrInfo2::getAllPosInBundleImpl(int opc, SlotData &vec) {
     vec[0].push_back(0);
     break;
   case Codasip::i_ext_hackaton__opc_hackaton_custom_e__reg0__regs__regs__:
+    vec.resize(1);
+    vec[0].reserve(1);
+    vec[0].push_back(0);
+    break;
+  case Codasip::i_ext_hackaton__opc_hackaton_custom_e__regs__reg0__reg0__:
     vec.resize(1);
     vec[0].reserve(1);
     vec[0].push_back(0);
@@ -10239,6 +10234,11 @@ void CodasipGenInstrInfo2::getAllPosInBundleImpl(int opc, SlotData &vec) {
     vec[0].push_back(0);
     break;
   case Codasip::i_snez_alias__reg0__regs__:
+    vec.resize(1);
+    vec[0].reserve(1);
+    vec[0].push_back(0);
+    break;
+  case Codasip::i_ext_hackaton__opc_hackaton_custom_b__regs__reg0__reg0__:
     vec.resize(1);
     vec[0].reserve(1);
     vec[0].push_back(0);
