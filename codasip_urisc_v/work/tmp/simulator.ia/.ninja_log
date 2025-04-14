@@ -1,8 +1,8 @@
 # ninja log v5
-1	945	1744580682062448573	CMakeFiles/isimulator.dir/tools/src/simulator_helpers.cpp.o	f7dfca8a5d8e8387
-1	1023	1744580682142449633	CMakeFiles/isimulator.dir/tools/src/syscalls.cpp.o	aac2b8c4defa1c95
-0	1476	1744580682594455624	CMakeFiles/isimulator.dir/codasip_resources_MemoryCore_codasip_memory_m_memory_t.cpp.o	de10415b1074e9e4
-1	2539	1744580683654469674	CMakeFiles/isimulator.dir/tools/src/simulator.cpp.o	f1e44ad7893c1b8e
-0	5278	1744580686390505937	CMakeFiles/isimulator.dir/codasip_simulator_MI15codasip_urisc_v_Sim.cpp.o	ea382ad798effd2d
-5278	8276	1744580689378546307	codasip_urisc_v-ia-isimulator	39a78b4cb2577c12
-8276	8348	0	CMakeFiles/install.util	44dd589478aff7e5
+1	862	1744631378931149645	CMakeFiles/isimulator.dir/tools/src/syscalls.cpp.o	aac2b8c4defa1c95
+1	1231	1744631379299149794	CMakeFiles/isimulator.dir/tools/src/simulator_helpers.cpp.o	f7dfca8a5d8e8387
+0	1455	1744631379523149886	CMakeFiles/isimulator.dir/codasip_resources_MemoryCore_codasip_memory_m_memory_t.cpp.o	de10415b1074e9e4
+0	2670	1744631380739150380	CMakeFiles/isimulator.dir/tools/src/simulator.cpp.o	f1e44ad7893c1b8e
+0	5696	1744631383763151608	CMakeFiles/isimulator.dir/codasip_simulator_MI15codasip_urisc_v_Sim.cpp.o	ea382ad798effd2d
+5697	9184	1744631387235153019	codasip_urisc_v-ia-isimulator	39a78b4cb2577c12
+9184	9270	0	CMakeFiles/install.util	44dd589478aff7e5

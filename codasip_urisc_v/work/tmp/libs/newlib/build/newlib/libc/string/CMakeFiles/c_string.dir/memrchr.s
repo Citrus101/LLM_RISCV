@@ -37,19 +37,20 @@ memrchr:                                //  @memrchr
 	bltu x0, x15, .LBB0_10
 .LBB0_6:                                //  %if.then11
 	sll x14, x11, 8&31
-	or x15, x11, x14
+	or x14, x11, x14
+	sll x15, x14, 16&31
 	lui x16, %hi( -16843009 )
 	lui x17, %hi( -2139062144 )
-	add x14, x13, -4
-	hackaton_custom_instr_c x15, x15, x15
+	or x14, x14, x15
+	add x15, x13, -4
 	add x16, x16, %lo( -16843009 )
 	add x17, x17, %lo( -2139062144 )
 	add x5, x0, 3
 .LBB0_7:                                //  %while.body26
                                         //  =>This Inner Loop Header: Depth=1
-	add x6, x12, x14
+	add x6, x12, x15
 	lw x6, 0 ( x6 )
-	xor x6, x15, x6
+	xor x6, x14, x6
 	add x7, x16, x6
 	xor x6, x6, -1
 	and x6, x7, x6

@@ -130,7 +130,8 @@ __dprintf:                              //  @__dprintf
 	lb x10, 3 ( x19 )
 	lbu x11, 2 ( x19 )
 	sll x10, x10, 24&31
-	hackaton_custom_instr_c x10, x11, x10
+	sll x11, x11, 16&31
+	or x10, x10, x11
 	lbu x11, 1 ( x19 )
 	sll x11, x11, 8&31
 	or x10, x11, x10
@@ -223,7 +224,8 @@ __dprintf:                              //  @__dprintf
 	lbu x11, 2 ( x19 )
 	add x21, sp, 58
 	sll x10, x10, 24&31
-	hackaton_custom_instr_c x10, x11, x10
+	sll x11, x11, 16&31
+	or x10, x10, x11
 	lbu x11, 1 ( x19 )
 	sll x11, x11, 8&31
 	or x10, x11, x10

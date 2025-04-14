@@ -53,15 +53,16 @@ category:                               //  @category
 	mv x11, x18
 	jal __mulsi3
 	add x11, x10, x21
-	lbu x10, 3 ( x11 )
-	lbu x12, 2 ( x11 )
-	lbu x13, 0 ( x11 )
+	lbu x10, 1 ( x11 )
+	lbu x12, 0 ( x11 )
+	lbu x13, 2 ( x11 )
 	sll x10, x10, 8&31
 	or x10, x12, x10
-	lbu x12, 1 ( x11 )
+	lbu x12, 3 ( x11 )
 	sll x12, x12, 8&31
 	or x12, x13, x12
-	hackaton_custom_instr_c x10, x10, x12
+	sll x12, x12, 16&31
+	or x10, x10, x12
 	lbu x12, 4 ( x11 )
 	lbu x11, 5 ( x11 )
 	sll x11, x11, 8&31

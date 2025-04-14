@@ -510,6 +510,7 @@ element i_store
         addr = SEXT_XLEN(rf_gpr_read(src1)) + SEXT_XLEN(simm12_s);
         data = rf_gpr_read(src2);
         write_val(opc, addr, data);
+        // codasip_print(15, "opc of sw %d \n", opc);
     };
 };
 

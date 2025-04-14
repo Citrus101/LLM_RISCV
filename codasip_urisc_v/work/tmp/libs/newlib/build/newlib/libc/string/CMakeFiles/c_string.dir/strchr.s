@@ -41,7 +41,8 @@ strchr:                                 //  @strchr
 .LBB0_7:                                //  %land.rhs.preheader
 	sll x15, x12, 8&31
 	or x15, x12, x15
-	hackaton_custom_instr_c x15, x15, x15
+	sll x16, x15, 16&31
+	or x15, x15, x16
 .LBB0_8:                                //  %land.rhs
                                         //  =>This Inner Loop Header: Depth=1
 	xor x14, x15, x14

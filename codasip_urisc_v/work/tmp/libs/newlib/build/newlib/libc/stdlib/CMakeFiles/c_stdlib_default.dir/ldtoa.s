@@ -4617,13 +4617,9 @@ ediv:                                   //  @ediv
 	sw x26, 32 ( sp )               //  4-byte Folded Spill
 	sw x21, 28 ( sp )               //  4-byte Folded Spill
 	sw x23, 24 ( sp )               //  4-byte Folded Spill
-	and x10, x21, x9
-	mv x25, x21
-	hackaton_custom_instr_c x10, fp, x10
-	bltu x23, x10, .LBB5_113
-	jal x0, .LBB5_112
+	jal x0, .LBB5_111
 .LBB5_117:                              //  %difrnt.i355.if.end36_crit_edge.i
-                                        //    in Loop: Header=BB5_113 Depth=1
+                                        //    in Loop: Header=BB5_111 Depth=1
 	lhu x10, 102 ( sp )
 	lhu x11, 8 ( x24 )
 	lhu x12, 10 ( x24 )
@@ -4634,7 +4630,7 @@ ediv:                                   //  @ediv
 	lhu x17, 20 ( x24 )
 	lhu x5, 22 ( x24 )
 .LBB5_150:                              //  %if.end36.i
-                                        //    in Loop: Header=BB5_113 Depth=1
+                                        //    in Loop: Header=BB5_111 Depth=1
 	lhu x7, 22 ( x18 )
 	add x6, x20, x26
 	sh x25, 0 ( x6 )
@@ -4710,17 +4706,19 @@ ediv:                                   //  @ediv
 	sh fp, 48 ( sp )
 	beq x0, x10, .LBB5_151
 .LBB5_111:                              //  %for.body9.i
-                                        //    in Loop: Header=BB5_113 Depth=1
+                                        //  =>This Inner Loop Header: Depth=1
 	and x10, x21, x9
+	sll x11, fp, 16&31
 	mv x25, x21
-	hackaton_custom_instr_c x10, fp, x10
+	or x10, x10, x11
 	bltu x23, x10, .LBB5_113
 .LBB5_112:                              //  %if.else.i
+                                        //    in Loop: Header=BB5_111 Depth=1
 	lw x11, 36 ( sp )               //  4-byte Folded Reload
 	jal __udivsi3
 	mv x25, x10
 .LBB5_113:                              //  %if.end.i
-                                        //  =>This Inner Loop Header: Depth=1
+                                        //    in Loop: Header=BB5_111 Depth=1
 	and x10, x21, x25
 	mv x11, x19
 	mv x12, x24
@@ -4731,63 +4729,63 @@ ediv:                                   //  @ediv
 	mv x28, ra
 	bne ra, x6, .LBB5_116
 .LBB5_114:                              //  %for.inc.i350.i
-                                        //    in Loop: Header=BB5_113 Depth=1
+                                        //    in Loop: Header=BB5_111 Depth=1
 	lhu x7, 50 ( sp )
 	lhu x10, 102 ( sp )
 	bne x10, x7, .LBB5_115
 .LBB5_118:                              //  %for.inc.1.i360.i
-                                        //    in Loop: Header=BB5_113 Depth=1
+                                        //    in Loop: Header=BB5_111 Depth=1
 	lhu x7, 52 ( sp )
 	lhu x11, 104 ( sp )
 	bne x11, x7, .LBB5_119
 .LBB5_120:                              //  %for.inc.2.i364.i
-                                        //    in Loop: Header=BB5_113 Depth=1
+                                        //    in Loop: Header=BB5_111 Depth=1
 	lhu x7, 54 ( sp )
 	lhu x12, 106 ( sp )
 	bne x12, x7, .LBB5_121
 .LBB5_122:                              //  %for.inc.3.i368.i
-                                        //    in Loop: Header=BB5_113 Depth=1
+                                        //    in Loop: Header=BB5_111 Depth=1
 	lhu x7, 56 ( sp )
 	lhu x14, 108 ( sp )
 	bne x14, x7, .LBB5_123
 .LBB5_124:                              //  %for.inc.4.i372.i
-                                        //    in Loop: Header=BB5_113 Depth=1
+                                        //    in Loop: Header=BB5_111 Depth=1
 	lhu x7, 58 ( sp )
 	lhu x13, 110 ( sp )
 	bne x13, x7, .LBB5_125
 .LBB5_126:                              //  %for.inc.5.i376.i
-                                        //    in Loop: Header=BB5_113 Depth=1
+                                        //    in Loop: Header=BB5_111 Depth=1
 	lhu x7, 60 ( sp )
 	lhu x15, 112 ( sp )
 	bne x15, x7, .LBB5_127
 .LBB5_128:                              //  %for.inc.6.i380.i
-                                        //    in Loop: Header=BB5_113 Depth=1
+                                        //    in Loop: Header=BB5_111 Depth=1
 	lhu x7, 62 ( sp )
 	lhu x16, 114 ( sp )
 	bne x16, x7, .LBB5_129
 .LBB5_130:                              //  %for.inc.7.i384.i
-                                        //    in Loop: Header=BB5_113 Depth=1
+                                        //    in Loop: Header=BB5_111 Depth=1
 	lhu x7, 64 ( sp )
 	lhu x17, 116 ( sp )
 	bne x17, x7, .LBB5_131
 .LBB5_132:                              //  %for.inc.8.i388.i
-                                        //    in Loop: Header=BB5_113 Depth=1
+                                        //    in Loop: Header=BB5_111 Depth=1
 	lhu x7, 66 ( sp )
 	lhu x5, 118 ( sp )
 	bne x5, x7, .LBB5_133
 .LBB5_134:                              //  %for.inc.9.i392.i
-                                        //    in Loop: Header=BB5_113 Depth=1
+                                        //    in Loop: Header=BB5_111 Depth=1
 	lhu x7, 68 ( sp )
 	lhu x28, 120 ( sp )
 	beq x28, x7, .LBB5_150
 	jal x0, .LBB5_116
-.LBB5_115:                              //    in Loop: Header=BB5_113 Depth=1
+.LBB5_115:                              //    in Loop: Header=BB5_111 Depth=1
 	mv x28, x10
 .LBB5_116:                              //  %difrnt.i355.i
-                                        //    in Loop: Header=BB5_113 Depth=1
+                                        //    in Loop: Header=BB5_111 Depth=1
 	bgeu x7, x28, .LBB5_117
 .LBB5_135:                              //  %if.then22.i
-                                        //    in Loop: Header=BB5_113 Depth=1
+                                        //    in Loop: Header=BB5_111 Depth=1
 	lhu x28, 24 ( x19 )
 	lhu x11, 24 ( x24 )
 	lhu x7, 22 ( x19 )
@@ -4868,71 +4866,71 @@ ediv:                                   //  @ediv
 	sh x19, 100 ( sp )
 	bne x6, x22, .LBB5_137
 .LBB5_136:                              //  %for.inc.i.i
-                                        //    in Loop: Header=BB5_113 Depth=1
+                                        //    in Loop: Header=BB5_111 Depth=1
 	lhu x6, 50 ( sp )
 	and x22, x23, x10
 	mv ra, x10
 	bne x6, x22, .LBB5_137
 .LBB5_139:                              //  %for.inc.1.i.i
-                                        //    in Loop: Header=BB5_113 Depth=1
+                                        //    in Loop: Header=BB5_111 Depth=1
 	lhu x6, 52 ( sp )
 	and x22, x23, x11
 	mv ra, x11
 	bne x6, x22, .LBB5_137
 .LBB5_140:                              //  %for.inc.2.i.i
-                                        //    in Loop: Header=BB5_113 Depth=1
+                                        //    in Loop: Header=BB5_111 Depth=1
 	lhu x6, 54 ( sp )
 	and x22, x23, x12
 	mv ra, x12
 	bne x6, x22, .LBB5_137
 .LBB5_141:                              //  %for.inc.3.i.i
-                                        //    in Loop: Header=BB5_113 Depth=1
+                                        //    in Loop: Header=BB5_111 Depth=1
 	lhu x6, 56 ( sp )
 	and x22, x23, x14
 	mv ra, x14
 	bne x6, x22, .LBB5_137
 .LBB5_142:                              //  %for.inc.4.i.i
-                                        //    in Loop: Header=BB5_113 Depth=1
+                                        //    in Loop: Header=BB5_111 Depth=1
 	lhu x6, 58 ( sp )
 	and x22, x23, x13
 	mv ra, x13
 	bne x6, x22, .LBB5_137
 .LBB5_143:                              //  %for.inc.5.i.i
-                                        //    in Loop: Header=BB5_113 Depth=1
+                                        //    in Loop: Header=BB5_111 Depth=1
 	lhu x6, 60 ( sp )
 	and x22, x23, x15
 	mv ra, x15
 	bne x6, x22, .LBB5_137
 .LBB5_144:                              //  %for.inc.6.i.i
-                                        //    in Loop: Header=BB5_113 Depth=1
+                                        //    in Loop: Header=BB5_111 Depth=1
 	lhu x6, 62 ( sp )
 	and x22, x23, x16
 	mv ra, x16
 	bne x6, x22, .LBB5_137
 .LBB5_145:                              //  %for.inc.7.i.i
-                                        //    in Loop: Header=BB5_113 Depth=1
+                                        //    in Loop: Header=BB5_111 Depth=1
 	lhu x6, 64 ( sp )
 	and x22, x23, x17
 	mv ra, x17
 	bne x6, x22, .LBB5_137
 .LBB5_146:                              //  %for.inc.8.i.i
-                                        //    in Loop: Header=BB5_113 Depth=1
+                                        //    in Loop: Header=BB5_111 Depth=1
 	lhu x6, 66 ( sp )
 	and x22, x23, x5
 	mv ra, x5
 	bne x6, x22, .LBB5_137
 .LBB5_147:                              //  %for.inc.9.i.i
-                                        //    in Loop: Header=BB5_113 Depth=1
+                                        //    in Loop: Header=BB5_111 Depth=1
 	lhu x6, 68 ( sp )
 	and x22, x23, x29
 	mv ra, x29
 	beq x6, x22, .LBB5_138
 .LBB5_137:                              //  %difrnt.i.i
-                                        //    in Loop: Header=BB5_113 Depth=1
+                                        //    in Loop: Header=BB5_111 Depth=1
 	and x22, x23, ra
 	bgeu x6, x22, .LBB5_138
 .LBB5_148:                              //  %if.then30.i
-                                        //    in Loop: Header=BB5_113 Depth=1
+                                        //    in Loop: Header=BB5_111 Depth=1
 	and x6, x23, x29
 	and x5, x23, x5
 	sub x6, x6, x28
@@ -4997,45 +4995,45 @@ ediv:                                   //  @ediv
 	sh x10, 6 ( x24 )
 	sh x7, 100 ( sp )
 	jal x0, .LBB5_149
-.LBB5_138:                              //    in Loop: Header=BB5_113 Depth=1
+.LBB5_138:                              //    in Loop: Header=BB5_111 Depth=1
 	lw x25, 40 ( sp )               //  4-byte Folded Reload
 .LBB5_149:                              //  %if.end36.i
-                                        //    in Loop: Header=BB5_113 Depth=1
+                                        //    in Loop: Header=BB5_111 Depth=1
 	lw x26, 32 ( sp )               //  4-byte Folded Reload
 	lw x21, 28 ( sp )               //  4-byte Folded Reload
 	lw x23, 24 ( sp )               //  4-byte Folded Reload
 	add x19, sp, 70
 	lui x22, %hi( 65535 )
 	jal x0, .LBB5_150
-.LBB5_119:                              //    in Loop: Header=BB5_113 Depth=1
+.LBB5_119:                              //    in Loop: Header=BB5_111 Depth=1
 	mv x28, x11
 	bgeu x7, x28, .LBB5_117
 	jal x0, .LBB5_135
-.LBB5_121:                              //    in Loop: Header=BB5_113 Depth=1
+.LBB5_121:                              //    in Loop: Header=BB5_111 Depth=1
 	mv x28, x12
 	bgeu x7, x28, .LBB5_117
 	jal x0, .LBB5_135
-.LBB5_123:                              //    in Loop: Header=BB5_113 Depth=1
+.LBB5_123:                              //    in Loop: Header=BB5_111 Depth=1
 	mv x28, x14
 	bgeu x7, x28, .LBB5_117
 	jal x0, .LBB5_135
-.LBB5_125:                              //    in Loop: Header=BB5_113 Depth=1
+.LBB5_125:                              //    in Loop: Header=BB5_111 Depth=1
 	mv x28, x13
 	bgeu x7, x28, .LBB5_117
 	jal x0, .LBB5_135
-.LBB5_127:                              //    in Loop: Header=BB5_113 Depth=1
+.LBB5_127:                              //    in Loop: Header=BB5_111 Depth=1
 	mv x28, x15
 	bgeu x7, x28, .LBB5_117
 	jal x0, .LBB5_135
-.LBB5_129:                              //    in Loop: Header=BB5_113 Depth=1
+.LBB5_129:                              //    in Loop: Header=BB5_111 Depth=1
 	mv x28, x16
 	bgeu x7, x28, .LBB5_117
 	jal x0, .LBB5_135
-.LBB5_131:                              //    in Loop: Header=BB5_113 Depth=1
+.LBB5_131:                              //    in Loop: Header=BB5_111 Depth=1
 	mv x28, x17
 	bgeu x7, x28, .LBB5_117
 	jal x0, .LBB5_135
-.LBB5_133:                              //    in Loop: Header=BB5_113 Depth=1
+.LBB5_133:                              //    in Loop: Header=BB5_111 Depth=1
 	mv x28, x5
 	bgeu x7, x28, .LBB5_117
 	jal x0, .LBB5_135

@@ -71,7 +71,8 @@ towctrans_l:                            //  @towctrans_l
 	add x11, x10, x22
 	lhu x10, 2 ( x11 )
 	lhu x12, 0 ( x11 )
-	hackaton_custom_instr_c x10, x10, x12
+	sll x10, x10, 16&31
+	or x10, x12, x10
 	srl x13, x10, 21&31
 	and x12, x24, x10
 	and x13, x13, 255
@@ -115,7 +116,8 @@ towctrans_l:                            //  @towctrans_l
 	add x11, x10, x22
 	lhu x10, 2 ( x11 )
 	lhu x12, 0 ( x11 )
-	hackaton_custom_instr_c x10, x10, x12
+	sll x10, x10, 16&31
+	or x10, x12, x10
 	srl x13, x10, 21&31
 	and x12, x24, x10
 	and x13, x13, 255

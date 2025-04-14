@@ -32,9 +32,10 @@ memchr:                                 //  @memchr
 .LBB0_5:                                //  %if.then9
 	sll x14, x11, 8&31
 	or x14, x11, x14
-	lui x15, %hi( -16843009 )
+	sll x15, x14, 16&31
 	lui x16, %hi( -2139062144 )
-	hackaton_custom_instr_c x14, x14, x14
+	or x14, x14, x15
+	lui x15, %hi( -16843009 )
 	add x15, x15, %lo( -16843009 )
 	add x16, x16, %lo( -2139062144 )
 	add x17, x0, 3

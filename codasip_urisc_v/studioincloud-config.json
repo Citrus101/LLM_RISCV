@@ -1,5 +1,8 @@
 {
   "generated-ia-sdk": [
     "codasip_urisc_v"
+  ],
+  "generated-ca-sdk": [
+    "codasip_urisc_v"
   ]
 }

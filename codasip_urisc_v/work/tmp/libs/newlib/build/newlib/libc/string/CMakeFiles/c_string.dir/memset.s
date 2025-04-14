@@ -34,7 +34,8 @@ memset:                                 //  @memset
 	and x14, x11, 255
 	sll x15, x14, 8&31
 	or x14, x14, x15
-	hackaton_custom_instr_c x14, x14, x14
+	sll x15, x14, 16&31
+	or x14, x14, x15
 	sltiu x15, x12, 16
 	bltu x0, x15, .LBB0_10
 .LBB0_7:                                //  %while.body15.preheader

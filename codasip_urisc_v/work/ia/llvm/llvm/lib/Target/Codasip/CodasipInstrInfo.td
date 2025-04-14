@@ -11,14 +11,14 @@
  * in Codasip license agreement under which you obtained this file.
  *
  * \file
- * \date    2025-04-13
+ * \date    2025-04-14
  * \author  Codasip (c) C compiler backend generator
  * \version 9.4.2
  * \brief   Source for compiler backend
  * \project codasip_urisc_v.ia
  * \note          Codasip Studio version: 9.4.2
  *                Project: codasip_urisc_v.ia
- *                Date: 2025-04-13 21:43:20
+ *                Date: 2025-04-14 11:48:10
  *                Copyright (C) 2025 Codasip s.r.o.
  */
 
@@ -3225,54 +3225,39 @@ let Inst{31-0} = 0b00000000000000000000000000101011;
 // i_ext_hackaton(opc_hackaton_custom_a,reg0,reg0,reg0)
 }
 
-def i_ext_hackaton__opc_hackaton_custom_a__reg0__reg0__regs__: CodasipMicroClass_<(outs), (ins regs:$op0)>
+def i_ext_hackaton__opc_hackaton_custom_a__regs__reg0__reg0__: CodasipMicroClass_<(outs regs:$op0), (ins)>
 {
-let AsmString = "hackaton_custom_instr_a x0, x0, $op0";
-//let Pattern = [];
+let AsmString = "hackaton_custom_instr_a $op0, x0, x0";
+let Pattern = [(set i32:$op0, (i32 0))];
 let Size = 4;
 let isReMaterializable = 1;
 let mayLoad = 0;
 let mayStore = 0;
-let hasSideEffects = 0;
 bits<5> op0;
-let Inst{31-25} = 0b0000000;
-let Inst{24-20} = op0;
-let Inst{19-0} = 0b00000000000000101011;
-// i_ext_hackaton(opc_hackaton_custom_a,reg0,reg0,regs)
+let Inst{31-12} = 0b00000000000000000000;
+let Inst{11-7} = op0;
+let Inst{6-0} = 0b0101011;
+// i_ext_hackaton(opc_hackaton_custom_a,regs,reg0,reg0)
 }
 
-def i_ext_hackaton__opc_hackaton_custom_a__reg0__regs__reg0__: CodasipMicroClass_<(outs), (ins regs:$op0)>
+def i_ext_hackaton__opc_hackaton_custom_a__regs__regs__regs__: CodasipMicroClass_<(outs regs:$op0), (ins regs:$op1, regs:$op2)>
 {
-let AsmString = "hackaton_custom_instr_a x0, $op0, x0";
-//let Pattern = [];
+let AsmString = "hackaton_custom_instr_a $op0, $op2, $op1";
+let Pattern = [(set i32:$op0, (i32 (select (i32 (seteq  (i32 CheckFI_i32_regs:$op1), (i32 0))), (i32 0), (i32 (sdiv (i32 CheckFI_i32_regs:$op2), (i32 CheckFI_i32_regs:$op1))))))];
 let Size = 4;
 let isReMaterializable = 1;
 let mayLoad = 0;
 let mayStore = 0;
-let hasSideEffects = 0;
 bits<5> op0;
-let Inst{31-20} = 0b000000000000;
-let Inst{19-15} = op0;
-let Inst{14-0} = 0b000000000101011;
-// i_ext_hackaton(opc_hackaton_custom_a,reg0,regs,reg0)
-}
-
-def i_ext_hackaton__opc_hackaton_custom_a__reg0__regs__regs__: CodasipMicroClass_<(outs), (ins regs:$op0, regs:$op1)>
-{
-let AsmString = "hackaton_custom_instr_a x0, $op0, $op1";
-//let Pattern = [];
-let Size = 4;
-let isReMaterializable = 1;
-let mayLoad = 0;
-let mayStore = 0;
-let hasSideEffects = 0;
-bits<5> op0;
+bits<5> op2;
 bits<5> op1;
 let Inst{31-25} = 0b0000000;
 let Inst{24-20} = op1;
-let Inst{19-15} = op0;
-let Inst{14-0} = 0b000000000101011;
-// i_ext_hackaton(opc_hackaton_custom_a,reg0,regs,regs)
+let Inst{19-15} = op2;
+let Inst{14-12} = 0b000;
+let Inst{11-7} = op0;
+let Inst{6-0} = 0b0101011;
+// i_ext_hackaton(opc_hackaton_custom_a,regs,regs,regs)
 }
 
 def i_ext_hackaton__opc_hackaton_custom_b__reg0__reg0__reg0__: CodasipMicroClass_<(outs), (ins)>
@@ -3287,138 +3272,71 @@ let Inst{31-0} = 0b00000000000000000001000000101011;
 // i_ext_hackaton(opc_hackaton_custom_b,reg0,reg0,reg0)
 }
 
-def i_ext_hackaton__opc_hackaton_custom_b__reg0__reg0__regs__: CodasipMicroClass_<(outs), (ins regs:$op0)>
-{
-let AsmString = "hackaton_custom_instr_b x0, x0, $op0";
-//let Pattern = [];
-let Size = 4;
-let isReMaterializable = 1;
-let mayLoad = 0;
-let mayStore = 0;
-let hasSideEffects = 0;
-bits<5> op0;
-let Inst{31-25} = 0b0000000;
-let Inst{24-20} = op0;
-let Inst{19-0} = 0b00000001000000101011;
-// i_ext_hackaton(opc_hackaton_custom_b,reg0,reg0,regs)
-}
-
-def i_ext_hackaton__opc_hackaton_custom_b__reg0__regs__reg0__: CodasipMicroClass_<(outs), (ins regs:$op0)>
-{
-let AsmString = "hackaton_custom_instr_b x0, $op0, x0";
-//let Pattern = [];
-let Size = 4;
-let isReMaterializable = 1;
-let mayLoad = 0;
-let mayStore = 0;
-let hasSideEffects = 0;
-bits<5> op0;
-let Inst{31-20} = 0b000000000000;
-let Inst{19-15} = op0;
-let Inst{14-0} = 0b001000000101011;
-// i_ext_hackaton(opc_hackaton_custom_b,reg0,regs,reg0)
-}
-
-def i_ext_hackaton__opc_hackaton_custom_b__reg0__regs__regs__: CodasipMicroClass_<(outs), (ins regs:$op0, regs:$op1)>
-{
-let AsmString = "hackaton_custom_instr_b x0, $op0, $op1";
-//let Pattern = [];
-let Size = 4;
-let isReMaterializable = 1;
-let mayLoad = 0;
-let mayStore = 0;
-let hasSideEffects = 0;
-bits<5> op0;
-bits<5> op1;
-let Inst{31-25} = 0b0000000;
-let Inst{24-20} = op1;
-let Inst{19-15} = op0;
-let Inst{14-0} = 0b001000000101011;
-// i_ext_hackaton(opc_hackaton_custom_b,reg0,regs,regs)
-}
-
+// warning: (BGW546): The instruction contains unsupported data types ('i16') even after the high-level analysis.
 def i_ext_hackaton__opc_hackaton_custom_c__reg0__reg0__reg0__: CodasipMicroClass_<(outs), (ins)>
 {
 let AsmString = "hackaton_custom_instr_c x0, x0, x0";
-let Pattern = [];
+//let Pattern = [(store_a1_s0 (i16 (add (i16 (add (i16 (sra (i16 (mul (i16 (load_a1_s0 (i32 2))), (i16 (load_a1_s0 (i32 2))))), (i16 8))), (i16 (sra (i16 (mul (i16 (load_a1_s0 (i32 0))), (i16 (load_a1_s0 (i32 0))))), (i16 8))))), (i16 (sra (i16 (mul (i16 (load_a1_s0 (i32 4))), (i16 (load_a1_s0 (i32 4))))), (i16 8))))), (i32 6))];
 let Size = 4;
 let isReMaterializable = 1;
-let mayLoad = 0;
-let mayStore = 0;
+let mayLoad = 1;
+let mayStore = 1;
+let hasSideEffects = 0;
 let Inst{31-0} = 0b00000000000000000010000000101011;
 // i_ext_hackaton(opc_hackaton_custom_c,reg0,reg0,reg0)
 }
 
-def i_ext_hackaton__opc_hackaton_custom_c__regs__reg0__reg0__: CodasipMicroClass_<(outs regs:$op0), (ins)>
+// warning: (BGW546): The instruction contains unsupported data types ('i16') even after the high-level analysis.
+def i_ext_hackaton__opc_hackaton_custom_c__reg0__reg0__regs__: CodasipMicroClass_<(outs), (ins regs:$op0)>
 {
-let AsmString = "hackaton_custom_instr_c $op0, x0, x0";
-let Pattern = [(set i32:$op0, (i32 0))];
+let AsmString = "hackaton_custom_instr_c x0, x0, $op0";
+//let Pattern = [(store_a1_s0 (i16 (add (i16 (add (i16 (sra (i16 (mul (i16 (load_a1_s0 (i32 (add (i32 CheckFI_i32_regs:$op0), (i32 2))))), (i16 (load_a1_s0 (i32 2))))), (i16 8))), (i16 (sra (i16 (mul (i16 (load_a1_s0 (i32 CheckFI_i32_regs:$op0))), (i16 (load_a1_s0 (i32 0))))), (i16 8))))), (i16 (sra (i16 (mul (i16 (load_a1_s0 (i32 (add (i32 CheckFI_i32_regs:$op0), (i32 4))))), (i16 (load_a1_s0 (i32 4))))), (i16 8))))), (i32 6))];
 let Size = 4;
 let isReMaterializable = 1;
-let mayLoad = 0;
-let mayStore = 0;
-bits<5> op0;
-let Inst{31-12} = 0b00000000000000000010;
-let Inst{11-7} = op0;
-let Inst{6-0} = 0b0101011;
-// i_ext_hackaton(opc_hackaton_custom_c,regs,reg0,reg0)
-}
-
-def i_ext_hackaton__opc_hackaton_custom_c__regs__reg0__regs__: CodasipMicroClass_<(outs regs:$op0), (ins regs:$op1)>
-{
-let AsmString = "hackaton_custom_instr_c $op0, x0, $op1";
-//let Pattern = [(set i32:$op0, (i32 CheckFI_i32_regs:$op1))];
-let Size = 4;
-let isReMaterializable = 1;
-let mayLoad = 0;
-let mayStore = 0;
+let mayLoad = 1;
+let mayStore = 1;
 let hasSideEffects = 0;
 bits<5> op0;
-bits<5> op1;
 let Inst{31-25} = 0b0000000;
-let Inst{24-20} = op1;
-let Inst{19-12} = 0b00000010;
-let Inst{11-7} = op0;
-let Inst{6-0} = 0b0101011;
-// i_ext_hackaton(opc_hackaton_custom_c,regs,reg0,regs)
+let Inst{24-20} = op0;
+let Inst{19-0} = 0b00000010000000101011;
+// i_ext_hackaton(opc_hackaton_custom_c,reg0,reg0,regs)
 }
 
-def i_ext_hackaton__opc_hackaton_custom_c__regs__regs__reg0__: CodasipMicroClass_<(outs regs:$op0), (ins regs:$op1)>
+// warning: (BGW546): The instruction contains unsupported data types ('i16') even after the high-level analysis.
+def i_ext_hackaton__opc_hackaton_custom_c__reg0__regs__reg0__: CodasipMicroClass_<(outs), (ins regs:$op0)>
 {
-let AsmString = "hackaton_custom_instr_c $op0, $op1, x0";
-let Pattern = [(set i32:$op0, (i32 (shl (i32 CheckFI_i32_regs:$op1), (i32 16))))];
+let AsmString = "hackaton_custom_instr_c x0, $op0, x0";
+//let Pattern = [(store_a1_s0 (i16 (add (i16 (add (i16 (sra (i16 (mul (i16 (load_a1_s0 (i32 2))), (i16 (load_a1_s0 (i32 (add (i32 CheckFI_i32_regs:$op0), (i32 2))))))), (i16 8))), (i16 (sra (i16 (mul (i16 (load_a1_s0 (i32 0))), (i16 (load_a1_s0 (i32 CheckFI_i32_regs:$op0))))), (i16 8))))), (i16 (sra (i16 (mul (i16 (load_a1_s0 (i32 4))), (i16 (load_a1_s0 (i32 (add (i32 CheckFI_i32_regs:$op0), (i32 4))))))), (i16 8))))), (i32 6))];
 let Size = 4;
 let isReMaterializable = 1;
-let mayLoad = 0;
-let mayStore = 0;
+let mayLoad = 1;
+let mayStore = 1;
+let hasSideEffects = 0;
 bits<5> op0;
-bits<5> op1;
 let Inst{31-20} = 0b000000000000;
-let Inst{19-15} = op1;
-let Inst{14-12} = 0b010;
-let Inst{11-7} = op0;
-let Inst{6-0} = 0b0101011;
-// i_ext_hackaton(opc_hackaton_custom_c,regs,regs,reg0)
+let Inst{19-15} = op0;
+let Inst{14-0} = 0b010000000101011;
+// i_ext_hackaton(opc_hackaton_custom_c,reg0,regs,reg0)
 }
 
-def i_ext_hackaton__opc_hackaton_custom_c__regs__regs__regs__: CodasipMicroClass_<(outs regs:$op0), (ins regs:$op1, regs:$op2)>
+// warning: (BGW546): The instruction contains unsupported data types ('i16') even after the high-level analysis.
+def i_ext_hackaton__opc_hackaton_custom_c__reg0__regs__regs__: CodasipMicroClass_<(outs), (ins regs:$op0, regs:$op1)>
 {
-let AsmString = "hackaton_custom_instr_c $op0, $op2, $op1";
-let Pattern = [(set i32:$op0, (i32 (or (i32 CheckFI_i32_regs:$op1), (i32 (shl (i32 CheckFI_i32_regs:$op2), (i32 16))))))];
+let AsmString = "hackaton_custom_instr_c x0, $op1, $op0";
+//let Pattern = [(store_a1_s0 (i16 (add (i16 (add (i16 (sra (i16 (mul (i16 (load_a1_s0 (i32 (add (i32 CheckFI_i32_regs:$op0), (i32 2))))), (i16 (load_a1_s0 (i32 (add (i32 CheckFI_i32_regs:$op1), (i32 2))))))), (i16 8))), (i16 (sra (i16 (mul (i16 (load_a1_s0 (i32 CheckFI_i32_regs:$op0))), (i16 (load_a1_s0 (i32 CheckFI_i32_regs:$op1))))), (i16 8))))), (i16 (sra (i16 (mul (i16 (load_a1_s0 (i32 (add (i32 CheckFI_i32_regs:$op0), (i32 4))))), (i16 (load_a1_s0 (i32 (add (i32 CheckFI_i32_regs:$op1), (i32 4))))))), (i16 8))))), (i32 6))];
 let Size = 4;
 let isReMaterializable = 1;
-let mayLoad = 0;
-let mayStore = 0;
-bits<5> op0;
-bits<5> op2;
+let mayLoad = 1;
+let mayStore = 1;
+let hasSideEffects = 0;
 bits<5> op1;
+bits<5> op0;
 let Inst{31-25} = 0b0000000;
-let Inst{24-20} = op1;
-let Inst{19-15} = op2;
-let Inst{14-12} = 0b010;
-let Inst{11-7} = op0;
-let Inst{6-0} = 0b0101011;
-// i_ext_hackaton(opc_hackaton_custom_c,regs,regs,regs)
+let Inst{24-20} = op0;
+let Inst{19-15} = op1;
+let Inst{14-0} = 0b010000000101011;
+// i_ext_hackaton(opc_hackaton_custom_c,reg0,regs,regs)
 }
 
 def i_ext_hackaton__opc_hackaton_custom_d__reg0__reg0__reg0__: CodasipMicroClass_<(outs), (ins)>
@@ -3433,75 +3351,54 @@ let Inst{31-0} = 0b00000000000000000011000000101011;
 // i_ext_hackaton(opc_hackaton_custom_d,reg0,reg0,reg0)
 }
 
-def i_ext_hackaton__opc_hackaton_custom_d__regs__reg0__reg0__: CodasipMicroClass_<(outs regs:$op0), (ins)>
+def i_ext_hackaton__opc_hackaton_custom_d__reg0__reg0__regs__: CodasipMicroClass_<(outs), (ins regs:$op0)>
 {
-let AsmString = "hackaton_custom_instr_d $op0, x0, x0";
-let Pattern = [(set i32:$op0, (i32 0))];
+let AsmString = "hackaton_custom_instr_d x0, x0, $op0";
+//let Pattern = [];
 let Size = 4;
 let isReMaterializable = 1;
 let mayLoad = 0;
 let mayStore = 0;
+let hasSideEffects = 0;
 bits<5> op0;
-let Inst{31-12} = 0b00000000000000000011;
-let Inst{11-7} = op0;
-let Inst{6-0} = 0b0101011;
-// i_ext_hackaton(opc_hackaton_custom_d,regs,reg0,reg0)
+let Inst{31-25} = 0b0000000;
+let Inst{24-20} = op0;
+let Inst{19-0} = 0b00000011000000101011;
+// i_ext_hackaton(opc_hackaton_custom_d,reg0,reg0,regs)
 }
 
-def i_ext_hackaton__opc_hackaton_custom_d__regs__reg0__regs__: CodasipMicroClass_<(outs regs:$op0), (ins regs:$op1)>
+def i_ext_hackaton__opc_hackaton_custom_d__reg0__regs__reg0__: CodasipMicroClass_<(outs), (ins regs:$op0)>
 {
-let AsmString = "hackaton_custom_instr_d $op0, x0, $op1";
-let Pattern = [(set i32:$op0, (i32 (add (i32 (and (i32 CheckFI_i32_regs:$op1), (i32 65535))), (i32 (sra (i32 CheckFI_i32_regs:$op1), (i32 16))))))];
+let AsmString = "hackaton_custom_instr_d x0, $op0, x0";
+//let Pattern = [];
 let Size = 4;
 let isReMaterializable = 1;
 let mayLoad = 0;
 let mayStore = 0;
+let hasSideEffects = 0;
+bits<5> op0;
+let Inst{31-20} = 0b000000000000;
+let Inst{19-15} = op0;
+let Inst{14-0} = 0b011000000101011;
+// i_ext_hackaton(opc_hackaton_custom_d,reg0,regs,reg0)
+}
+
+def i_ext_hackaton__opc_hackaton_custom_d__reg0__regs__regs__: CodasipMicroClass_<(outs), (ins regs:$op0, regs:$op1)>
+{
+let AsmString = "hackaton_custom_instr_d x0, $op0, $op1";
+//let Pattern = [];
+let Size = 4;
+let isReMaterializable = 1;
+let mayLoad = 0;
+let mayStore = 0;
+let hasSideEffects = 0;
 bits<5> op0;
 bits<5> op1;
 let Inst{31-25} = 0b0000000;
 let Inst{24-20} = op1;
-let Inst{19-12} = 0b00000011;
-let Inst{11-7} = op0;
-let Inst{6-0} = 0b0101011;
-// i_ext_hackaton(opc_hackaton_custom_d,regs,reg0,regs)
-}
-
-def i_ext_hackaton__opc_hackaton_custom_d__regs__regs__reg0__: CodasipMicroClass_<(outs regs:$op0), (ins regs:$op1)>
-{
-let AsmString = "hackaton_custom_instr_d $op0, $op1, x0";
-let Pattern = [(set i32:$op0, (i32 (add (i32 (and (i32 CheckFI_i32_regs:$op1), (i32 65535))), (i32 (sra (i32 CheckFI_i32_regs:$op1), (i32 16))))))];
-let Size = 4;
-let isReMaterializable = 1;
-let mayLoad = 0;
-let mayStore = 0;
-bits<5> op0;
-bits<5> op1;
-let Inst{31-20} = 0b000000000000;
-let Inst{19-15} = op1;
-let Inst{14-12} = 0b011;
-let Inst{11-7} = op0;
-let Inst{6-0} = 0b0101011;
-// i_ext_hackaton(opc_hackaton_custom_d,regs,regs,reg0)
-}
-
-def i_ext_hackaton__opc_hackaton_custom_d__regs__regs__regs__: CodasipMicroClass_<(outs regs:$op0), (ins regs:$op1, regs:$op2)>
-{
-let AsmString = "hackaton_custom_instr_d $op0, $op1, $op2";
-let Pattern = [(set i32:$op0, (i32 (add (i32 (add (i32 (add (i32 (and (i32 CheckFI_i32_regs:$op1), (i32 65535))), (i32 (sra (i32 CheckFI_i32_regs:$op1), (i32 16))))), (i32 (and (i32 CheckFI_i32_regs:$op2), (i32 65535))))), (i32 (sra (i32 CheckFI_i32_regs:$op2), (i32 16))))))];
-let Size = 4;
-let isReMaterializable = 1;
-let mayLoad = 0;
-let mayStore = 0;
-bits<5> op0;
-bits<5> op1;
-bits<5> op2;
-let Inst{31-25} = 0b0000000;
-let Inst{24-20} = op2;
-let Inst{19-15} = op1;
-let Inst{14-12} = 0b011;
-let Inst{11-7} = op0;
-let Inst{6-0} = 0b0101011;
-// i_ext_hackaton(opc_hackaton_custom_d,regs,regs,regs)
+let Inst{19-15} = op0;
+let Inst{14-0} = 0b011000000101011;
+// i_ext_hackaton(opc_hackaton_custom_d,reg0,regs,regs)
 }
 
 def i_ext_hackaton__opc_hackaton_custom_e__reg0__reg0__reg0__: CodasipMicroClass_<(outs), (ins)>
@@ -3514,6 +3411,118 @@ let mayLoad = 0;
 let mayStore = 0;
 let Inst{31-0} = 0b00000000000000000100000000101011;
 // i_ext_hackaton(opc_hackaton_custom_e,reg0,reg0,reg0)
+}
+
+def i_ext_hackaton__opc_hackaton_custom_e__regs__reg0__reg0__: CodasipMicroClass_<(outs regs:$op0), (ins)>
+{
+let AsmString = "hackaton_custom_instr_e $op0, x0, x0";
+let Pattern = [(set i32:$op0, (i32 0))];
+let Size = 4;
+let isReMaterializable = 1;
+let mayLoad = 0;
+let mayStore = 0;
+bits<5> op0;
+let Inst{31-12} = 0b00000000000000000100;
+let Inst{11-7} = op0;
+let Inst{6-0} = 0b0101011;
+// i_ext_hackaton(opc_hackaton_custom_e,regs,reg0,reg0)
+}
+
+def i_ext_hackaton__opc_hackaton_custom_e__regs__regs__reg0__: CodasipMicroClass_<(outs regs:$op0), (ins regs:$op1)>
+{
+let AsmString = "hackaton_custom_instr_e $op0, $op1, x0";
+let Pattern = [(set i32:$op0, (i32 (select (i32 (setlt  (i32 (select (i32 (setgt  (i32 CheckFI_i32_regs:$op1), (i32 -32768))), (i32 CheckFI_i32_regs:$op1), (i32 -32768))), (i32 32767))), (i32 (select (i32 (setgt  (i32 CheckFI_i32_regs:$op1), (i32 -32768))), (i32 CheckFI_i32_regs:$op1), (i32 -32768))), (i32 32767))))];
+let Size = 4;
+let isReMaterializable = 1;
+let mayLoad = 0;
+let mayStore = 0;
+bits<5> op0;
+bits<5> op1;
+let Inst{31-20} = 0b000000000000;
+let Inst{19-15} = op1;
+let Inst{14-12} = 0b100;
+let Inst{11-7} = op0;
+let Inst{6-0} = 0b0101011;
+// i_ext_hackaton(opc_hackaton_custom_e,regs,regs,reg0)
+}
+
+// warning: (BGW546): The instruction contains unsupported data types ('i16') even after the high-level analysis.
+def i_ext_hackaton__opc_hackaton_custom_f__reg0__reg0__reg0__: CodasipMicroClass_<(outs), (ins)>
+{
+let AsmString = "hackaton_custom_instr_f x0, x0, x0";
+//let Pattern = [(store_a1_s0 (i16 (add (i16 (load_a1_s0 (i32 0))), (i16 (load_a1_s0 (i32 0))))), (i32 0)), (store_a1_s0 (i16 (add (i16 (load_a1_s0 (i32 2))), (i16 (load_a1_s0 (i32 2))))), (i32 2)), (store_a1_s0 (i16 (add (i16 (load_a1_s0 (i32 4))), (i16 (load_a1_s0 (i32 4))))), (i32 4)), (store_a1_s0 (i16 (add (i16 (load_a1_s0 (i32 6))), (i16 (load_a1_s0 (i32 6))))), (i32 6))];
+let Size = 4;
+let isReMaterializable = 1;
+let mayLoad = 1;
+let mayStore = 1;
+let hasSideEffects = 0;
+let Inst{31-0} = 0b00000000000000000101000000101011;
+// i_ext_hackaton(opc_hackaton_custom_f,reg0,reg0,reg0)
+}
+
+// warning: (BGW546): The instruction contains unsupported data types ('i16') even after the high-level analysis.
+def i_ext_hackaton__opc_hackaton_custom_f__reg0__reg0__regs__: CodasipMicroClass_<(outs), (ins regs:$op0)>
+{
+let AsmString = "hackaton_custom_instr_f x0, x0, $op0";
+//let Pattern = [(store_a1_s0 (i16 (add (i16 (load_a1_s0 (i32 CheckFI_i32_regs:$op0))), (i16 (load_a1_s0 (i32 0))))), (i32 0)), (store_a1_s0 (i16 (add (i16 (load_a1_s0 (i32 (add (i32 CheckFI_i32_regs:$op0), (i32 2))))), (i16 (load_a1_s0 (i32 2))))), (i32 2)), (store_a1_s0 (i16 (add (i16 (load_a1_s0 (i32 (add (i32 CheckFI_i32_regs:$op0), (i32 4))))), (i16 (load_a1_s0 (i32 4))))), (i32 4)), (store_a1_s0 (i16 (add (i16 (load_a1_s0 (i32 (add (i32 CheckFI_i32_regs:$op0), (i32 6))))), (i16 (load_a1_s0 (i32 6))))), (i32 6))];
+let Size = 4;
+let isReMaterializable = 1;
+let mayLoad = 1;
+let mayStore = 1;
+let hasSideEffects = 0;
+bits<5> op0;
+let Inst{31-25} = 0b0000000;
+let Inst{24-20} = op0;
+let Inst{19-0} = 0b00000101000000101011;
+// i_ext_hackaton(opc_hackaton_custom_f,reg0,reg0,regs)
+}
+
+// warning: (BGW546): The instruction contains unsupported data types ('i16') even after the high-level analysis.
+def i_ext_hackaton__opc_hackaton_custom_f__reg0__regs__reg0__: CodasipMicroClass_<(outs), (ins regs:$op0)>
+{
+let AsmString = "hackaton_custom_instr_f x0, $op0, x0";
+//let Pattern = [(store_a1_s0 (i16 (add (i16 (load_a1_s0 (i32 0))), (i16 (load_a1_s0 (i32 CheckFI_i32_regs:$op0))))), (i32 0)), (store_a1_s0 (i16 (add (i16 (load_a1_s0 (i32 2))), (i16 (load_a1_s0 (i32 (add (i32 CheckFI_i32_regs:$op0), (i32 2))))))), (i32 2)), (store_a1_s0 (i16 (add (i16 (load_a1_s0 (i32 4))), (i16 (load_a1_s0 (i32 (add (i32 CheckFI_i32_regs:$op0), (i32 4))))))), (i32 4)), (store_a1_s0 (i16 (add (i16 (load_a1_s0 (i32 6))), (i16 (load_a1_s0 (i32 (add (i32 CheckFI_i32_regs:$op0), (i32 6))))))), (i32 6))];
+let Size = 4;
+let isReMaterializable = 1;
+let mayLoad = 1;
+let mayStore = 1;
+let hasSideEffects = 0;
+bits<5> op0;
+let Inst{31-20} = 0b000000000000;
+let Inst{19-15} = op0;
+let Inst{14-0} = 0b101000000101011;
+// i_ext_hackaton(opc_hackaton_custom_f,reg0,regs,reg0)
+}
+
+// warning: (BGW546): The instruction contains unsupported data types ('i16') even after the high-level analysis.
+def i_ext_hackaton__opc_hackaton_custom_f__reg0__regs__regs__: CodasipMicroClass_<(outs), (ins regs:$op0, regs:$op1)>
+{
+let AsmString = "hackaton_custom_instr_f x0, $op1, $op0";
+//let Pattern = [(store_a1_s0 (i16 (add (i16 (load_a1_s0 (i32 CheckFI_i32_regs:$op0))), (i16 (load_a1_s0 (i32 CheckFI_i32_regs:$op1))))), (i32 0)), (store_a1_s0 (i16 (add (i16 (load_a1_s0 (i32 (add (i32 CheckFI_i32_regs:$op0), (i32 2))))), (i16 (load_a1_s0 (i32 (add (i32 CheckFI_i32_regs:$op1), (i32 2))))))), (i32 2)), (store_a1_s0 (i16 (add (i16 (load_a1_s0 (i32 (add (i32 CheckFI_i32_regs:$op0), (i32 4))))), (i16 (load_a1_s0 (i32 (add (i32 CheckFI_i32_regs:$op1), (i32 4))))))), (i32 4)), (store_a1_s0 (i16 (add (i16 (load_a1_s0 (i32 (add (i32 CheckFI_i32_regs:$op0), (i32 6))))), (i16 (load_a1_s0 (i32 (add (i32 CheckFI_i32_regs:$op1), (i32 6))))))), (i32 6))];
+let Size = 4;
+let isReMaterializable = 1;
+let mayLoad = 1;
+let mayStore = 1;
+let hasSideEffects = 0;
+bits<5> op1;
+bits<5> op0;
+let Inst{31-25} = 0b0000000;
+let Inst{24-20} = op0;
+let Inst{19-15} = op1;
+let Inst{14-0} = 0b101000000101011;
+// i_ext_hackaton(opc_hackaton_custom_f,reg0,regs,regs)
+}
+
+def i_ext_hackaton__opc_hackaton_custom_g__reg0__reg0__reg0__: CodasipMicroClass_<(outs), (ins)>
+{
+let AsmString = "hackaton_custom_instr_g x0, x0, x0";
+let Pattern = [];
+let Size = 4;
+let isReMaterializable = 1;
+let mayLoad = 0;
+let mayStore = 0;
+let Inst{31-0} = 0b00000000000000000110000000101011;
+// i_ext_hackaton(opc_hackaton_custom_g,reg0,reg0,reg0)
 }
 
 def i_fence__opc_fence__opc_hint_fence__opc_hint_fence__: CodasipMicroClass_<(outs), (ins)>
@@ -6655,69 +6664,69 @@ let Inst{31-0} = 0b00110000001000000000000001110011;
 }
 
 // warning: (BGW546): The instruction contains unsupported data types ('i16') even after the high-level analysis.
-def i_ext_hackaton__opc_hackaton_custom_a__regs__reg0__reg0__AEXT_CLONE_: CodasipMicroClass_<(outs regs:$op0), (ins regs:$op1)>
+def i_ext_hackaton__opc_hackaton_custom_c__regs__reg0__reg0__AEXT_CLONE_: CodasipMicroClass_<(outs regs:$op0), (ins regs:$op1)>
 {
-//let Pattern = [(set i32:$op0, (i32 (add (i32 (add (i32 (add (i32 (add (i32 CheckFI_i32_regs:$op1), (i32 (anyext (i16 (sra (i16 (mul (i16 (extloadi8_a1_s0 (i32 0))), (i16 (extloadi8_a1_s0 (i32 0))))), (i16 8))))))), (i32 (anyext (i16 (sra (i16 (mul (i16 (extloadi8_a1_s0 (i32 2))), (i16 (extloadi8_a1_s0 (i32 2))))), (i16 8))))))), (i32 (anyext (i16 (sra (i16 (mul (i16 (extloadi8_a1_s0 (i32 4))), (i16 (extloadi8_a1_s0 (i32 4))))), (i16 8))))))), (i32 (anyext (i16 (sra (i16 (mul (i16 (extloadi8_a1_s0 (i32 6))), (i16 (extloadi8_a1_s0 (i32 6))))), (i16 8))))))))];
+//let Pattern = [(set i32:$op0, (i32 (anyext (i16 (add (i16 (add (i16 (sra (i16 (mul (i16 (load_a1_s0 (i32 2))), (i16 (load_a1_s0 (i32 2))))), (i16 8))), (i16 (sra (i16 (mul (i16 (load_a1_s0 (i32 0))), (i16 (load_a1_s0 (i32 0))))), (i16 8))))), (i16 (sra (i16 (mul (i16 (load_a1_s0 (i32 4))), (i16 (load_a1_s0 (i32 4))))), (i16 8)))))))), (store_a1_s0 (i16 (add (i16 (add (i16 (sra (i16 (mul (i16 (load_a1_s0 (i32 2))), (i16 (load_a1_s0 (i32 2))))), (i16 8))), (i16 (sra (i16 (mul (i16 (load_a1_s0 (i32 0))), (i16 (load_a1_s0 (i32 0))))), (i16 8))))), (i16 (sra (i16 (mul (i16 (load_a1_s0 (i32 4))), (i16 (load_a1_s0 (i32 4))))), (i16 8))))), (i32 (add (i32 CheckFI_i32_regs:$op1), (i32 6))))];
 let Size = 4;
 let isReMaterializable = 1;
 let mayLoad = 1;
-let mayStore = 0;
+let mayStore = 1;
 let hasSideEffects = 0;
 let usesCustomInserter = 1;
 let isPseudo = 1;
 let isCodeGenOnly = 1;
-// i_ext_hackaton(opc_hackaton_custom_a,regs,reg0,reg0)
+// i_ext_hackaton(opc_hackaton_custom_c,regs,reg0,reg0)
 }
 
 // warning: (BGW546): The instruction contains unsupported data types ('i16') even after the high-level analysis.
-def i_ext_hackaton__opc_hackaton_custom_a__regs__reg0__regs__AEXT_CLONE_: CodasipMicroClass_<(outs regs:$op0), (ins regs:$op1, regs:$op2)>
+def i_ext_hackaton__opc_hackaton_custom_c__regs__reg0__regs__AEXT_CLONE_: CodasipMicroClass_<(outs regs:$op0), (ins regs:$op1, regs:$op2)>
 {
-//let Pattern = [(set i32:$op0, (i32 (add (i32 (add (i32 (add (i32 (add (i32 CheckFI_i32_regs:$op1), (i32 (anyext (i16 (sra (i16 (mul (i16 (extloadi8_a1_s0 (i32 CheckFI_i32_regs:$op2))), (i16 (extloadi8_a1_s0 (i32 0))))), (i16 8))))))), (i32 (anyext (i16 (sra (i16 (mul (i16 (extloadi8_a1_s0 (i32 (add (i32 CheckFI_i32_regs:$op2), (i32 2))))), (i16 (extloadi8_a1_s0 (i32 2))))), (i16 8))))))), (i32 (anyext (i16 (sra (i16 (mul (i16 (extloadi8_a1_s0 (i32 (add (i32 CheckFI_i32_regs:$op2), (i32 4))))), (i16 (extloadi8_a1_s0 (i32 4))))), (i16 8))))))), (i32 (anyext (i16 (sra (i16 (mul (i16 (extloadi8_a1_s0 (i32 (add (i32 CheckFI_i32_regs:$op2), (i32 6))))), (i16 (extloadi8_a1_s0 (i32 6))))), (i16 8))))))))];
+//let Pattern = [(set i32:$op0, (i32 (anyext (i16 (add (i16 (add (i16 (sra (i16 (mul (i16 (load_a1_s0 (i32 (add (i32 CheckFI_i32_regs:$op1), (i32 2))))), (i16 (load_a1_s0 (i32 2))))), (i16 8))), (i16 (sra (i16 (mul (i16 (load_a1_s0 (i32 CheckFI_i32_regs:$op1))), (i16 (load_a1_s0 (i32 0))))), (i16 8))))), (i16 (sra (i16 (mul (i16 (load_a1_s0 (i32 (add (i32 CheckFI_i32_regs:$op1), (i32 4))))), (i16 (load_a1_s0 (i32 4))))), (i16 8)))))))), (store_a1_s0 (i16 (add (i16 (add (i16 (sra (i16 (mul (i16 (load_a1_s0 (i32 (add (i32 CheckFI_i32_regs:$op1), (i32 2))))), (i16 (load_a1_s0 (i32 2))))), (i16 8))), (i16 (sra (i16 (mul (i16 (load_a1_s0 (i32 CheckFI_i32_regs:$op1))), (i16 (load_a1_s0 (i32 0))))), (i16 8))))), (i16 (sra (i16 (mul (i16 (load_a1_s0 (i32 (add (i32 CheckFI_i32_regs:$op1), (i32 4))))), (i16 (load_a1_s0 (i32 4))))), (i16 8))))), (i32 (add (i32 CheckFI_i32_regs:$op2), (i32 6))))];
 let Size = 4;
 let isReMaterializable = 1;
 let mayLoad = 1;
-let mayStore = 0;
+let mayStore = 1;
 let hasSideEffects = 0;
 let usesCustomInserter = 1;
 let isPseudo = 1;
 let isCodeGenOnly = 1;
-// i_ext_hackaton(opc_hackaton_custom_a,regs,reg0,regs)
+// i_ext_hackaton(opc_hackaton_custom_c,regs,reg0,regs)
 }
 
 // warning: (BGW546): The instruction contains unsupported data types ('i16') even after the high-level analysis.
-def i_ext_hackaton__opc_hackaton_custom_a__regs__regs__reg0__AEXT_CLONE_: CodasipMicroClass_<(outs regs:$op0), (ins regs:$op1, regs:$op2)>
+def i_ext_hackaton__opc_hackaton_custom_c__regs__regs__reg0__AEXT_CLONE_: CodasipMicroClass_<(outs regs:$op0), (ins regs:$op1, regs:$op2)>
 {
-//let Pattern = [(set i32:$op0, (i32 (add (i32 (add (i32 (add (i32 (add (i32 CheckFI_i32_regs:$op1), (i32 (anyext (i16 (sra (i16 (mul (i16 (extloadi8_a1_s0 (i32 0))), (i16 (extloadi8_a1_s0 (i32 CheckFI_i32_regs:$op2))))), (i16 8))))))), (i32 (anyext (i16 (sra (i16 (mul (i16 (extloadi8_a1_s0 (i32 2))), (i16 (extloadi8_a1_s0 (i32 (add (i32 CheckFI_i32_regs:$op2), (i32 2))))))), (i16 8))))))), (i32 (anyext (i16 (sra (i16 (mul (i16 (extloadi8_a1_s0 (i32 4))), (i16 (extloadi8_a1_s0 (i32 (add (i32 CheckFI_i32_regs:$op2), (i32 4))))))), (i16 8))))))), (i32 (anyext (i16 (sra (i16 (mul (i16 (extloadi8_a1_s0 (i32 6))), (i16 (extloadi8_a1_s0 (i32 (add (i32 CheckFI_i32_regs:$op2), (i32 6))))))), (i16 8))))))))];
+//let Pattern = [(set i32:$op0, (i32 (anyext (i16 (add (i16 (add (i16 (sra (i16 (mul (i16 (load_a1_s0 (i32 2))), (i16 (load_a1_s0 (i32 (add (i32 CheckFI_i32_regs:$op1), (i32 2))))))), (i16 8))), (i16 (sra (i16 (mul (i16 (load_a1_s0 (i32 0))), (i16 (load_a1_s0 (i32 CheckFI_i32_regs:$op1))))), (i16 8))))), (i16 (sra (i16 (mul (i16 (load_a1_s0 (i32 4))), (i16 (load_a1_s0 (i32 (add (i32 CheckFI_i32_regs:$op1), (i32 4))))))), (i16 8)))))))), (store_a1_s0 (i16 (add (i16 (add (i16 (sra (i16 (mul (i16 (load_a1_s0 (i32 2))), (i16 (load_a1_s0 (i32 (add (i32 CheckFI_i32_regs:$op1), (i32 2))))))), (i16 8))), (i16 (sra (i16 (mul (i16 (load_a1_s0 (i32 0))), (i16 (load_a1_s0 (i32 CheckFI_i32_regs:$op1))))), (i16 8))))), (i16 (sra (i16 (mul (i16 (load_a1_s0 (i32 4))), (i16 (load_a1_s0 (i32 (add (i32 CheckFI_i32_regs:$op1), (i32 4))))))), (i16 8))))), (i32 (add (i32 CheckFI_i32_regs:$op2), (i32 6))))];
 let Size = 4;
 let isReMaterializable = 1;
 let mayLoad = 1;
-let mayStore = 0;
+let mayStore = 1;
 let hasSideEffects = 0;
 let usesCustomInserter = 1;
 let isPseudo = 1;
 let isCodeGenOnly = 1;
-// i_ext_hackaton(opc_hackaton_custom_a,regs,regs,reg0)
+// i_ext_hackaton(opc_hackaton_custom_c,regs,regs,reg0)
 }
 
 // warning: (BGW546): The instruction contains unsupported data types ('i16') even after the high-level analysis.
-def i_ext_hackaton__opc_hackaton_custom_a__regs__regs__regs__AEXT_CLONE_: CodasipMicroClass_<(outs regs:$op0), (ins regs:$op1, regs:$op2, regs:$op3)>
+def i_ext_hackaton__opc_hackaton_custom_c__regs__regs__regs__AEXT_CLONE_: CodasipMicroClass_<(outs regs:$op0), (ins regs:$op1, regs:$op2, regs:$op3)>
 {
-//let Pattern = [(set i32:$op0, (i32 (add (i32 (add (i32 (add (i32 (add (i32 CheckFI_i32_regs:$op1), (i32 (anyext (i16 (sra (i16 (mul (i16 (extloadi8_a1_s0 (i32 CheckFI_i32_regs:$op2))), (i16 (extloadi8_a1_s0 (i32 CheckFI_i32_regs:$op3))))), (i16 8))))))), (i32 (anyext (i16 (sra (i16 (mul (i16 (extloadi8_a1_s0 (i32 (add (i32 CheckFI_i32_regs:$op2), (i32 2))))), (i16 (extloadi8_a1_s0 (i32 (add (i32 CheckFI_i32_regs:$op3), (i32 2))))))), (i16 8))))))), (i32 (anyext (i16 (sra (i16 (mul (i16 (extloadi8_a1_s0 (i32 (add (i32 CheckFI_i32_regs:$op2), (i32 4))))), (i16 (extloadi8_a1_s0 (i32 (add (i32 CheckFI_i32_regs:$op3), (i32 4))))))), (i16 8))))))), (i32 (anyext (i16 (sra (i16 (mul (i16 (extloadi8_a1_s0 (i32 (add (i32 CheckFI_i32_regs:$op2), (i32 6))))), (i16 (extloadi8_a1_s0 (i32 (add (i32 CheckFI_i32_regs:$op3), (i32 6))))))), (i16 8))))))))];
+//let Pattern = [(set i32:$op0, (i32 (anyext (i16 (add (i16 (add (i16 (sra (i16 (mul (i16 (load_a1_s0 (i32 (add (i32 CheckFI_i32_regs:$op1), (i32 2))))), (i16 (load_a1_s0 (i32 (add (i32 CheckFI_i32_regs:$op2), (i32 2))))))), (i16 8))), (i16 (sra (i16 (mul (i16 (load_a1_s0 (i32 CheckFI_i32_regs:$op1))), (i16 (load_a1_s0 (i32 CheckFI_i32_regs:$op2))))), (i16 8))))), (i16 (sra (i16 (mul (i16 (load_a1_s0 (i32 (add (i32 CheckFI_i32_regs:$op1), (i32 4))))), (i16 (load_a1_s0 (i32 (add (i32 CheckFI_i32_regs:$op2), (i32 4))))))), (i16 8)))))))), (store_a1_s0 (i16 (add (i16 (add (i16 (sra (i16 (mul (i16 (load_a1_s0 (i32 (add (i32 CheckFI_i32_regs:$op1), (i32 2))))), (i16 (load_a1_s0 (i32 (add (i32 CheckFI_i32_regs:$op2), (i32 2))))))), (i16 8))), (i16 (sra (i16 (mul (i16 (load_a1_s0 (i32 CheckFI_i32_regs:$op1))), (i16 (load_a1_s0 (i32 CheckFI_i32_regs:$op2))))), (i16 8))))), (i16 (sra (i16 (mul (i16 (load_a1_s0 (i32 (add (i32 CheckFI_i32_regs:$op1), (i32 4))))), (i16 (load_a1_s0 (i32 (add (i32 CheckFI_i32_regs:$op2), (i32 4))))))), (i16 8))))), (i32 (add (i32 CheckFI_i32_regs:$op3), (i32 6))))];
 let Size = 4;
 let isReMaterializable = 1;
 let mayLoad = 1;
-let mayStore = 0;
+let mayStore = 1;
 let hasSideEffects = 0;
 let usesCustomInserter = 1;
 let isPseudo = 1;
 let isCodeGenOnly = 1;
-// i_ext_hackaton(opc_hackaton_custom_a,regs,regs,regs)
+// i_ext_hackaton(opc_hackaton_custom_c,regs,regs,regs)
 }
 
 // warning: (BGW546): The instruction contains unsupported data types ('i16') even after the high-level analysis.
-def i_ext_hackaton__opc_hackaton_custom_b__regs__reg0__reg0__AEXT_CLONE_: CodasipMicroClass_<(outs regs:$op0), (ins regs:$op1)>
+def i_ext_hackaton__opc_hackaton_custom_d__regs__reg0__reg0__AEXT_CLONE_: CodasipMicroClass_<(outs regs:$op0), (ins regs:$op1)>
 {
-//let Pattern = [(set i32:$op0, (i32 (add (i32 (add (i32 (add (i32 (add (i32 CheckFI_i32_regs:$op1), (i32 (anyext (i16 (srl (i16 (mul (i16 (xor (i16 (add (i16 (extloadi8_a1_s0 (i32 0))), (i16 (sra (i16 (extloadi8_a1_s0 (i32 0))), (i16 15))))), (i16 (sra (i16 (extloadi8_a1_s0 (i32 0))), (i16 15))))), (i16 (xor (i16 (add (i16 (extloadi8_a1_s0 (i32 0))), (i16 (sra (i16 (extloadi8_a1_s0 (i32 0))), (i16 15))))), (i16 (sra (i16 (extloadi8_a1_s0 (i32 0))), (i16 15))))))), (i16 8))))))), (i32 (anyext (i16 (srl (i16 (mul (i16 (xor (i16 (add (i16 (extloadi8_a1_s0 (i32 2))), (i16 (sra (i16 (extloadi8_a1_s0 (i32 2))), (i16 15))))), (i16 (sra (i16 (extloadi8_a1_s0 (i32 2))), (i16 15))))), (i16 (xor (i16 (add (i16 (extloadi8_a1_s0 (i32 2))), (i16 (sra (i16 (extloadi8_a1_s0 (i32 2))), (i16 15))))), (i16 (sra (i16 (extloadi8_a1_s0 (i32 2))), (i16 15))))))), (i16 8))))))), (i32 (anyext (i16 (srl (i16 (mul (i16 (xor (i16 (add (i16 (extloadi8_a1_s0 (i32 4))), (i16 (sra (i16 (extloadi8_a1_s0 (i32 4))), (i16 15))))), (i16 (sra (i16 (extloadi8_a1_s0 (i32 4))), (i16 15))))), (i16 (xor (i16 (add (i16 (extloadi8_a1_s0 (i32 4))), (i16 (sra (i16 (extloadi8_a1_s0 (i32 4))), (i16 15))))), (i16 (sra (i16 (extloadi8_a1_s0 (i32 4))), (i16 15))))))), (i16 8))))))), (i32 (anyext (i16 (srl (i16 (mul (i16 (xor (i16 (add (i16 (extloadi8_a1_s0 (i32 6))), (i16 (sra (i16 (extloadi8_a1_s0 (i32 6))), (i16 15))))), (i16 (sra (i16 (extloadi8_a1_s0 (i32 6))), (i16 15))))), (i16 (xor (i16 (add (i16 (extloadi8_a1_s0 (i32 6))), (i16 (sra (i16 (extloadi8_a1_s0 (i32 6))), (i16 15))))), (i16 (sra (i16 (extloadi8_a1_s0 (i32 6))), (i16 15))))))), (i16 8))))))))];
+//let Pattern = [(set i32:$op0, (i32 (add (i32 (add (i32 (add (i32 (add (i32 CheckFI_i32_regs:$op1), (i32 (anyext (i16 (sra (i16 (mul (i16 (load_a1_s0 (i32 0))), (i16 (load_a1_s0 (i32 0))))), (i16 8))))))), (i32 (anyext (i16 (sra (i16 (mul (i16 (load_a1_s0 (i32 2))), (i16 (load_a1_s0 (i32 2))))), (i16 8))))))), (i32 (anyext (i16 (sra (i16 (mul (i16 (load_a1_s0 (i32 4))), (i16 (load_a1_s0 (i32 4))))), (i16 8))))))), (i32 (anyext (i16 (sra (i16 (mul (i16 (load_a1_s0 (i32 6))), (i16 (load_a1_s0 (i32 6))))), (i16 8))))))))];
 let Size = 4;
 let isReMaterializable = 1;
 let mayLoad = 1;
@@ -6726,13 +6735,13 @@ let hasSideEffects = 0;
 let usesCustomInserter = 1;
 let isPseudo = 1;
 let isCodeGenOnly = 1;
-// i_ext_hackaton(opc_hackaton_custom_b,regs,reg0,reg0)
+// i_ext_hackaton(opc_hackaton_custom_d,regs,reg0,reg0)
 }
 
 // warning: (BGW546): The instruction contains unsupported data types ('i16') even after the high-level analysis.
-def i_ext_hackaton__opc_hackaton_custom_b__regs__reg0__regs__AEXT_CLONE_: CodasipMicroClass_<(outs regs:$op0), (ins regs:$op1, regs:$op2)>
+def i_ext_hackaton__opc_hackaton_custom_d__regs__reg0__regs__AEXT_CLONE_: CodasipMicroClass_<(outs regs:$op0), (ins regs:$op1, regs:$op2)>
 {
-//let Pattern = [(set i32:$op0, (i32 (add (i32 (add (i32 (add (i32 (add (i32 CheckFI_i32_regs:$op1), (i32 (anyext (i16 (srl (i16 (mul (i16 (xor (i16 (add (i16 (extloadi8_a1_s0 (i32 CheckFI_i32_regs:$op2))), (i16 (sra (i16 (extloadi8_a1_s0 (i32 CheckFI_i32_regs:$op2))), (i16 15))))), (i16 (sra (i16 (extloadi8_a1_s0 (i32 CheckFI_i32_regs:$op2))), (i16 15))))), (i16 (xor (i16 (add (i16 (extloadi8_a1_s0 (i32 0))), (i16 (sra (i16 (extloadi8_a1_s0 (i32 0))), (i16 15))))), (i16 (sra (i16 (extloadi8_a1_s0 (i32 0))), (i16 15))))))), (i16 8))))))), (i32 (anyext (i16 (srl (i16 (mul (i16 (xor (i16 (add (i16 (extloadi8_a1_s0 (i32 (add (i32 CheckFI_i32_regs:$op2), (i32 2))))), (i16 (sra (i16 (extloadi8_a1_s0 (i32 (add (i32 CheckFI_i32_regs:$op2), (i32 2))))), (i16 15))))), (i16 (sra (i16 (extloadi8_a1_s0 (i32 (add (i32 CheckFI_i32_regs:$op2), (i32 2))))), (i16 15))))), (i16 (xor (i16 (add (i16 (extloadi8_a1_s0 (i32 2))), (i16 (sra (i16 (extloadi8_a1_s0 (i32 2))), (i16 15))))), (i16 (sra (i16 (extloadi8_a1_s0 (i32 2))), (i16 15))))))), (i16 8))))))), (i32 (anyext (i16 (srl (i16 (mul (i16 (xor (i16 (add (i16 (extloadi8_a1_s0 (i32 (add (i32 CheckFI_i32_regs:$op2), (i32 4))))), (i16 (sra (i16 (extloadi8_a1_s0 (i32 (add (i32 CheckFI_i32_regs:$op2), (i32 4))))), (i16 15))))), (i16 (sra (i16 (extloadi8_a1_s0 (i32 (add (i32 CheckFI_i32_regs:$op2), (i32 4))))), (i16 15))))), (i16 (xor (i16 (add (i16 (extloadi8_a1_s0 (i32 4))), (i16 (sra (i16 (extloadi8_a1_s0 (i32 4))), (i16 15))))), (i16 (sra (i16 (extloadi8_a1_s0 (i32 4))), (i16 15))))))), (i16 8))))))), (i32 (anyext (i16 (srl (i16 (mul (i16 (xor (i16 (add (i16 (extloadi8_a1_s0 (i32 (add (i32 CheckFI_i32_regs:$op2), (i32 6))))), (i16 (sra (i16 (extloadi8_a1_s0 (i32 (add (i32 CheckFI_i32_regs:$op2), (i32 6))))), (i16 15))))), (i16 (sra (i16 (extloadi8_a1_s0 (i32 (add (i32 CheckFI_i32_regs:$op2), (i32 6))))), (i16 15))))), (i16 (xor (i16 (add (i16 (extloadi8_a1_s0 (i32 6))), (i16 (sra (i16 (extloadi8_a1_s0 (i32 6))), (i16 15))))), (i16 (sra (i16 (extloadi8_a1_s0 (i32 6))), (i16 15))))))), (i16 8))))))))];
+//let Pattern = [(set i32:$op0, (i32 (add (i32 (add (i32 (add (i32 (add (i32 CheckFI_i32_regs:$op1), (i32 (anyext (i16 (sra (i16 (mul (i16 (load_a1_s0 (i32 CheckFI_i32_regs:$op2))), (i16 (load_a1_s0 (i32 0))))), (i16 8))))))), (i32 (anyext (i16 (sra (i16 (mul (i16 (load_a1_s0 (i32 (add (i32 CheckFI_i32_regs:$op2), (i32 2))))), (i16 (load_a1_s0 (i32 2))))), (i16 8))))))), (i32 (anyext (i16 (sra (i16 (mul (i16 (load_a1_s0 (i32 (add (i32 CheckFI_i32_regs:$op2), (i32 4))))), (i16 (load_a1_s0 (i32 4))))), (i16 8))))))), (i32 (anyext (i16 (sra (i16 (mul (i16 (load_a1_s0 (i32 (add (i32 CheckFI_i32_regs:$op2), (i32 6))))), (i16 (load_a1_s0 (i32 6))))), (i16 8))))))))];
 let Size = 4;
 let isReMaterializable = 1;
 let mayLoad = 1;
@@ -6741,13 +6750,13 @@ let hasSideEffects = 0;
 let usesCustomInserter = 1;
 let isPseudo = 1;
 let isCodeGenOnly = 1;
-// i_ext_hackaton(opc_hackaton_custom_b,regs,reg0,regs)
+// i_ext_hackaton(opc_hackaton_custom_d,regs,reg0,regs)
 }
 
 // warning: (BGW546): The instruction contains unsupported data types ('i16') even after the high-level analysis.
-def i_ext_hackaton__opc_hackaton_custom_b__regs__regs__reg0__AEXT_CLONE_: CodasipMicroClass_<(outs regs:$op0), (ins regs:$op1, regs:$op2)>
+def i_ext_hackaton__opc_hackaton_custom_d__regs__regs__reg0__AEXT_CLONE_: CodasipMicroClass_<(outs regs:$op0), (ins regs:$op1, regs:$op2)>
 {
-//let Pattern = [(set i32:$op0, (i32 (add (i32 (add (i32 (add (i32 (add (i32 CheckFI_i32_regs:$op1), (i32 (anyext (i16 (srl (i16 (mul (i16 (xor (i16 (add (i16 (extloadi8_a1_s0 (i32 0))), (i16 (sra (i16 (extloadi8_a1_s0 (i32 0))), (i16 15))))), (i16 (sra (i16 (extloadi8_a1_s0 (i32 0))), (i16 15))))), (i16 (xor (i16 (add (i16 (extloadi8_a1_s0 (i32 CheckFI_i32_regs:$op2))), (i16 (sra (i16 (extloadi8_a1_s0 (i32 CheckFI_i32_regs:$op2))), (i16 15))))), (i16 (sra (i16 (extloadi8_a1_s0 (i32 CheckFI_i32_regs:$op2))), (i16 15))))))), (i16 8))))))), (i32 (anyext (i16 (srl (i16 (mul (i16 (xor (i16 (add (i16 (extloadi8_a1_s0 (i32 2))), (i16 (sra (i16 (extloadi8_a1_s0 (i32 2))), (i16 15))))), (i16 (sra (i16 (extloadi8_a1_s0 (i32 2))), (i16 15))))), (i16 (xor (i16 (add (i16 (extloadi8_a1_s0 (i32 (add (i32 CheckFI_i32_regs:$op2), (i32 2))))), (i16 (sra (i16 (extloadi8_a1_s0 (i32 (add (i32 CheckFI_i32_regs:$op2), (i32 2))))), (i16 15))))), (i16 (sra (i16 (extloadi8_a1_s0 (i32 (add (i32 CheckFI_i32_regs:$op2), (i32 2))))), (i16 15))))))), (i16 8))))))), (i32 (anyext (i16 (srl (i16 (mul (i16 (xor (i16 (add (i16 (extloadi8_a1_s0 (i32 4))), (i16 (sra (i16 (extloadi8_a1_s0 (i32 4))), (i16 15))))), (i16 (sra (i16 (extloadi8_a1_s0 (i32 4))), (i16 15))))), (i16 (xor (i16 (add (i16 (extloadi8_a1_s0 (i32 (add (i32 CheckFI_i32_regs:$op2), (i32 4))))), (i16 (sra (i16 (extloadi8_a1_s0 (i32 (add (i32 CheckFI_i32_regs:$op2), (i32 4))))), (i16 15))))), (i16 (sra (i16 (extloadi8_a1_s0 (i32 (add (i32 CheckFI_i32_regs:$op2), (i32 4))))), (i16 15))))))), (i16 8))))))), (i32 (anyext (i16 (srl (i16 (mul (i16 (xor (i16 (add (i16 (extloadi8_a1_s0 (i32 6))), (i16 (sra (i16 (extloadi8_a1_s0 (i32 6))), (i16 15))))), (i16 (sra (i16 (extloadi8_a1_s0 (i32 6))), (i16 15))))), (i16 (xor (i16 (add (i16 (extloadi8_a1_s0 (i32 (add (i32 CheckFI_i32_regs:$op2), (i32 6))))), (i16 (sra (i16 (extloadi8_a1_s0 (i32 (add (i32 CheckFI_i32_regs:$op2), (i32 6))))), (i16 15))))), (i16 (sra (i16 (extloadi8_a1_s0 (i32 (add (i32 CheckFI_i32_regs:$op2), (i32 6))))), (i16 15))))))), (i16 8))))))))];
+//let Pattern = [(set i32:$op0, (i32 (add (i32 (add (i32 (add (i32 (add (i32 CheckFI_i32_regs:$op1), (i32 (anyext (i16 (sra (i16 (mul (i16 (load_a1_s0 (i32 0))), (i16 (load_a1_s0 (i32 CheckFI_i32_regs:$op2))))), (i16 8))))))), (i32 (anyext (i16 (sra (i16 (mul (i16 (load_a1_s0 (i32 2))), (i16 (load_a1_s0 (i32 (add (i32 CheckFI_i32_regs:$op2), (i32 2))))))), (i16 8))))))), (i32 (anyext (i16 (sra (i16 (mul (i16 (load_a1_s0 (i32 4))), (i16 (load_a1_s0 (i32 (add (i32 CheckFI_i32_regs:$op2), (i32 4))))))), (i16 8))))))), (i32 (anyext (i16 (sra (i16 (mul (i16 (load_a1_s0 (i32 6))), (i16 (load_a1_s0 (i32 (add (i32 CheckFI_i32_regs:$op2), (i32 6))))))), (i16 8))))))))];
 let Size = 4;
 let isReMaterializable = 1;
 let mayLoad = 1;
@@ -6756,13 +6765,13 @@ let hasSideEffects = 0;
 let usesCustomInserter = 1;
 let isPseudo = 1;
 let isCodeGenOnly = 1;
-// i_ext_hackaton(opc_hackaton_custom_b,regs,regs,reg0)
+// i_ext_hackaton(opc_hackaton_custom_d,regs,regs,reg0)
 }
 
 // warning: (BGW546): The instruction contains unsupported data types ('i16') even after the high-level analysis.
-def i_ext_hackaton__opc_hackaton_custom_b__regs__regs__regs__AEXT_CLONE_: CodasipMicroClass_<(outs regs:$op0), (ins regs:$op1, regs:$op2, regs:$op3)>
+def i_ext_hackaton__opc_hackaton_custom_d__regs__regs__regs__AEXT_CLONE_: CodasipMicroClass_<(outs regs:$op0), (ins regs:$op1, regs:$op2, regs:$op3)>
 {
-//let Pattern = [(set i32:$op0, (i32 (add (i32 (add (i32 (add (i32 (add (i32 CheckFI_i32_regs:$op1), (i32 (anyext (i16 (srl (i16 (mul (i16 (xor (i16 (add (i16 (extloadi8_a1_s0 (i32 CheckFI_i32_regs:$op2))), (i16 (sra (i16 (extloadi8_a1_s0 (i32 CheckFI_i32_regs:$op2))), (i16 15))))), (i16 (sra (i16 (extloadi8_a1_s0 (i32 CheckFI_i32_regs:$op2))), (i16 15))))), (i16 (xor (i16 (add (i16 (extloadi8_a1_s0 (i32 CheckFI_i32_regs:$op3))), (i16 (sra (i16 (extloadi8_a1_s0 (i32 CheckFI_i32_regs:$op3))), (i16 15))))), (i16 (sra (i16 (extloadi8_a1_s0 (i32 CheckFI_i32_regs:$op3))), (i16 15))))))), (i16 8))))))), (i32 (anyext (i16 (srl (i16 (mul (i16 (xor (i16 (add (i16 (extloadi8_a1_s0 (i32 (add (i32 CheckFI_i32_regs:$op2), (i32 2))))), (i16 (sra (i16 (extloadi8_a1_s0 (i32 (add (i32 CheckFI_i32_regs:$op2), (i32 2))))), (i16 15))))), (i16 (sra (i16 (extloadi8_a1_s0 (i32 (add (i32 CheckFI_i32_regs:$op2), (i32 2))))), (i16 15))))), (i16 (xor (i16 (add (i16 (extloadi8_a1_s0 (i32 (add (i32 CheckFI_i32_regs:$op3), (i32 2))))), (i16 (sra (i16 (extloadi8_a1_s0 (i32 (add (i32 CheckFI_i32_regs:$op3), (i32 2))))), (i16 15))))), (i16 (sra (i16 (extloadi8_a1_s0 (i32 (add (i32 CheckFI_i32_regs:$op3), (i32 2))))), (i16 15))))))), (i16 8))))))), (i32 (anyext (i16 (srl (i16 (mul (i16 (xor (i16 (add (i16 (extloadi8_a1_s0 (i32 (add (i32 CheckFI_i32_regs:$op2), (i32 4))))), (i16 (sra (i16 (extloadi8_a1_s0 (i32 (add (i32 CheckFI_i32_regs:$op2), (i32 4))))), (i16 15))))), (i16 (sra (i16 (extloadi8_a1_s0 (i32 (add (i32 CheckFI_i32_regs:$op2), (i32 4))))), (i16 15))))), (i16 (xor (i16 (add (i16 (extloadi8_a1_s0 (i32 (add (i32 CheckFI_i32_regs:$op3), (i32 4))))), (i16 (sra (i16 (extloadi8_a1_s0 (i32 (add (i32 CheckFI_i32_regs:$op3), (i32 4))))), (i16 15))))), (i16 (sra (i16 (extloadi8_a1_s0 (i32 (add (i32 CheckFI_i32_regs:$op3), (i32 4))))), (i16 15))))))), (i16 8))))))), (i32 (anyext (i16 (srl (i16 (mul (i16 (xor (i16 (add (i16 (extloadi8_a1_s0 (i32 (add (i32 CheckFI_i32_regs:$op2), (i32 6))))), (i16 (sra (i16 (extloadi8_a1_s0 (i32 (add (i32 CheckFI_i32_regs:$op2), (i32 6))))), (i16 15))))), (i16 (sra (i16 (extloadi8_a1_s0 (i32 (add (i32 CheckFI_i32_regs:$op2), (i32 6))))), (i16 15))))), (i16 (xor (i16 (add (i16 (extloadi8_a1_s0 (i32 (add (i32 CheckFI_i32_regs:$op3), (i32 6))))), (i16 (sra (i16 (extloadi8_a1_s0 (i32 (add (i32 CheckFI_i32_regs:$op3), (i32 6))))), (i16 15))))), (i16 (sra (i16 (extloadi8_a1_s0 (i32 (add (i32 CheckFI_i32_regs:$op3), (i32 6))))), (i16 15))))))), (i16 8))))))))];
+//let Pattern = [(set i32:$op0, (i32 (add (i32 (add (i32 (add (i32 (add (i32 CheckFI_i32_regs:$op1), (i32 (anyext (i16 (sra (i16 (mul (i16 (load_a1_s0 (i32 CheckFI_i32_regs:$op2))), (i16 (load_a1_s0 (i32 CheckFI_i32_regs:$op3))))), (i16 8))))))), (i32 (anyext (i16 (sra (i16 (mul (i16 (load_a1_s0 (i32 (add (i32 CheckFI_i32_regs:$op2), (i32 2))))), (i16 (load_a1_s0 (i32 (add (i32 CheckFI_i32_regs:$op3), (i32 2))))))), (i16 8))))))), (i32 (anyext (i16 (sra (i16 (mul (i16 (load_a1_s0 (i32 (add (i32 CheckFI_i32_regs:$op2), (i32 4))))), (i16 (load_a1_s0 (i32 (add (i32 CheckFI_i32_regs:$op3), (i32 4))))))), (i16 8))))))), (i32 (anyext (i16 (sra (i16 (mul (i16 (load_a1_s0 (i32 (add (i32 CheckFI_i32_regs:$op2), (i32 6))))), (i16 (load_a1_s0 (i32 (add (i32 CheckFI_i32_regs:$op3), (i32 6))))))), (i16 8))))))))];
 let Size = 4;
 let isReMaterializable = 1;
 let mayLoad = 1;
@@ -6771,7 +6780,7 @@ let hasSideEffects = 0;
 let usesCustomInserter = 1;
 let isPseudo = 1;
 let isCodeGenOnly = 1;
-// i_ext_hackaton(opc_hackaton_custom_b,regs,regs,regs)
+// i_ext_hackaton(opc_hackaton_custom_d,regs,regs,regs)
 }
 
 def e_movi32__: CodasipMicroClass_<(outs regs:$op0), (ins i32imm:$op1)>
@@ -6866,170 +6875,274 @@ let isCodeGenOnly = 1;
 // 
 }
 
-// warning: (BGW546): The instruction contains unsupported data types ('i16') even after the high-level analysis.
-def i_ext_hackaton__opc_hackaton_custom_a__regs__reg0__reg0__: CodasipMicroClass_<(outs regs:$op0), (ins regs:$op1)>
-{
-let AsmString = "hackaton_custom_instr_a $op0, x0, x0";
-//let Pattern = [(set i32:$op0, (i32 (add (i32 (add (i32 (add (i32 (add (i32 NotFI_i32_regs:$op1), (i32 (sext (i16 (sra (i16 (mul (i16 (sextloadi8_a1_s0 (i32 0))), (i16 (sextloadi8_a1_s0 (i32 0))))), (i16 8))))))), (i32 (sext (i16 (sra (i16 (mul (i16 (sextloadi8_a1_s0 (i32 2))), (i16 (sextloadi8_a1_s0 (i32 2))))), (i16 8))))))), (i32 (sext (i16 (sra (i16 (mul (i16 (sextloadi8_a1_s0 (i32 4))), (i16 (sextloadi8_a1_s0 (i32 4))))), (i16 8))))))), (i32 (sext (i16 (sra (i16 (mul (i16 (sextloadi8_a1_s0 (i32 6))), (i16 (sextloadi8_a1_s0 (i32 6))))), (i16 8))))))))];
-let Constraints = "$op1 = $op0";
-let Size = 4;
-let isReMaterializable = 1;
-let mayLoad = 1;
-let mayStore = 0;
-let hasSideEffects = 0;
-bits<5> op0;
-let Inst{31-12} = 0b00000000000000000000;
-let Inst{11-7} = op0;
-let Inst{6-0} = 0b0101011;
-// i_ext_hackaton(opc_hackaton_custom_a,regs,reg0,reg0)
-}
-
-// warning: (BGW546): The instruction contains unsupported data types ('i16') even after the high-level analysis.
-def i_ext_hackaton__opc_hackaton_custom_a__regs__reg0__regs__: CodasipMicroClass_<(outs regs:$op0), (ins regs:$op1, regs:$op2)>
-{
-let AsmString = "hackaton_custom_instr_a $op0, x0, $op2";
-//let Pattern = [(set i32:$op0, (i32 (add (i32 (add (i32 (add (i32 (add (i32 NotFI_i32_regs:$op1), (i32 (sext (i16 (sra (i16 (mul (i16 (sextloadi8_a1_s0 (i32 CheckFI_i32_regs:$op2))), (i16 (sextloadi8_a1_s0 (i32 0))))), (i16 8))))))), (i32 (sext (i16 (sra (i16 (mul (i16 (sextloadi8_a1_s0 (i32 (add (i32 CheckFI_i32_regs:$op2), (i32 2))))), (i16 (sextloadi8_a1_s0 (i32 2))))), (i16 8))))))), (i32 (sext (i16 (sra (i16 (mul (i16 (sextloadi8_a1_s0 (i32 (add (i32 CheckFI_i32_regs:$op2), (i32 4))))), (i16 (sextloadi8_a1_s0 (i32 4))))), (i16 8))))))), (i32 (sext (i16 (sra (i16 (mul (i16 (sextloadi8_a1_s0 (i32 (add (i32 CheckFI_i32_regs:$op2), (i32 6))))), (i16 (sextloadi8_a1_s0 (i32 6))))), (i16 8))))))))];
-let Constraints = "$op1 = $op0";
-let Size = 4;
-let isReMaterializable = 1;
-let mayLoad = 1;
-let mayStore = 0;
-let hasSideEffects = 0;
-bits<5> op0;
-bits<5> op2;
-let Inst{31-25} = 0b0000000;
-let Inst{24-20} = op2;
-let Inst{19-12} = 0b00000000;
-let Inst{11-7} = op0;
-let Inst{6-0} = 0b0101011;
-// i_ext_hackaton(opc_hackaton_custom_a,regs,reg0,regs)
-}
-
-// warning: (BGW546): The instruction contains unsupported data types ('i16') even after the high-level analysis.
-def i_ext_hackaton__opc_hackaton_custom_a__regs__regs__reg0__: CodasipMicroClass_<(outs regs:$op0), (ins regs:$op1, regs:$op2)>
-{
-let AsmString = "hackaton_custom_instr_a $op0, $op2, x0";
-//let Pattern = [(set i32:$op0, (i32 (add (i32 (add (i32 (add (i32 (add (i32 NotFI_i32_regs:$op1), (i32 (sext (i16 (sra (i16 (mul (i16 (sextloadi8_a1_s0 (i32 0))), (i16 (sextloadi8_a1_s0 (i32 CheckFI_i32_regs:$op2))))), (i16 8))))))), (i32 (sext (i16 (sra (i16 (mul (i16 (sextloadi8_a1_s0 (i32 2))), (i16 (sextloadi8_a1_s0 (i32 (add (i32 CheckFI_i32_regs:$op2), (i32 2))))))), (i16 8))))))), (i32 (sext (i16 (sra (i16 (mul (i16 (sextloadi8_a1_s0 (i32 4))), (i16 (sextloadi8_a1_s0 (i32 (add (i32 CheckFI_i32_regs:$op2), (i32 4))))))), (i16 8))))))), (i32 (sext (i16 (sra (i16 (mul (i16 (sextloadi8_a1_s0 (i32 6))), (i16 (sextloadi8_a1_s0 (i32 (add (i32 CheckFI_i32_regs:$op2), (i32 6))))))), (i16 8))))))))];
-let Constraints = "$op1 = $op0";
-let Size = 4;
-let isReMaterializable = 1;
-let mayLoad = 1;
-let mayStore = 0;
-let hasSideEffects = 0;
-bits<5> op0;
-bits<5> op2;
-let Inst{31-20} = 0b000000000000;
-let Inst{19-15} = op2;
-let Inst{14-12} = 0b000;
-let Inst{11-7} = op0;
-let Inst{6-0} = 0b0101011;
-// i_ext_hackaton(opc_hackaton_custom_a,regs,regs,reg0)
-}
-
-// warning: (BGW546): The instruction contains unsupported data types ('i16') even after the high-level analysis.
-def i_ext_hackaton__opc_hackaton_custom_a__regs__regs__regs__: CodasipMicroClass_<(outs regs:$op0), (ins regs:$op1, regs:$op2, regs:$op3)>
-{
-let AsmString = "hackaton_custom_instr_a $op0, $op3, $op2";
-//let Pattern = [(set i32:$op0, (i32 (add (i32 (add (i32 (add (i32 (add (i32 NotFI_i32_regs:$op1), (i32 (sext (i16 (sra (i16 (mul (i16 (sextloadi8_a1_s0 (i32 CheckFI_i32_regs:$op2))), (i16 (sextloadi8_a1_s0 (i32 CheckFI_i32_regs:$op3))))), (i16 8))))))), (i32 (sext (i16 (sra (i16 (mul (i16 (sextloadi8_a1_s0 (i32 (add (i32 CheckFI_i32_regs:$op2), (i32 2))))), (i16 (sextloadi8_a1_s0 (i32 (add (i32 CheckFI_i32_regs:$op3), (i32 2))))))), (i16 8))))))), (i32 (sext (i16 (sra (i16 (mul (i16 (sextloadi8_a1_s0 (i32 (add (i32 CheckFI_i32_regs:$op2), (i32 4))))), (i16 (sextloadi8_a1_s0 (i32 (add (i32 CheckFI_i32_regs:$op3), (i32 4))))))), (i16 8))))))), (i32 (sext (i16 (sra (i16 (mul (i16 (sextloadi8_a1_s0 (i32 (add (i32 CheckFI_i32_regs:$op2), (i32 6))))), (i16 (sextloadi8_a1_s0 (i32 (add (i32 CheckFI_i32_regs:$op3), (i32 6))))))), (i16 8))))))))];
-let Constraints = "$op1 = $op0";
-let Size = 4;
-let isReMaterializable = 1;
-let mayLoad = 1;
-let mayStore = 0;
-let hasSideEffects = 0;
-bits<5> op0;
-bits<5> op3;
-bits<5> op2;
-let Inst{31-25} = 0b0000000;
-let Inst{24-20} = op2;
-let Inst{19-15} = op3;
-let Inst{14-12} = 0b000;
-let Inst{11-7} = op0;
-let Inst{6-0} = 0b0101011;
-// i_ext_hackaton(opc_hackaton_custom_a,regs,regs,regs)
-}
-
-// warning: (BGW546): The instruction contains unsupported data types ('i16') even after the high-level analysis.
-def i_ext_hackaton__opc_hackaton_custom_b__regs__reg0__reg0__: CodasipMicroClass_<(outs regs:$op0), (ins regs:$op1)>
-{
-let AsmString = "hackaton_custom_instr_b $op0, x0, x0";
-//let Pattern = [(set i32:$op0, (i32 (add (i32 (add (i32 (add (i32 (add (i32 NotFI_i32_regs:$op1), (i32 (zext (i16 (srl (i16 (mul (i16 (xor (i16 (add (i16 (sextloadi8_a1_s0 (i32 0))), (i16 (sra (i16 (sextloadi8_a1_s0 (i32 0))), (i16 15))))), (i16 (sra (i16 (sextloadi8_a1_s0 (i32 0))), (i16 15))))), (i16 (xor (i16 (add (i16 (sextloadi8_a1_s0 (i32 0))), (i16 (sra (i16 (sextloadi8_a1_s0 (i32 0))), (i16 15))))), (i16 (sra (i16 (sextloadi8_a1_s0 (i32 0))), (i16 15))))))), (i16 8))))))), (i32 (zext (i16 (srl (i16 (mul (i16 (xor (i16 (add (i16 (sextloadi8_a1_s0 (i32 2))), (i16 (sra (i16 (sextloadi8_a1_s0 (i32 2))), (i16 15))))), (i16 (sra (i16 (sextloadi8_a1_s0 (i32 2))), (i16 15))))), (i16 (xor (i16 (add (i16 (sextloadi8_a1_s0 (i32 2))), (i16 (sra (i16 (sextloadi8_a1_s0 (i32 2))), (i16 15))))), (i16 (sra (i16 (sextloadi8_a1_s0 (i32 2))), (i16 15))))))), (i16 8))))))), (i32 (zext (i16 (srl (i16 (mul (i16 (xor (i16 (add (i16 (sextloadi8_a1_s0 (i32 4))), (i16 (sra (i16 (sextloadi8_a1_s0 (i32 4))), (i16 15))))), (i16 (sra (i16 (sextloadi8_a1_s0 (i32 4))), (i16 15))))), (i16 (xor (i16 (add (i16 (sextloadi8_a1_s0 (i32 4))), (i16 (sra (i16 (sextloadi8_a1_s0 (i32 4))), (i16 15))))), (i16 (sra (i16 (sextloadi8_a1_s0 (i32 4))), (i16 15))))))), (i16 8))))))), (i32 (zext (i16 (srl (i16 (mul (i16 (xor (i16 (add (i16 (sextloadi8_a1_s0 (i32 6))), (i16 (sra (i16 (sextloadi8_a1_s0 (i32 6))), (i16 15))))), (i16 (sra (i16 (sextloadi8_a1_s0 (i32 6))), (i16 15))))), (i16 (xor (i16 (add (i16 (sextloadi8_a1_s0 (i32 6))), (i16 (sra (i16 (sextloadi8_a1_s0 (i32 6))), (i16 15))))), (i16 (sra (i16 (sextloadi8_a1_s0 (i32 6))), (i16 15))))))), (i16 8))))))))];
-let Constraints = "$op1 = $op0";
-let Size = 4;
-let isReMaterializable = 1;
-let mayLoad = 1;
-let mayStore = 0;
-let hasSideEffects = 0;
-bits<5> op0;
-let Inst{31-12} = 0b00000000000000000001;
-let Inst{11-7} = op0;
-let Inst{6-0} = 0b0101011;
-// i_ext_hackaton(opc_hackaton_custom_b,regs,reg0,reg0)
-}
-
-// warning: (BGW546): The instruction contains unsupported data types ('i16') even after the high-level analysis.
-def i_ext_hackaton__opc_hackaton_custom_b__regs__reg0__regs__: CodasipMicroClass_<(outs regs:$op0), (ins regs:$op1, regs:$op2)>
-{
-let AsmString = "hackaton_custom_instr_b $op0, x0, $op2";
-//let Pattern = [(set i32:$op0, (i32 (add (i32 (add (i32 (add (i32 (add (i32 NotFI_i32_regs:$op1), (i32 (zext (i16 (srl (i16 (mul (i16 (xor (i16 (add (i16 (sextloadi8_a1_s0 (i32 CheckFI_i32_regs:$op2))), (i16 (sra (i16 (sextloadi8_a1_s0 (i32 CheckFI_i32_regs:$op2))), (i16 15))))), (i16 (sra (i16 (sextloadi8_a1_s0 (i32 CheckFI_i32_regs:$op2))), (i16 15))))), (i16 (xor (i16 (add (i16 (sextloadi8_a1_s0 (i32 0))), (i16 (sra (i16 (sextloadi8_a1_s0 (i32 0))), (i16 15))))), (i16 (sra (i16 (sextloadi8_a1_s0 (i32 0))), (i16 15))))))), (i16 8))))))), (i32 (zext (i16 (srl (i16 (mul (i16 (xor (i16 (add (i16 (sextloadi8_a1_s0 (i32 (add (i32 CheckFI_i32_regs:$op2), (i32 2))))), (i16 (sra (i16 (sextloadi8_a1_s0 (i32 (add (i32 CheckFI_i32_regs:$op2), (i32 2))))), (i16 15))))), (i16 (sra (i16 (sextloadi8_a1_s0 (i32 (add (i32 CheckFI_i32_regs:$op2), (i32 2))))), (i16 15))))), (i16 (xor (i16 (add (i16 (sextloadi8_a1_s0 (i32 2))), (i16 (sra (i16 (sextloadi8_a1_s0 (i32 2))), (i16 15))))), (i16 (sra (i16 (sextloadi8_a1_s0 (i32 2))), (i16 15))))))), (i16 8))))))), (i32 (zext (i16 (srl (i16 (mul (i16 (xor (i16 (add (i16 (sextloadi8_a1_s0 (i32 (add (i32 CheckFI_i32_regs:$op2), (i32 4))))), (i16 (sra (i16 (sextloadi8_a1_s0 (i32 (add (i32 CheckFI_i32_regs:$op2), (i32 4))))), (i16 15))))), (i16 (sra (i16 (sextloadi8_a1_s0 (i32 (add (i32 CheckFI_i32_regs:$op2), (i32 4))))), (i16 15))))), (i16 (xor (i16 (add (i16 (sextloadi8_a1_s0 (i32 4))), (i16 (sra (i16 (sextloadi8_a1_s0 (i32 4))), (i16 15))))), (i16 (sra (i16 (sextloadi8_a1_s0 (i32 4))), (i16 15))))))), (i16 8))))))), (i32 (zext (i16 (srl (i16 (mul (i16 (xor (i16 (add (i16 (sextloadi8_a1_s0 (i32 (add (i32 CheckFI_i32_regs:$op2), (i32 6))))), (i16 (sra (i16 (sextloadi8_a1_s0 (i32 (add (i32 CheckFI_i32_regs:$op2), (i32 6))))), (i16 15))))), (i16 (sra (i16 (sextloadi8_a1_s0 (i32 (add (i32 CheckFI_i32_regs:$op2), (i32 6))))), (i16 15))))), (i16 (xor (i16 (add (i16 (sextloadi8_a1_s0 (i32 6))), (i16 (sra (i16 (sextloadi8_a1_s0 (i32 6))), (i16 15))))), (i16 (sra (i16 (sextloadi8_a1_s0 (i32 6))), (i16 15))))))), (i16 8))))))))];
-let Constraints = "$op1 = $op0";
-let Size = 4;
-let isReMaterializable = 1;
-let mayLoad = 1;
-let mayStore = 0;
-let hasSideEffects = 0;
-bits<5> op0;
-bits<5> op2;
-let Inst{31-25} = 0b0000000;
-let Inst{24-20} = op2;
-let Inst{19-12} = 0b00000001;
-let Inst{11-7} = op0;
-let Inst{6-0} = 0b0101011;
-// i_ext_hackaton(opc_hackaton_custom_b,regs,reg0,regs)
-}
-
-// warning: (BGW546): The instruction contains unsupported data types ('i16') even after the high-level analysis.
-def i_ext_hackaton__opc_hackaton_custom_b__regs__regs__reg0__: CodasipMicroClass_<(outs regs:$op0), (ins regs:$op1, regs:$op2)>
-{
-let AsmString = "hackaton_custom_instr_b $op0, $op2, x0";
-//let Pattern = [(set i32:$op0, (i32 (add (i32 (add (i32 (add (i32 (add (i32 NotFI_i32_regs:$op1), (i32 (zext (i16 (srl (i16 (mul (i16 (xor (i16 (add (i16 (sextloadi8_a1_s0 (i32 0))), (i16 (sra (i16 (sextloadi8_a1_s0 (i32 0))), (i16 15))))), (i16 (sra (i16 (sextloadi8_a1_s0 (i32 0))), (i16 15))))), (i16 (xor (i16 (add (i16 (sextloadi8_a1_s0 (i32 CheckFI_i32_regs:$op2))), (i16 (sra (i16 (sextloadi8_a1_s0 (i32 CheckFI_i32_regs:$op2))), (i16 15))))), (i16 (sra (i16 (sextloadi8_a1_s0 (i32 CheckFI_i32_regs:$op2))), (i16 15))))))), (i16 8))))))), (i32 (zext (i16 (srl (i16 (mul (i16 (xor (i16 (add (i16 (sextloadi8_a1_s0 (i32 2))), (i16 (sra (i16 (sextloadi8_a1_s0 (i32 2))), (i16 15))))), (i16 (sra (i16 (sextloadi8_a1_s0 (i32 2))), (i16 15))))), (i16 (xor (i16 (add (i16 (sextloadi8_a1_s0 (i32 (add (i32 CheckFI_i32_regs:$op2), (i32 2))))), (i16 (sra (i16 (sextloadi8_a1_s0 (i32 (add (i32 CheckFI_i32_regs:$op2), (i32 2))))), (i16 15))))), (i16 (sra (i16 (sextloadi8_a1_s0 (i32 (add (i32 CheckFI_i32_regs:$op2), (i32 2))))), (i16 15))))))), (i16 8))))))), (i32 (zext (i16 (srl (i16 (mul (i16 (xor (i16 (add (i16 (sextloadi8_a1_s0 (i32 4))), (i16 (sra (i16 (sextloadi8_a1_s0 (i32 4))), (i16 15))))), (i16 (sra (i16 (sextloadi8_a1_s0 (i32 4))), (i16 15))))), (i16 (xor (i16 (add (i16 (sextloadi8_a1_s0 (i32 (add (i32 CheckFI_i32_regs:$op2), (i32 4))))), (i16 (sra (i16 (sextloadi8_a1_s0 (i32 (add (i32 CheckFI_i32_regs:$op2), (i32 4))))), (i16 15))))), (i16 (sra (i16 (sextloadi8_a1_s0 (i32 (add (i32 CheckFI_i32_regs:$op2), (i32 4))))), (i16 15))))))), (i16 8))))))), (i32 (zext (i16 (srl (i16 (mul (i16 (xor (i16 (add (i16 (sextloadi8_a1_s0 (i32 6))), (i16 (sra (i16 (sextloadi8_a1_s0 (i32 6))), (i16 15))))), (i16 (sra (i16 (sextloadi8_a1_s0 (i32 6))), (i16 15))))), (i16 (xor (i16 (add (i16 (sextloadi8_a1_s0 (i32 (add (i32 CheckFI_i32_regs:$op2), (i32 6))))), (i16 (sra (i16 (sextloadi8_a1_s0 (i32 (add (i32 CheckFI_i32_regs:$op2), (i32 6))))), (i16 15))))), (i16 (sra (i16 (sextloadi8_a1_s0 (i32 (add (i32 CheckFI_i32_regs:$op2), (i32 6))))), (i16 15))))))), (i16 8))))))))];
-let Constraints = "$op1 = $op0";
-let Size = 4;
-let isReMaterializable = 1;
-let mayLoad = 1;
-let mayStore = 0;
-let hasSideEffects = 0;
-bits<5> op0;
-bits<5> op2;
-let Inst{31-20} = 0b000000000000;
-let Inst{19-15} = op2;
-let Inst{14-12} = 0b001;
-let Inst{11-7} = op0;
-let Inst{6-0} = 0b0101011;
-// i_ext_hackaton(opc_hackaton_custom_b,regs,regs,reg0)
-}
-
-// warning: (BGW546): The instruction contains unsupported data types ('i16') even after the high-level analysis.
 def i_ext_hackaton__opc_hackaton_custom_b__regs__regs__regs__: CodasipMicroClass_<(outs regs:$op0), (ins regs:$op1, regs:$op2, regs:$op3)>
 {
-let AsmString = "hackaton_custom_instr_b $op0, $op3, $op2";
-//let Pattern = [(set i32:$op0, (i32 (add (i32 (add (i32 (add (i32 (add (i32 NotFI_i32_regs:$op1), (i32 (zext (i16 (srl (i16 (mul (i16 (xor (i16 (add (i16 (sextloadi8_a1_s0 (i32 CheckFI_i32_regs:$op2))), (i16 (sra (i16 (sextloadi8_a1_s0 (i32 CheckFI_i32_regs:$op2))), (i16 15))))), (i16 (sra (i16 (sextloadi8_a1_s0 (i32 CheckFI_i32_regs:$op2))), (i16 15))))), (i16 (xor (i16 (add (i16 (sextloadi8_a1_s0 (i32 CheckFI_i32_regs:$op3))), (i16 (sra (i16 (sextloadi8_a1_s0 (i32 CheckFI_i32_regs:$op3))), (i16 15))))), (i16 (sra (i16 (sextloadi8_a1_s0 (i32 CheckFI_i32_regs:$op3))), (i16 15))))))), (i16 8))))))), (i32 (zext (i16 (srl (i16 (mul (i16 (xor (i16 (add (i16 (sextloadi8_a1_s0 (i32 (add (i32 CheckFI_i32_regs:$op2), (i32 2))))), (i16 (sra (i16 (sextloadi8_a1_s0 (i32 (add (i32 CheckFI_i32_regs:$op2), (i32 2))))), (i16 15))))), (i16 (sra (i16 (sextloadi8_a1_s0 (i32 (add (i32 CheckFI_i32_regs:$op2), (i32 2))))), (i16 15))))), (i16 (xor (i16 (add (i16 (sextloadi8_a1_s0 (i32 (add (i32 CheckFI_i32_regs:$op3), (i32 2))))), (i16 (sra (i16 (sextloadi8_a1_s0 (i32 (add (i32 CheckFI_i32_regs:$op3), (i32 2))))), (i16 15))))), (i16 (sra (i16 (sextloadi8_a1_s0 (i32 (add (i32 CheckFI_i32_regs:$op3), (i32 2))))), (i16 15))))))), (i16 8))))))), (i32 (zext (i16 (srl (i16 (mul (i16 (xor (i16 (add (i16 (sextloadi8_a1_s0 (i32 (add (i32 CheckFI_i32_regs:$op2), (i32 4))))), (i16 (sra (i16 (sextloadi8_a1_s0 (i32 (add (i32 CheckFI_i32_regs:$op2), (i32 4))))), (i16 15))))), (i16 (sra (i16 (sextloadi8_a1_s0 (i32 (add (i32 CheckFI_i32_regs:$op2), (i32 4))))), (i16 15))))), (i16 (xor (i16 (add (i16 (sextloadi8_a1_s0 (i32 (add (i32 CheckFI_i32_regs:$op3), (i32 4))))), (i16 (sra (i16 (sextloadi8_a1_s0 (i32 (add (i32 CheckFI_i32_regs:$op3), (i32 4))))), (i16 15))))), (i16 (sra (i16 (sextloadi8_a1_s0 (i32 (add (i32 CheckFI_i32_regs:$op3), (i32 4))))), (i16 15))))))), (i16 8))))))), (i32 (zext (i16 (srl (i16 (mul (i16 (xor (i16 (add (i16 (sextloadi8_a1_s0 (i32 (add (i32 CheckFI_i32_regs:$op2), (i32 6))))), (i16 (sra (i16 (sextloadi8_a1_s0 (i32 (add (i32 CheckFI_i32_regs:$op2), (i32 6))))), (i16 15))))), (i16 (sra (i16 (sextloadi8_a1_s0 (i32 (add (i32 CheckFI_i32_regs:$op2), (i32 6))))), (i16 15))))), (i16 (xor (i16 (add (i16 (sextloadi8_a1_s0 (i32 (add (i32 CheckFI_i32_regs:$op3), (i32 6))))), (i16 (sra (i16 (sextloadi8_a1_s0 (i32 (add (i32 CheckFI_i32_regs:$op3), (i32 6))))), (i16 15))))), (i16 (sra (i16 (sextloadi8_a1_s0 (i32 (add (i32 CheckFI_i32_regs:$op3), (i32 6))))), (i16 15))))))), (i16 8))))))))];
-let Constraints = "$op1 = $op0";
+let AsmString = "hackaton_custom_instr_b $op0, $op2, $op1";
+let Pattern = [(set i32:$op0, (i32 (add (i32 (sra (i32 (mul (i32 CheckFI_i32_regs:$op1), (i32 CheckFI_i32_regs:$op2))), (i32 8))), (i32 NotFI_i32_regs:$op3))))];
+let Constraints = "$op3 = $op0";
 let Size = 4;
 let isReMaterializable = 1;
-let mayLoad = 1;
+let mayLoad = 0;
 let mayStore = 0;
-let hasSideEffects = 0;
 bits<5> op0;
-bits<5> op3;
 bits<5> op2;
+bits<5> op1;
 let Inst{31-25} = 0b0000000;
-let Inst{24-20} = op2;
-let Inst{19-15} = op3;
+let Inst{24-20} = op1;
+let Inst{19-15} = op2;
 let Inst{14-12} = 0b001;
 let Inst{11-7} = op0;
 let Inst{6-0} = 0b0101011;
 // i_ext_hackaton(opc_hackaton_custom_b,regs,regs,regs)
+}
+
+// warning: (BGW546): The instruction contains unsupported data types ('i16') even after the high-level analysis.
+def i_ext_hackaton__opc_hackaton_custom_c__regs__reg0__reg0__: CodasipMicroClass_<(outs regs:$op0), (ins regs:$op1)>
+{
+let AsmString = "hackaton_custom_instr_c $op0, x0, x0";
+//let Pattern = [(set i32:$op0, (i32 (sext (i16 (add (i16 (add (i16 (sra (i16 (mul (i16 (load_a1_s0 (i32 2))), (i16 (load_a1_s0 (i32 2))))), (i16 8))), (i16 (sra (i16 (mul (i16 (load_a1_s0 (i32 0))), (i16 (load_a1_s0 (i32 0))))), (i16 8))))), (i16 (sra (i16 (mul (i16 (load_a1_s0 (i32 4))), (i16 (load_a1_s0 (i32 4))))), (i16 8)))))))), (store_a1_s0 (i16 (add (i16 (add (i16 (sra (i16 (mul (i16 (load_a1_s0 (i32 2))), (i16 (load_a1_s0 (i32 2))))), (i16 8))), (i16 (sra (i16 (mul (i16 (load_a1_s0 (i32 0))), (i16 (load_a1_s0 (i32 0))))), (i16 8))))), (i16 (sra (i16 (mul (i16 (load_a1_s0 (i32 4))), (i16 (load_a1_s0 (i32 4))))), (i16 8))))), (i32 (add (i32 NotFI_i32_regs:$op1), (i32 6))))];
+let Constraints = "$op1 = $op0";
+let Size = 4;
+let isReMaterializable = 1;
+let mayLoad = 1;
+let mayStore = 1;
+let hasSideEffects = 0;
+bits<5> op0;
+let Inst{31-12} = 0b00000000000000000010;
+let Inst{11-7} = op0;
+let Inst{6-0} = 0b0101011;
+// i_ext_hackaton(opc_hackaton_custom_c,regs,reg0,reg0)
+}
+
+// warning: (BGW546): The instruction contains unsupported data types ('i16') even after the high-level analysis.
+def i_ext_hackaton__opc_hackaton_custom_c__regs__reg0__regs__: CodasipMicroClass_<(outs regs:$op0), (ins regs:$op1, regs:$op2)>
+{
+let AsmString = "hackaton_custom_instr_c $op0, x0, $op1";
+//let Pattern = [(set i32:$op0, (i32 (sext (i16 (add (i16 (add (i16 (sra (i16 (mul (i16 (load_a1_s0 (i32 (add (i32 CheckFI_i32_regs:$op1), (i32 2))))), (i16 (load_a1_s0 (i32 2))))), (i16 8))), (i16 (sra (i16 (mul (i16 (load_a1_s0 (i32 CheckFI_i32_regs:$op1))), (i16 (load_a1_s0 (i32 0))))), (i16 8))))), (i16 (sra (i16 (mul (i16 (load_a1_s0 (i32 (add (i32 CheckFI_i32_regs:$op1), (i32 4))))), (i16 (load_a1_s0 (i32 4))))), (i16 8)))))))), (store_a1_s0 (i16 (add (i16 (add (i16 (sra (i16 (mul (i16 (load_a1_s0 (i32 (add (i32 CheckFI_i32_regs:$op1), (i32 2))))), (i16 (load_a1_s0 (i32 2))))), (i16 8))), (i16 (sra (i16 (mul (i16 (load_a1_s0 (i32 CheckFI_i32_regs:$op1))), (i16 (load_a1_s0 (i32 0))))), (i16 8))))), (i16 (sra (i16 (mul (i16 (load_a1_s0 (i32 (add (i32 CheckFI_i32_regs:$op1), (i32 4))))), (i16 (load_a1_s0 (i32 4))))), (i16 8))))), (i32 (add (i32 NotFI_i32_regs:$op2), (i32 6))))];
+let Constraints = "$op2 = $op0";
+let Size = 4;
+let isReMaterializable = 1;
+let mayLoad = 1;
+let mayStore = 1;
+let hasSideEffects = 0;
+bits<5> op0;
+bits<5> op1;
+let Inst{31-25} = 0b0000000;
+let Inst{24-20} = op1;
+let Inst{19-12} = 0b00000010;
+let Inst{11-7} = op0;
+let Inst{6-0} = 0b0101011;
+// i_ext_hackaton(opc_hackaton_custom_c,regs,reg0,regs)
+}
+
+// warning: (BGW546): The instruction contains unsupported data types ('i16') even after the high-level analysis.
+def i_ext_hackaton__opc_hackaton_custom_c__regs__regs__reg0__: CodasipMicroClass_<(outs regs:$op0), (ins regs:$op1, regs:$op2)>
+{
+let AsmString = "hackaton_custom_instr_c $op0, $op1, x0";
+//let Pattern = [(set i32:$op0, (i32 (sext (i16 (add (i16 (add (i16 (sra (i16 (mul (i16 (load_a1_s0 (i32 2))), (i16 (load_a1_s0 (i32 (add (i32 CheckFI_i32_regs:$op1), (i32 2))))))), (i16 8))), (i16 (sra (i16 (mul (i16 (load_a1_s0 (i32 0))), (i16 (load_a1_s0 (i32 CheckFI_i32_regs:$op1))))), (i16 8))))), (i16 (sra (i16 (mul (i16 (load_a1_s0 (i32 4))), (i16 (load_a1_s0 (i32 (add (i32 CheckFI_i32_regs:$op1), (i32 4))))))), (i16 8)))))))), (store_a1_s0 (i16 (add (i16 (add (i16 (sra (i16 (mul (i16 (load_a1_s0 (i32 2))), (i16 (load_a1_s0 (i32 (add (i32 CheckFI_i32_regs:$op1), (i32 2))))))), (i16 8))), (i16 (sra (i16 (mul (i16 (load_a1_s0 (i32 0))), (i16 (load_a1_s0 (i32 CheckFI_i32_regs:$op1))))), (i16 8))))), (i16 (sra (i16 (mul (i16 (load_a1_s0 (i32 4))), (i16 (load_a1_s0 (i32 (add (i32 CheckFI_i32_regs:$op1), (i32 4))))))), (i16 8))))), (i32 (add (i32 NotFI_i32_regs:$op2), (i32 6))))];
+let Constraints = "$op2 = $op0";
+let Size = 4;
+let isReMaterializable = 1;
+let mayLoad = 1;
+let mayStore = 1;
+let hasSideEffects = 0;
+bits<5> op0;
+bits<5> op1;
+let Inst{31-20} = 0b000000000000;
+let Inst{19-15} = op1;
+let Inst{14-12} = 0b010;
+let Inst{11-7} = op0;
+let Inst{6-0} = 0b0101011;
+// i_ext_hackaton(opc_hackaton_custom_c,regs,regs,reg0)
+}
+
+// warning: (BGW546): The instruction contains unsupported data types ('i16') even after the high-level analysis.
+def i_ext_hackaton__opc_hackaton_custom_c__regs__regs__regs__: CodasipMicroClass_<(outs regs:$op0), (ins regs:$op1, regs:$op2, regs:$op3)>
+{
+let AsmString = "hackaton_custom_instr_c $op0, $op2, $op1";
+//let Pattern = [(set i32:$op0, (i32 (sext (i16 (add (i16 (add (i16 (sra (i16 (mul (i16 (load_a1_s0 (i32 (add (i32 CheckFI_i32_regs:$op1), (i32 2))))), (i16 (load_a1_s0 (i32 (add (i32 CheckFI_i32_regs:$op2), (i32 2))))))), (i16 8))), (i16 (sra (i16 (mul (i16 (load_a1_s0 (i32 CheckFI_i32_regs:$op1))), (i16 (load_a1_s0 (i32 CheckFI_i32_regs:$op2))))), (i16 8))))), (i16 (sra (i16 (mul (i16 (load_a1_s0 (i32 (add (i32 CheckFI_i32_regs:$op1), (i32 4))))), (i16 (load_a1_s0 (i32 (add (i32 CheckFI_i32_regs:$op2), (i32 4))))))), (i16 8)))))))), (store_a1_s0 (i16 (add (i16 (add (i16 (sra (i16 (mul (i16 (load_a1_s0 (i32 (add (i32 CheckFI_i32_regs:$op1), (i32 2))))), (i16 (load_a1_s0 (i32 (add (i32 CheckFI_i32_regs:$op2), (i32 2))))))), (i16 8))), (i16 (sra (i16 (mul (i16 (load_a1_s0 (i32 CheckFI_i32_regs:$op1))), (i16 (load_a1_s0 (i32 CheckFI_i32_regs:$op2))))), (i16 8))))), (i16 (sra (i16 (mul (i16 (load_a1_s0 (i32 (add (i32 CheckFI_i32_regs:$op1), (i32 4))))), (i16 (load_a1_s0 (i32 (add (i32 CheckFI_i32_regs:$op2), (i32 4))))))), (i16 8))))), (i32 (add (i32 NotFI_i32_regs:$op3), (i32 6))))];
+let Constraints = "$op3 = $op0";
+let Size = 4;
+let isReMaterializable = 1;
+let mayLoad = 1;
+let mayStore = 1;
+let hasSideEffects = 0;
+bits<5> op0;
+bits<5> op2;
+bits<5> op1;
+let Inst{31-25} = 0b0000000;
+let Inst{24-20} = op1;
+let Inst{19-15} = op2;
+let Inst{14-12} = 0b010;
+let Inst{11-7} = op0;
+let Inst{6-0} = 0b0101011;
+// i_ext_hackaton(opc_hackaton_custom_c,regs,regs,regs)
+}
+
+// warning: (BGW546): The instruction contains unsupported data types ('i16') even after the high-level analysis.
+def i_ext_hackaton__opc_hackaton_custom_d__regs__reg0__reg0__: CodasipMicroClass_<(outs regs:$op0), (ins regs:$op1)>
+{
+let AsmString = "hackaton_custom_instr_d $op0, x0, x0";
+//let Pattern = [(set i32:$op0, (i32 (add (i32 (add (i32 (add (i32 (add (i32 NotFI_i32_regs:$op1), (i32 (sext (i16 (sra (i16 (mul (i16 (load_a1_s0 (i32 0))), (i16 (load_a1_s0 (i32 0))))), (i16 8))))))), (i32 (sext (i16 (sra (i16 (mul (i16 (load_a1_s0 (i32 2))), (i16 (load_a1_s0 (i32 2))))), (i16 8))))))), (i32 (sext (i16 (sra (i16 (mul (i16 (load_a1_s0 (i32 4))), (i16 (load_a1_s0 (i32 4))))), (i16 8))))))), (i32 (sext (i16 (sra (i16 (mul (i16 (load_a1_s0 (i32 6))), (i16 (load_a1_s0 (i32 6))))), (i16 8))))))))];
+let Constraints = "$op1 = $op0";
+let Size = 4;
+let isReMaterializable = 1;
+let mayLoad = 1;
+let mayStore = 0;
+let hasSideEffects = 0;
+bits<5> op0;
+let Inst{31-12} = 0b00000000000000000011;
+let Inst{11-7} = op0;
+let Inst{6-0} = 0b0101011;
+// i_ext_hackaton(opc_hackaton_custom_d,regs,reg0,reg0)
+}
+
+// warning: (BGW546): The instruction contains unsupported data types ('i16') even after the high-level analysis.
+def i_ext_hackaton__opc_hackaton_custom_d__regs__reg0__regs__: CodasipMicroClass_<(outs regs:$op0), (ins regs:$op1, regs:$op2)>
+{
+let AsmString = "hackaton_custom_instr_d $op0, x0, $op2";
+//let Pattern = [(set i32:$op0, (i32 (add (i32 (add (i32 (add (i32 (add (i32 NotFI_i32_regs:$op1), (i32 (sext (i16 (sra (i16 (mul (i16 (load_a1_s0 (i32 CheckFI_i32_regs:$op2))), (i16 (load_a1_s0 (i32 0))))), (i16 8))))))), (i32 (sext (i16 (sra (i16 (mul (i16 (load_a1_s0 (i32 (add (i32 CheckFI_i32_regs:$op2), (i32 2))))), (i16 (load_a1_s0 (i32 2))))), (i16 8))))))), (i32 (sext (i16 (sra (i16 (mul (i16 (load_a1_s0 (i32 (add (i32 CheckFI_i32_regs:$op2), (i32 4))))), (i16 (load_a1_s0 (i32 4))))), (i16 8))))))), (i32 (sext (i16 (sra (i16 (mul (i16 (load_a1_s0 (i32 (add (i32 CheckFI_i32_regs:$op2), (i32 6))))), (i16 (load_a1_s0 (i32 6))))), (i16 8))))))))];
+let Constraints = "$op1 = $op0";
+let Size = 4;
+let isReMaterializable = 1;
+let mayLoad = 1;
+let mayStore = 0;
+let hasSideEffects = 0;
+bits<5> op0;
+bits<5> op2;
+let Inst{31-25} = 0b0000000;
+let Inst{24-20} = op2;
+let Inst{19-12} = 0b00000011;
+let Inst{11-7} = op0;
+let Inst{6-0} = 0b0101011;
+// i_ext_hackaton(opc_hackaton_custom_d,regs,reg0,regs)
+}
+
+// warning: (BGW546): The instruction contains unsupported data types ('i16') even after the high-level analysis.
+def i_ext_hackaton__opc_hackaton_custom_d__regs__regs__reg0__: CodasipMicroClass_<(outs regs:$op0), (ins regs:$op1, regs:$op2)>
+{
+let AsmString = "hackaton_custom_instr_d $op0, $op2, x0";
+//let Pattern = [(set i32:$op0, (i32 (add (i32 (add (i32 (add (i32 (add (i32 NotFI_i32_regs:$op1), (i32 (sext (i16 (sra (i16 (mul (i16 (load_a1_s0 (i32 0))), (i16 (load_a1_s0 (i32 CheckFI_i32_regs:$op2))))), (i16 8))))))), (i32 (sext (i16 (sra (i16 (mul (i16 (load_a1_s0 (i32 2))), (i16 (load_a1_s0 (i32 (add (i32 CheckFI_i32_regs:$op2), (i32 2))))))), (i16 8))))))), (i32 (sext (i16 (sra (i16 (mul (i16 (load_a1_s0 (i32 4))), (i16 (load_a1_s0 (i32 (add (i32 CheckFI_i32_regs:$op2), (i32 4))))))), (i16 8))))))), (i32 (sext (i16 (sra (i16 (mul (i16 (load_a1_s0 (i32 6))), (i16 (load_a1_s0 (i32 (add (i32 CheckFI_i32_regs:$op2), (i32 6))))))), (i16 8))))))))];
+let Constraints = "$op1 = $op0";
+let Size = 4;
+let isReMaterializable = 1;
+let mayLoad = 1;
+let mayStore = 0;
+let hasSideEffects = 0;
+bits<5> op0;
+bits<5> op2;
+let Inst{31-20} = 0b000000000000;
+let Inst{19-15} = op2;
+let Inst{14-12} = 0b011;
+let Inst{11-7} = op0;
+let Inst{6-0} = 0b0101011;
+// i_ext_hackaton(opc_hackaton_custom_d,regs,regs,reg0)
+}
+
+// warning: (BGW546): The instruction contains unsupported data types ('i16') even after the high-level analysis.
+def i_ext_hackaton__opc_hackaton_custom_d__regs__regs__regs__: CodasipMicroClass_<(outs regs:$op0), (ins regs:$op1, regs:$op2, regs:$op3)>
+{
+let AsmString = "hackaton_custom_instr_d $op0, $op3, $op2";
+//let Pattern = [(set i32:$op0, (i32 (add (i32 (add (i32 (add (i32 (add (i32 NotFI_i32_regs:$op1), (i32 (sext (i16 (sra (i16 (mul (i16 (load_a1_s0 (i32 CheckFI_i32_regs:$op2))), (i16 (load_a1_s0 (i32 CheckFI_i32_regs:$op3))))), (i16 8))))))), (i32 (sext (i16 (sra (i16 (mul (i16 (load_a1_s0 (i32 (add (i32 CheckFI_i32_regs:$op2), (i32 2))))), (i16 (load_a1_s0 (i32 (add (i32 CheckFI_i32_regs:$op3), (i32 2))))))), (i16 8))))))), (i32 (sext (i16 (sra (i16 (mul (i16 (load_a1_s0 (i32 (add (i32 CheckFI_i32_regs:$op2), (i32 4))))), (i16 (load_a1_s0 (i32 (add (i32 CheckFI_i32_regs:$op3), (i32 4))))))), (i16 8))))))), (i32 (sext (i16 (sra (i16 (mul (i16 (load_a1_s0 (i32 (add (i32 CheckFI_i32_regs:$op2), (i32 6))))), (i16 (load_a1_s0 (i32 (add (i32 CheckFI_i32_regs:$op3), (i32 6))))))), (i16 8))))))))];
+let Constraints = "$op1 = $op0";
+let Size = 4;
+let isReMaterializable = 1;
+let mayLoad = 1;
+let mayStore = 0;
+let hasSideEffects = 0;
+bits<5> op0;
+bits<5> op3;
+bits<5> op2;
+let Inst{31-25} = 0b0000000;
+let Inst{24-20} = op2;
+let Inst{19-15} = op3;
+let Inst{14-12} = 0b011;
+let Inst{11-7} = op0;
+let Inst{6-0} = 0b0101011;
+// i_ext_hackaton(opc_hackaton_custom_d,regs,regs,regs)
+}
+
+// warning: (BGW546): The instruction contains unsupported data types ('i16') even after the high-level analysis.
+def i_ext_hackaton__opc_hackaton_custom_f__regs__reg0__reg0__: CodasipMicroClass_<(outs regs:$op0), (ins regs:$op1)>
+{
+let AsmString = "hackaton_custom_instr_f $op0, x0, x0";
+//let Pattern = [(set i32:$op0, (i32 NotFI_i32_regs:$op1)), (store_a1_s0 (i16 (add (i16 (load_a1_s0 (i32 0))), (i16 (load_a1_s0 (i32 0))))), (i32 NotFI_i32_regs:$op1)), (store_a1_s0 (i16 (add (i16 (load_a1_s0 (i32 2))), (i16 (load_a1_s0 (i32 2))))), (i32 (add (i32 NotFI_i32_regs:$op1), (i32 2)))), (store_a1_s0 (i16 (add (i16 (load_a1_s0 (i32 4))), (i16 (load_a1_s0 (i32 4))))), (i32 (add (i32 NotFI_i32_regs:$op1), (i32 4)))), (store_a1_s0 (i16 (add (i16 (load_a1_s0 (i32 6))), (i16 (load_a1_s0 (i32 6))))), (i32 (add (i32 NotFI_i32_regs:$op1), (i32 6))))];
+let Constraints = "$op1 = $op0";
+let Size = 4;
+let isReMaterializable = 1;
+let mayLoad = 1;
+let mayStore = 1;
+let hasSideEffects = 0;
+bits<5> op0;
+let Inst{31-12} = 0b00000000000000000101;
+let Inst{11-7} = op0;
+let Inst{6-0} = 0b0101011;
+// i_ext_hackaton(opc_hackaton_custom_f,regs,reg0,reg0)
+}
+
+// warning: (BGW546): The instruction contains unsupported data types ('i16') even after the high-level analysis.
+def i_ext_hackaton__opc_hackaton_custom_f__regs__reg0__regs__: CodasipMicroClass_<(outs regs:$op0), (ins regs:$op1, regs:$op2)>
+{
+let AsmString = "hackaton_custom_instr_f $op0, x0, $op2";
+//let Pattern = [(set i32:$op0, (i32 NotFI_i32_regs:$op1)), (store_a1_s0 (i16 (add (i16 (load_a1_s0 (i32 CheckFI_i32_regs:$op2))), (i16 (load_a1_s0 (i32 0))))), (i32 NotFI_i32_regs:$op1)), (store_a1_s0 (i16 (add (i16 (load_a1_s0 (i32 (add (i32 CheckFI_i32_regs:$op2), (i32 2))))), (i16 (load_a1_s0 (i32 2))))), (i32 (add (i32 NotFI_i32_regs:$op1), (i32 2)))), (store_a1_s0 (i16 (add (i16 (load_a1_s0 (i32 (add (i32 CheckFI_i32_regs:$op2), (i32 4))))), (i16 (load_a1_s0 (i32 4))))), (i32 (add (i32 NotFI_i32_regs:$op1), (i32 4)))), (store_a1_s0 (i16 (add (i16 (load_a1_s0 (i32 (add (i32 CheckFI_i32_regs:$op2), (i32 6))))), (i16 (load_a1_s0 (i32 6))))), (i32 (add (i32 NotFI_i32_regs:$op1), (i32 6))))];
+let Constraints = "$op1 = $op0";
+let Size = 4;
+let isReMaterializable = 1;
+let mayLoad = 1;
+let mayStore = 1;
+let hasSideEffects = 0;
+bits<5> op0;
+bits<5> op2;
+let Inst{31-25} = 0b0000000;
+let Inst{24-20} = op2;
+let Inst{19-12} = 0b00000101;
+let Inst{11-7} = op0;
+let Inst{6-0} = 0b0101011;
+// i_ext_hackaton(opc_hackaton_custom_f,regs,reg0,regs)
+}
+
+// warning: (BGW546): The instruction contains unsupported data types ('i16') even after the high-level analysis.
+def i_ext_hackaton__opc_hackaton_custom_f__regs__regs__reg0__: CodasipMicroClass_<(outs regs:$op0), (ins regs:$op1, regs:$op2)>
+{
+let AsmString = "hackaton_custom_instr_f $op0, $op2, x0";
+//let Pattern = [(set i32:$op0, (i32 NotFI_i32_regs:$op1)), (store_a1_s0 (i16 (add (i16 (load_a1_s0 (i32 0))), (i16 (load_a1_s0 (i32 CheckFI_i32_regs:$op2))))), (i32 NotFI_i32_regs:$op1)), (store_a1_s0 (i16 (add (i16 (load_a1_s0 (i32 2))), (i16 (load_a1_s0 (i32 (add (i32 CheckFI_i32_regs:$op2), (i32 2))))))), (i32 (add (i32 NotFI_i32_regs:$op1), (i32 2)))), (store_a1_s0 (i16 (add (i16 (load_a1_s0 (i32 4))), (i16 (load_a1_s0 (i32 (add (i32 CheckFI_i32_regs:$op2), (i32 4))))))), (i32 (add (i32 NotFI_i32_regs:$op1), (i32 4)))), (store_a1_s0 (i16 (add (i16 (load_a1_s0 (i32 6))), (i16 (load_a1_s0 (i32 (add (i32 CheckFI_i32_regs:$op2), (i32 6))))))), (i32 (add (i32 NotFI_i32_regs:$op1), (i32 6))))];
+let Constraints = "$op1 = $op0";
+let Size = 4;
+let isReMaterializable = 1;
+let mayLoad = 1;
+let mayStore = 1;
+let hasSideEffects = 0;
+bits<5> op0;
+bits<5> op2;
+let Inst{31-20} = 0b000000000000;
+let Inst{19-15} = op2;
+let Inst{14-12} = 0b101;
+let Inst{11-7} = op0;
+let Inst{6-0} = 0b0101011;
+// i_ext_hackaton(opc_hackaton_custom_f,regs,regs,reg0)
+}
+
+// warning: (BGW546): The instruction contains unsupported data types ('i16') even after the high-level analysis.
+def i_ext_hackaton__opc_hackaton_custom_f__regs__regs__regs__: CodasipMicroClass_<(outs regs:$op0), (ins regs:$op1, regs:$op2, regs:$op3)>
+{
+let AsmString = "hackaton_custom_instr_f $op0, $op3, $op2";
+//let Pattern = [(set i32:$op0, (i32 NotFI_i32_regs:$op1)), (store_a1_s0 (i16 (add (i16 (load_a1_s0 (i32 CheckFI_i32_regs:$op2))), (i16 (load_a1_s0 (i32 CheckFI_i32_regs:$op3))))), (i32 NotFI_i32_regs:$op1)), (store_a1_s0 (i16 (add (i16 (load_a1_s0 (i32 (add (i32 CheckFI_i32_regs:$op2), (i32 2))))), (i16 (load_a1_s0 (i32 (add (i32 CheckFI_i32_regs:$op3), (i32 2))))))), (i32 (add (i32 NotFI_i32_regs:$op1), (i32 2)))), (store_a1_s0 (i16 (add (i16 (load_a1_s0 (i32 (add (i32 CheckFI_i32_regs:$op2), (i32 4))))), (i16 (load_a1_s0 (i32 (add (i32 CheckFI_i32_regs:$op3), (i32 4))))))), (i32 (add (i32 NotFI_i32_regs:$op1), (i32 4)))), (store_a1_s0 (i16 (add (i16 (load_a1_s0 (i32 (add (i32 CheckFI_i32_regs:$op2), (i32 6))))), (i16 (load_a1_s0 (i32 (add (i32 CheckFI_i32_regs:$op3), (i32 6))))))), (i32 (add (i32 NotFI_i32_regs:$op1), (i32 6))))];
+let Constraints = "$op1 = $op0";
+let Size = 4;
+let isReMaterializable = 1;
+let mayLoad = 1;
+let mayStore = 1;
+let hasSideEffects = 0;
+bits<5> op0;
+bits<5> op3;
+bits<5> op2;
+let Inst{31-25} = 0b0000000;
+let Inst{24-20} = op2;
+let Inst{19-15} = op3;
+let Inst{14-12} = 0b101;
+let Inst{11-7} = op0;
+let Inst{6-0} = 0b0101011;
+// i_ext_hackaton(opc_hackaton_custom_f,regs,regs,regs)
 }
 
 def i_jump_reg_alias__regs__TAILCALL_CLONE_: CodasipMicroClass_<(outs), (ins regs:$op0, variable_ops)>
@@ -19643,6 +19756,588 @@ let Inst{6-0} = 0b0101011;
 // i_ext_hackaton(opc_hackaton_custom_e,regs,regs,reg0_alias)
 }
 
+def i_ext_hackaton__opc_hackaton_custom_f__reg0__reg0__reg0_alias__: CodasipMicroClass_<(outs), (ins)>
+{
+let AsmString = "hackaton_custom_instr_f x0, x0, zero";
+let Size = 4;
+let isReMaterializable = 1;
+let mayLoad = 0;
+let mayStore = 0;
+let hasSideEffects = 0;
+let isAsmParserOnly = 1;
+let Inst{31-0} = 0b00000000000000000101000000101011;
+// i_ext_hackaton(opc_hackaton_custom_f,reg0,reg0,reg0_alias)
+}
+
+def i_ext_hackaton__opc_hackaton_custom_f__reg0__reg0_alias__reg0__: CodasipMicroClass_<(outs), (ins)>
+{
+let AsmString = "hackaton_custom_instr_f x0, zero, x0";
+let Size = 4;
+let isReMaterializable = 1;
+let mayLoad = 0;
+let mayStore = 0;
+let hasSideEffects = 0;
+let isAsmParserOnly = 1;
+let Inst{31-0} = 0b00000000000000000101000000101011;
+// i_ext_hackaton(opc_hackaton_custom_f,reg0,reg0_alias,reg0)
+}
+
+def i_ext_hackaton__opc_hackaton_custom_f__reg0__reg0_alias__reg0_alias__: CodasipMicroClass_<(outs), (ins)>
+{
+let AsmString = "hackaton_custom_instr_f x0, zero, zero";
+let Size = 4;
+let isReMaterializable = 1;
+let mayLoad = 0;
+let mayStore = 0;
+let hasSideEffects = 0;
+let isAsmParserOnly = 1;
+let Inst{31-0} = 0b00000000000000000101000000101011;
+// i_ext_hackaton(opc_hackaton_custom_f,reg0,reg0_alias,reg0_alias)
+}
+
+def i_ext_hackaton__opc_hackaton_custom_f__reg0__reg0_alias__regs__: CodasipMicroClass_<(outs), (ins regs:$op0)>
+{
+let AsmString = "hackaton_custom_instr_f x0, zero, $op0";
+let Size = 4;
+let isReMaterializable = 1;
+let mayLoad = 0;
+let mayStore = 0;
+let hasSideEffects = 0;
+let isAsmParserOnly = 1;
+bits<5> op0;
+let Inst{31-25} = 0b0000000;
+let Inst{24-20} = op0;
+let Inst{19-0} = 0b00000101000000101011;
+// i_ext_hackaton(opc_hackaton_custom_f,reg0,reg0_alias,regs)
+}
+
+def i_ext_hackaton__opc_hackaton_custom_f__reg0__regs__reg0_alias__: CodasipMicroClass_<(outs), (ins regs:$op0)>
+{
+let AsmString = "hackaton_custom_instr_f x0, $op0, zero";
+let Size = 4;
+let isReMaterializable = 1;
+let mayLoad = 0;
+let mayStore = 0;
+let hasSideEffects = 0;
+let isAsmParserOnly = 1;
+bits<5> op0;
+let Inst{31-20} = 0b000000000000;
+let Inst{19-15} = op0;
+let Inst{14-0} = 0b101000000101011;
+// i_ext_hackaton(opc_hackaton_custom_f,reg0,regs,reg0_alias)
+}
+
+def i_ext_hackaton__opc_hackaton_custom_f__reg0_alias__reg0__reg0__: CodasipMicroClass_<(outs), (ins)>
+{
+let AsmString = "hackaton_custom_instr_f zero, x0, x0";
+let Size = 4;
+let isReMaterializable = 1;
+let mayLoad = 0;
+let mayStore = 0;
+let hasSideEffects = 0;
+let isAsmParserOnly = 1;
+let Inst{31-0} = 0b00000000000000000101000000101011;
+// i_ext_hackaton(opc_hackaton_custom_f,reg0_alias,reg0,reg0)
+}
+
+def i_ext_hackaton__opc_hackaton_custom_f__reg0_alias__reg0__reg0_alias__: CodasipMicroClass_<(outs), (ins)>
+{
+let AsmString = "hackaton_custom_instr_f zero, x0, zero";
+let Size = 4;
+let isReMaterializable = 1;
+let mayLoad = 0;
+let mayStore = 0;
+let hasSideEffects = 0;
+let isAsmParserOnly = 1;
+let Inst{31-0} = 0b00000000000000000101000000101011;
+// i_ext_hackaton(opc_hackaton_custom_f,reg0_alias,reg0,reg0_alias)
+}
+
+def i_ext_hackaton__opc_hackaton_custom_f__reg0_alias__reg0__regs__: CodasipMicroClass_<(outs), (ins regs:$op0)>
+{
+let AsmString = "hackaton_custom_instr_f zero, x0, $op0";
+let Size = 4;
+let isReMaterializable = 1;
+let mayLoad = 0;
+let mayStore = 0;
+let hasSideEffects = 0;
+let isAsmParserOnly = 1;
+bits<5> op0;
+let Inst{31-25} = 0b0000000;
+let Inst{24-20} = op0;
+let Inst{19-0} = 0b00000101000000101011;
+// i_ext_hackaton(opc_hackaton_custom_f,reg0_alias,reg0,regs)
+}
+
+def i_ext_hackaton__opc_hackaton_custom_f__reg0_alias__reg0_alias__reg0__: CodasipMicroClass_<(outs), (ins)>
+{
+let AsmString = "hackaton_custom_instr_f zero, zero, x0";
+let Size = 4;
+let isReMaterializable = 1;
+let mayLoad = 0;
+let mayStore = 0;
+let hasSideEffects = 0;
+let isAsmParserOnly = 1;
+let Inst{31-0} = 0b00000000000000000101000000101011;
+// i_ext_hackaton(opc_hackaton_custom_f,reg0_alias,reg0_alias,reg0)
+}
+
+def i_ext_hackaton__opc_hackaton_custom_f__reg0_alias__reg0_alias__reg0_alias__: CodasipMicroClass_<(outs), (ins)>
+{
+let AsmString = "hackaton_custom_instr_f zero, zero, zero";
+let Size = 4;
+let isReMaterializable = 1;
+let mayLoad = 0;
+let mayStore = 0;
+let hasSideEffects = 0;
+let isAsmParserOnly = 1;
+let Inst{31-0} = 0b00000000000000000101000000101011;
+// i_ext_hackaton(opc_hackaton_custom_f,reg0_alias,reg0_alias,reg0_alias)
+}
+
+def i_ext_hackaton__opc_hackaton_custom_f__reg0_alias__reg0_alias__regs__: CodasipMicroClass_<(outs), (ins regs:$op0)>
+{
+let AsmString = "hackaton_custom_instr_f zero, zero, $op0";
+let Size = 4;
+let isReMaterializable = 1;
+let mayLoad = 0;
+let mayStore = 0;
+let hasSideEffects = 0;
+let isAsmParserOnly = 1;
+bits<5> op0;
+let Inst{31-25} = 0b0000000;
+let Inst{24-20} = op0;
+let Inst{19-0} = 0b00000101000000101011;
+// i_ext_hackaton(opc_hackaton_custom_f,reg0_alias,reg0_alias,regs)
+}
+
+def i_ext_hackaton__opc_hackaton_custom_f__reg0_alias__regs__reg0__: CodasipMicroClass_<(outs), (ins regs:$op0)>
+{
+let AsmString = "hackaton_custom_instr_f zero, $op0, x0";
+let Size = 4;
+let isReMaterializable = 1;
+let mayLoad = 0;
+let mayStore = 0;
+let hasSideEffects = 0;
+let isAsmParserOnly = 1;
+bits<5> op0;
+let Inst{31-20} = 0b000000000000;
+let Inst{19-15} = op0;
+let Inst{14-0} = 0b101000000101011;
+// i_ext_hackaton(opc_hackaton_custom_f,reg0_alias,regs,reg0)
+}
+
+def i_ext_hackaton__opc_hackaton_custom_f__reg0_alias__regs__reg0_alias__: CodasipMicroClass_<(outs), (ins regs:$op0)>
+{
+let AsmString = "hackaton_custom_instr_f zero, $op0, zero";
+let Size = 4;
+let isReMaterializable = 1;
+let mayLoad = 0;
+let mayStore = 0;
+let hasSideEffects = 0;
+let isAsmParserOnly = 1;
+bits<5> op0;
+let Inst{31-20} = 0b000000000000;
+let Inst{19-15} = op0;
+let Inst{14-0} = 0b101000000101011;
+// i_ext_hackaton(opc_hackaton_custom_f,reg0_alias,regs,reg0_alias)
+}
+
+def i_ext_hackaton__opc_hackaton_custom_f__reg0_alias__regs__regs__: CodasipMicroClass_<(outs), (ins regs:$op0, regs:$op1)>
+{
+let AsmString = "hackaton_custom_instr_f zero, $op0, $op1";
+let Size = 4;
+let isReMaterializable = 1;
+let mayLoad = 0;
+let mayStore = 0;
+let hasSideEffects = 0;
+let isAsmParserOnly = 1;
+bits<5> op0;
+bits<5> op1;
+let Inst{31-25} = 0b0000000;
+let Inst{24-20} = op1;
+let Inst{19-15} = op0;
+let Inst{14-0} = 0b101000000101011;
+// i_ext_hackaton(opc_hackaton_custom_f,reg0_alias,regs,regs)
+}
+
+def i_ext_hackaton__opc_hackaton_custom_f__regs__reg0__reg0_alias__: CodasipMicroClass_<(outs), (ins regs:$op0)>
+{
+let AsmString = "hackaton_custom_instr_f $op0, x0, zero";
+let Size = 4;
+let isReMaterializable = 1;
+let mayLoad = 0;
+let mayStore = 0;
+let hasSideEffects = 0;
+let isAsmParserOnly = 1;
+bits<5> op0;
+let Inst{31-12} = 0b00000000000000000101;
+let Inst{11-7} = op0;
+let Inst{6-0} = 0b0101011;
+// i_ext_hackaton(opc_hackaton_custom_f,regs,reg0,reg0_alias)
+}
+
+def i_ext_hackaton__opc_hackaton_custom_f__regs__reg0_alias__reg0__: CodasipMicroClass_<(outs), (ins regs:$op0)>
+{
+let AsmString = "hackaton_custom_instr_f $op0, zero, x0";
+let Size = 4;
+let isReMaterializable = 1;
+let mayLoad = 0;
+let mayStore = 0;
+let hasSideEffects = 0;
+let isAsmParserOnly = 1;
+bits<5> op0;
+let Inst{31-12} = 0b00000000000000000101;
+let Inst{11-7} = op0;
+let Inst{6-0} = 0b0101011;
+// i_ext_hackaton(opc_hackaton_custom_f,regs,reg0_alias,reg0)
+}
+
+def i_ext_hackaton__opc_hackaton_custom_f__regs__reg0_alias__reg0_alias__: CodasipMicroClass_<(outs), (ins regs:$op0)>
+{
+let AsmString = "hackaton_custom_instr_f $op0, zero, zero";
+let Size = 4;
+let isReMaterializable = 1;
+let mayLoad = 0;
+let mayStore = 0;
+let hasSideEffects = 0;
+let isAsmParserOnly = 1;
+bits<5> op0;
+let Inst{31-12} = 0b00000000000000000101;
+let Inst{11-7} = op0;
+let Inst{6-0} = 0b0101011;
+// i_ext_hackaton(opc_hackaton_custom_f,regs,reg0_alias,reg0_alias)
+}
+
+def i_ext_hackaton__opc_hackaton_custom_f__regs__reg0_alias__regs__: CodasipMicroClass_<(outs), (ins regs:$op0, regs:$op1)>
+{
+let AsmString = "hackaton_custom_instr_f $op0, zero, $op1";
+let Size = 4;
+let isReMaterializable = 1;
+let mayLoad = 0;
+let mayStore = 0;
+let hasSideEffects = 0;
+let isAsmParserOnly = 1;
+bits<5> op0;
+bits<5> op1;
+let Inst{31-25} = 0b0000000;
+let Inst{24-20} = op1;
+let Inst{19-12} = 0b00000101;
+let Inst{11-7} = op0;
+let Inst{6-0} = 0b0101011;
+// i_ext_hackaton(opc_hackaton_custom_f,regs,reg0_alias,regs)
+}
+
+def i_ext_hackaton__opc_hackaton_custom_f__regs__regs__reg0_alias__: CodasipMicroClass_<(outs), (ins regs:$op0, regs:$op1)>
+{
+let AsmString = "hackaton_custom_instr_f $op0, $op1, zero";
+let Size = 4;
+let isReMaterializable = 1;
+let mayLoad = 0;
+let mayStore = 0;
+let hasSideEffects = 0;
+let isAsmParserOnly = 1;
+bits<5> op0;
+bits<5> op1;
+let Inst{31-20} = 0b000000000000;
+let Inst{19-15} = op1;
+let Inst{14-12} = 0b101;
+let Inst{11-7} = op0;
+let Inst{6-0} = 0b0101011;
+// i_ext_hackaton(opc_hackaton_custom_f,regs,regs,reg0_alias)
+}
+
+def i_ext_hackaton__opc_hackaton_custom_g__reg0__reg0__reg0_alias__: CodasipMicroClass_<(outs), (ins)>
+{
+let AsmString = "hackaton_custom_instr_g x0, x0, zero";
+let Size = 4;
+let isReMaterializable = 1;
+let mayLoad = 0;
+let mayStore = 0;
+let hasSideEffects = 0;
+let isAsmParserOnly = 1;
+let Inst{31-0} = 0b00000000000000000110000000101011;
+// i_ext_hackaton(opc_hackaton_custom_g,reg0,reg0,reg0_alias)
+}
+
+def i_ext_hackaton__opc_hackaton_custom_g__reg0__reg0_alias__reg0__: CodasipMicroClass_<(outs), (ins)>
+{
+let AsmString = "hackaton_custom_instr_g x0, zero, x0";
+let Size = 4;
+let isReMaterializable = 1;
+let mayLoad = 0;
+let mayStore = 0;
+let hasSideEffects = 0;
+let isAsmParserOnly = 1;
+let Inst{31-0} = 0b00000000000000000110000000101011;
+// i_ext_hackaton(opc_hackaton_custom_g,reg0,reg0_alias,reg0)
+}
+
+def i_ext_hackaton__opc_hackaton_custom_g__reg0__reg0_alias__reg0_alias__: CodasipMicroClass_<(outs), (ins)>
+{
+let AsmString = "hackaton_custom_instr_g x0, zero, zero";
+let Size = 4;
+let isReMaterializable = 1;
+let mayLoad = 0;
+let mayStore = 0;
+let hasSideEffects = 0;
+let isAsmParserOnly = 1;
+let Inst{31-0} = 0b00000000000000000110000000101011;
+// i_ext_hackaton(opc_hackaton_custom_g,reg0,reg0_alias,reg0_alias)
+}
+
+def i_ext_hackaton__opc_hackaton_custom_g__reg0__reg0_alias__regs__: CodasipMicroClass_<(outs), (ins regs:$op0)>
+{
+let AsmString = "hackaton_custom_instr_g x0, zero, $op0";
+let Size = 4;
+let isReMaterializable = 1;
+let mayLoad = 0;
+let mayStore = 0;
+let hasSideEffects = 0;
+let isAsmParserOnly = 1;
+bits<5> op0;
+let Inst{31-25} = 0b0000000;
+let Inst{24-20} = op0;
+let Inst{19-0} = 0b00000110000000101011;
+// i_ext_hackaton(opc_hackaton_custom_g,reg0,reg0_alias,regs)
+}
+
+def i_ext_hackaton__opc_hackaton_custom_g__reg0__regs__reg0_alias__: CodasipMicroClass_<(outs), (ins regs:$op0)>
+{
+let AsmString = "hackaton_custom_instr_g x0, $op0, zero";
+let Size = 4;
+let isReMaterializable = 1;
+let mayLoad = 0;
+let mayStore = 0;
+let hasSideEffects = 0;
+let isAsmParserOnly = 1;
+bits<5> op0;
+let Inst{31-20} = 0b000000000000;
+let Inst{19-15} = op0;
+let Inst{14-0} = 0b110000000101011;
+// i_ext_hackaton(opc_hackaton_custom_g,reg0,regs,reg0_alias)
+}
+
+def i_ext_hackaton__opc_hackaton_custom_g__reg0_alias__reg0__reg0__: CodasipMicroClass_<(outs), (ins)>
+{
+let AsmString = "hackaton_custom_instr_g zero, x0, x0";
+let Size = 4;
+let isReMaterializable = 1;
+let mayLoad = 0;
+let mayStore = 0;
+let hasSideEffects = 0;
+let isAsmParserOnly = 1;
+let Inst{31-0} = 0b00000000000000000110000000101011;
+// i_ext_hackaton(opc_hackaton_custom_g,reg0_alias,reg0,reg0)
+}
+
+def i_ext_hackaton__opc_hackaton_custom_g__reg0_alias__reg0__reg0_alias__: CodasipMicroClass_<(outs), (ins)>
+{
+let AsmString = "hackaton_custom_instr_g zero, x0, zero";
+let Size = 4;
+let isReMaterializable = 1;
+let mayLoad = 0;
+let mayStore = 0;
+let hasSideEffects = 0;
+let isAsmParserOnly = 1;
+let Inst{31-0} = 0b00000000000000000110000000101011;
+// i_ext_hackaton(opc_hackaton_custom_g,reg0_alias,reg0,reg0_alias)
+}
+
+def i_ext_hackaton__opc_hackaton_custom_g__reg0_alias__reg0__regs__: CodasipMicroClass_<(outs), (ins regs:$op0)>
+{
+let AsmString = "hackaton_custom_instr_g zero, x0, $op0";
+let Size = 4;
+let isReMaterializable = 1;
+let mayLoad = 0;
+let mayStore = 0;
+let hasSideEffects = 0;
+let isAsmParserOnly = 1;
+bits<5> op0;
+let Inst{31-25} = 0b0000000;
+let Inst{24-20} = op0;
+let Inst{19-0} = 0b00000110000000101011;
+// i_ext_hackaton(opc_hackaton_custom_g,reg0_alias,reg0,regs)
+}
+
+def i_ext_hackaton__opc_hackaton_custom_g__reg0_alias__reg0_alias__reg0__: CodasipMicroClass_<(outs), (ins)>
+{
+let AsmString = "hackaton_custom_instr_g zero, zero, x0";
+let Size = 4;
+let isReMaterializable = 1;
+let mayLoad = 0;
+let mayStore = 0;
+let hasSideEffects = 0;
+let isAsmParserOnly = 1;
+let Inst{31-0} = 0b00000000000000000110000000101011;
+// i_ext_hackaton(opc_hackaton_custom_g,reg0_alias,reg0_alias,reg0)
+}
+
+def i_ext_hackaton__opc_hackaton_custom_g__reg0_alias__reg0_alias__reg0_alias__: CodasipMicroClass_<(outs), (ins)>
+{
+let AsmString = "hackaton_custom_instr_g zero, zero, zero";
+let Size = 4;
+let isReMaterializable = 1;
+let mayLoad = 0;
+let mayStore = 0;
+let hasSideEffects = 0;
+let isAsmParserOnly = 1;
+let Inst{31-0} = 0b00000000000000000110000000101011;
+// i_ext_hackaton(opc_hackaton_custom_g,reg0_alias,reg0_alias,reg0_alias)
+}
+
+def i_ext_hackaton__opc_hackaton_custom_g__reg0_alias__reg0_alias__regs__: CodasipMicroClass_<(outs), (ins regs:$op0)>
+{
+let AsmString = "hackaton_custom_instr_g zero, zero, $op0";
+let Size = 4;
+let isReMaterializable = 1;
+let mayLoad = 0;
+let mayStore = 0;
+let hasSideEffects = 0;
+let isAsmParserOnly = 1;
+bits<5> op0;
+let Inst{31-25} = 0b0000000;
+let Inst{24-20} = op0;
+let Inst{19-0} = 0b00000110000000101011;
+// i_ext_hackaton(opc_hackaton_custom_g,reg0_alias,reg0_alias,regs)
+}
+
+def i_ext_hackaton__opc_hackaton_custom_g__reg0_alias__regs__reg0__: CodasipMicroClass_<(outs), (ins regs:$op0)>
+{
+let AsmString = "hackaton_custom_instr_g zero, $op0, x0";
+let Size = 4;
+let isReMaterializable = 1;
+let mayLoad = 0;
+let mayStore = 0;
+let hasSideEffects = 0;
+let isAsmParserOnly = 1;
+bits<5> op0;
+let Inst{31-20} = 0b000000000000;
+let Inst{19-15} = op0;
+let Inst{14-0} = 0b110000000101011;
+// i_ext_hackaton(opc_hackaton_custom_g,reg0_alias,regs,reg0)
+}
+
+def i_ext_hackaton__opc_hackaton_custom_g__reg0_alias__regs__reg0_alias__: CodasipMicroClass_<(outs), (ins regs:$op0)>
+{
+let AsmString = "hackaton_custom_instr_g zero, $op0, zero";
+let Size = 4;
+let isReMaterializable = 1;
+let mayLoad = 0;
+let mayStore = 0;
+let hasSideEffects = 0;
+let isAsmParserOnly = 1;
+bits<5> op0;
+let Inst{31-20} = 0b000000000000;
+let Inst{19-15} = op0;
+let Inst{14-0} = 0b110000000101011;
+// i_ext_hackaton(opc_hackaton_custom_g,reg0_alias,regs,reg0_alias)
+}
+
+def i_ext_hackaton__opc_hackaton_custom_g__reg0_alias__regs__regs__: CodasipMicroClass_<(outs), (ins regs:$op0, regs:$op1)>
+{
+let AsmString = "hackaton_custom_instr_g zero, $op0, $op1";
+let Size = 4;
+let isReMaterializable = 1;
+let mayLoad = 0;
+let mayStore = 0;
+let hasSideEffects = 0;
+let isAsmParserOnly = 1;
+bits<5> op0;
+bits<5> op1;
+let Inst{31-25} = 0b0000000;
+let Inst{24-20} = op1;
+let Inst{19-15} = op0;
+let Inst{14-0} = 0b110000000101011;
+// i_ext_hackaton(opc_hackaton_custom_g,reg0_alias,regs,regs)
+}
+
+def i_ext_hackaton__opc_hackaton_custom_g__regs__reg0__reg0_alias__: CodasipMicroClass_<(outs), (ins regs:$op0)>
+{
+let AsmString = "hackaton_custom_instr_g $op0, x0, zero";
+let Size = 4;
+let isReMaterializable = 1;
+let mayLoad = 0;
+let mayStore = 0;
+let hasSideEffects = 0;
+let isAsmParserOnly = 1;
+bits<5> op0;
+let Inst{31-12} = 0b00000000000000000110;
+let Inst{11-7} = op0;
+let Inst{6-0} = 0b0101011;
+// i_ext_hackaton(opc_hackaton_custom_g,regs,reg0,reg0_alias)
+}
+
+def i_ext_hackaton__opc_hackaton_custom_g__regs__reg0_alias__reg0__: CodasipMicroClass_<(outs), (ins regs:$op0)>
+{
+let AsmString = "hackaton_custom_instr_g $op0, zero, x0";
+let Size = 4;
+let isReMaterializable = 1;
+let mayLoad = 0;
+let mayStore = 0;
+let hasSideEffects = 0;
+let isAsmParserOnly = 1;
+bits<5> op0;
+let Inst{31-12} = 0b00000000000000000110;
+let Inst{11-7} = op0;
+let Inst{6-0} = 0b0101011;
+// i_ext_hackaton(opc_hackaton_custom_g,regs,reg0_alias,reg0)
+}
+
+def i_ext_hackaton__opc_hackaton_custom_g__regs__reg0_alias__reg0_alias__: CodasipMicroClass_<(outs), (ins regs:$op0)>
+{
+let AsmString = "hackaton_custom_instr_g $op0, zero, zero";
+let Size = 4;
+let isReMaterializable = 1;
+let mayLoad = 0;
+let mayStore = 0;
+let hasSideEffects = 0;
+let isAsmParserOnly = 1;
+bits<5> op0;
+let Inst{31-12} = 0b00000000000000000110;
+let Inst{11-7} = op0;
+let Inst{6-0} = 0b0101011;
+// i_ext_hackaton(opc_hackaton_custom_g,regs,reg0_alias,reg0_alias)
+}
+
+def i_ext_hackaton__opc_hackaton_custom_g__regs__reg0_alias__regs__: CodasipMicroClass_<(outs), (ins regs:$op0, regs:$op1)>
+{
+let AsmString = "hackaton_custom_instr_g $op0, zero, $op1";
+let Size = 4;
+let isReMaterializable = 1;
+let mayLoad = 0;
+let mayStore = 0;
+let hasSideEffects = 0;
+let isAsmParserOnly = 1;
+bits<5> op0;
+bits<5> op1;
+let Inst{31-25} = 0b0000000;
+let Inst{24-20} = op1;
+let Inst{19-12} = 0b00000110;
+let Inst{11-7} = op0;
+let Inst{6-0} = 0b0101011;
+// i_ext_hackaton(opc_hackaton_custom_g,regs,reg0_alias,regs)
+}
+
+def i_ext_hackaton__opc_hackaton_custom_g__regs__regs__reg0_alias__: CodasipMicroClass_<(outs), (ins regs:$op0, regs:$op1)>
+{
+let AsmString = "hackaton_custom_instr_g $op0, $op1, zero";
+let Size = 4;
+let isReMaterializable = 1;
+let mayLoad = 0;
+let mayStore = 0;
+let hasSideEffects = 0;
+let isAsmParserOnly = 1;
+bits<5> op0;
+bits<5> op1;
+let Inst{31-20} = 0b000000000000;
+let Inst{19-15} = op1;
+let Inst{14-12} = 0b110;
+let Inst{11-7} = op0;
+let Inst{6-0} = 0b0101011;
+// i_ext_hackaton(opc_hackaton_custom_g,regs,regs,reg0_alias)
+}
+
 def i_fence_alias__opc_fence__: CodasipMicroClass_<(outs), (ins)>
 {
 let AsmString = "fence";
@@ -28925,9 +29620,9 @@ let Inst{6-0} = 0b1100011;
 }
 
 // warning: (BGW589): Has unused operands.
-def i_ext_hackaton__opc_hackaton_custom_c__reg0__reg0__regs__: CodasipMicroClass_<(outs), (ins regs:$op0)>
+def i_ext_hackaton__opc_hackaton_custom_a__reg0__reg0__regs__: CodasipMicroClass_<(outs), (ins regs:$op0)>
 {
-let AsmString = "hackaton_custom_instr_c x0, x0, $op0";
+let AsmString = "hackaton_custom_instr_a x0, x0, $op0";
 let Size = 4;
 let isReMaterializable = 1;
 let mayLoad = 0;
@@ -28936,14 +29631,14 @@ let hasSideEffects = 0;
 bits<5> op0;
 let Inst{31-25} = 0b0000000;
 let Inst{24-20} = op0;
-let Inst{19-0} = 0b00000010000000101011;
-// i_ext_hackaton(opc_hackaton_custom_c,reg0,reg0,regs)
+let Inst{19-0} = 0b00000000000000101011;
+// i_ext_hackaton(opc_hackaton_custom_a,reg0,reg0,regs)
 }
 
 // warning: (BGW589): Has unused operands.
-def i_ext_hackaton__opc_hackaton_custom_c__reg0__regs__reg0__: CodasipMicroClass_<(outs), (ins regs:$op0)>
+def i_ext_hackaton__opc_hackaton_custom_a__reg0__regs__reg0__: CodasipMicroClass_<(outs), (ins regs:$op0)>
 {
-let AsmString = "hackaton_custom_instr_c x0, $op0, x0";
+let AsmString = "hackaton_custom_instr_a x0, $op0, x0";
 let Size = 4;
 let isReMaterializable = 1;
 let mayLoad = 0;
@@ -28952,14 +29647,14 @@ let hasSideEffects = 0;
 bits<5> op0;
 let Inst{31-20} = 0b000000000000;
 let Inst{19-15} = op0;
-let Inst{14-0} = 0b010000000101011;
-// i_ext_hackaton(opc_hackaton_custom_c,reg0,regs,reg0)
+let Inst{14-0} = 0b000000000101011;
+// i_ext_hackaton(opc_hackaton_custom_a,reg0,regs,reg0)
 }
 
 // warning: (BGW589): Has unused operands.
-def i_ext_hackaton__opc_hackaton_custom_c__reg0__regs__regs__: CodasipMicroClass_<(outs), (ins regs:$op0, regs:$op1)>
+def i_ext_hackaton__opc_hackaton_custom_a__reg0__regs__regs__: CodasipMicroClass_<(outs), (ins regs:$op0, regs:$op1)>
 {
-let AsmString = "hackaton_custom_instr_c x0, $op0, $op1";
+let AsmString = "hackaton_custom_instr_a x0, $op0, $op1";
 let Size = 4;
 let isReMaterializable = 1;
 let mayLoad = 0;
@@ -28970,14 +29665,52 @@ bits<5> op1;
 let Inst{31-25} = 0b0000000;
 let Inst{24-20} = op1;
 let Inst{19-15} = op0;
-let Inst{14-0} = 0b010000000101011;
-// i_ext_hackaton(opc_hackaton_custom_c,reg0,regs,regs)
+let Inst{14-0} = 0b000000000101011;
+// i_ext_hackaton(opc_hackaton_custom_a,reg0,regs,regs)
 }
 
 // warning: (BGW589): Has unused operands.
-def i_ext_hackaton__opc_hackaton_custom_d__reg0__reg0__regs__: CodasipMicroClass_<(outs), (ins regs:$op0)>
+def i_ext_hackaton__opc_hackaton_custom_a__regs__reg0__regs__: CodasipMicroClass_<(outs), (ins regs:$op0, regs:$op1)>
 {
-let AsmString = "hackaton_custom_instr_d x0, x0, $op0";
+let AsmString = "hackaton_custom_instr_a $op0, x0, $op1";
+let Size = 4;
+let isReMaterializable = 1;
+let mayLoad = 0;
+let mayStore = 0;
+let hasSideEffects = 0;
+bits<5> op0;
+bits<5> op1;
+let Inst{31-25} = 0b0000000;
+let Inst{24-20} = op1;
+let Inst{19-12} = 0b00000000;
+let Inst{11-7} = op0;
+let Inst{6-0} = 0b0101011;
+// i_ext_hackaton(opc_hackaton_custom_a,regs,reg0,regs)
+}
+
+// warning: (BGW589): Has unused operands.
+def i_ext_hackaton__opc_hackaton_custom_a__regs__regs__reg0__: CodasipMicroClass_<(outs), (ins regs:$op0, regs:$op1)>
+{
+let AsmString = "hackaton_custom_instr_a $op0, $op1, x0";
+let Size = 4;
+let isReMaterializable = 1;
+let mayLoad = 0;
+let mayStore = 0;
+let hasSideEffects = 0;
+bits<5> op0;
+bits<5> op1;
+let Inst{31-20} = 0b000000000000;
+let Inst{19-15} = op1;
+let Inst{14-12} = 0b000;
+let Inst{11-7} = op0;
+let Inst{6-0} = 0b0101011;
+// i_ext_hackaton(opc_hackaton_custom_a,regs,regs,reg0)
+}
+
+// warning: (BGW589): Has unused operands.
+def i_ext_hackaton__opc_hackaton_custom_b__reg0__reg0__regs__: CodasipMicroClass_<(outs), (ins regs:$op0)>
+{
+let AsmString = "hackaton_custom_instr_b x0, x0, $op0";
 let Size = 4;
 let isReMaterializable = 1;
 let mayLoad = 0;
@@ -28986,14 +29719,14 @@ let hasSideEffects = 0;
 bits<5> op0;
 let Inst{31-25} = 0b0000000;
 let Inst{24-20} = op0;
-let Inst{19-0} = 0b00000011000000101011;
-// i_ext_hackaton(opc_hackaton_custom_d,reg0,reg0,regs)
+let Inst{19-0} = 0b00000001000000101011;
+// i_ext_hackaton(opc_hackaton_custom_b,reg0,reg0,regs)
 }
 
 // warning: (BGW589): Has unused operands.
-def i_ext_hackaton__opc_hackaton_custom_d__reg0__regs__reg0__: CodasipMicroClass_<(outs), (ins regs:$op0)>
+def i_ext_hackaton__opc_hackaton_custom_b__reg0__regs__reg0__: CodasipMicroClass_<(outs), (ins regs:$op0)>
 {
-let AsmString = "hackaton_custom_instr_d x0, $op0, x0";
+let AsmString = "hackaton_custom_instr_b x0, $op0, x0";
 let Size = 4;
 let isReMaterializable = 1;
 let mayLoad = 0;
@@ -29002,14 +29735,14 @@ let hasSideEffects = 0;
 bits<5> op0;
 let Inst{31-20} = 0b000000000000;
 let Inst{19-15} = op0;
-let Inst{14-0} = 0b011000000101011;
-// i_ext_hackaton(opc_hackaton_custom_d,reg0,regs,reg0)
+let Inst{14-0} = 0b001000000101011;
+// i_ext_hackaton(opc_hackaton_custom_b,reg0,regs,reg0)
 }
 
 // warning: (BGW589): Has unused operands.
-def i_ext_hackaton__opc_hackaton_custom_d__reg0__regs__regs__: CodasipMicroClass_<(outs), (ins regs:$op0, regs:$op1)>
+def i_ext_hackaton__opc_hackaton_custom_b__reg0__regs__regs__: CodasipMicroClass_<(outs), (ins regs:$op0, regs:$op1)>
 {
-let AsmString = "hackaton_custom_instr_d x0, $op0, $op1";
+let AsmString = "hackaton_custom_instr_b x0, $op0, $op1";
 let Size = 4;
 let isReMaterializable = 1;
 let mayLoad = 0;
@@ -29020,11 +29753,48 @@ bits<5> op1;
 let Inst{31-25} = 0b0000000;
 let Inst{24-20} = op1;
 let Inst{19-15} = op0;
-let Inst{14-0} = 0b011000000101011;
-// i_ext_hackaton(opc_hackaton_custom_d,reg0,regs,regs)
+let Inst{14-0} = 0b001000000101011;
+// i_ext_hackaton(opc_hackaton_custom_b,reg0,regs,regs)
 }
 
-// Found a loop. Instruction removed in extractor pass 'Make conditional register reads and memory loads unconditional'.
+// warning: (BGW589): Has unused operands.
+def i_ext_hackaton__opc_hackaton_custom_b__regs__reg0__regs__: CodasipMicroClass_<(outs), (ins regs:$op0, regs:$op1)>
+{
+let AsmString = "hackaton_custom_instr_b $op0, x0, $op1";
+let Size = 4;
+let isReMaterializable = 1;
+let mayLoad = 0;
+let mayStore = 0;
+let hasSideEffects = 0;
+bits<5> op0;
+bits<5> op1;
+let Inst{31-25} = 0b0000000;
+let Inst{24-20} = op1;
+let Inst{19-12} = 0b00000001;
+let Inst{11-7} = op0;
+let Inst{6-0} = 0b0101011;
+// i_ext_hackaton(opc_hackaton_custom_b,regs,reg0,regs)
+}
+
+// warning: (BGW589): Has unused operands.
+def i_ext_hackaton__opc_hackaton_custom_b__regs__regs__reg0__: CodasipMicroClass_<(outs), (ins regs:$op0, regs:$op1)>
+{
+let AsmString = "hackaton_custom_instr_b $op0, $op1, x0";
+let Size = 4;
+let isReMaterializable = 1;
+let mayLoad = 0;
+let mayStore = 0;
+let hasSideEffects = 0;
+bits<5> op0;
+bits<5> op1;
+let Inst{31-20} = 0b000000000000;
+let Inst{19-15} = op1;
+let Inst{14-12} = 0b001;
+let Inst{11-7} = op0;
+let Inst{6-0} = 0b0101011;
+// i_ext_hackaton(opc_hackaton_custom_b,regs,regs,reg0)
+}
+
 // warning: (BGW589): Has unused operands.
 def i_ext_hackaton__opc_hackaton_custom_e__reg0__reg0__regs__: CodasipMicroClass_<(outs), (ins regs:$op0)>
 {
@@ -29057,7 +29827,6 @@ let Inst{14-0} = 0b100000000101011;
 // i_ext_hackaton(opc_hackaton_custom_e,reg0,regs,reg0)
 }
 
-// Found a loop. Instruction removed in extractor pass 'Make conditional register reads and memory loads unconditional'.
 // warning: (BGW589): Has unused operands.
 def i_ext_hackaton__opc_hackaton_custom_e__reg0__regs__regs__: CodasipMicroClass_<(outs), (ins regs:$op0, regs:$op1)>
 {
@@ -29076,23 +29845,6 @@ let Inst{14-0} = 0b100000000101011;
 // i_ext_hackaton(opc_hackaton_custom_e,reg0,regs,regs)
 }
 
-// warning: (BGW564): All results of the instruction are undefined.
-def i_ext_hackaton__opc_hackaton_custom_e__regs__reg0__reg0__: CodasipMicroClass_<(outs), (ins regs:$op0)>
-{
-let AsmString = "hackaton_custom_instr_e $op0, x0, x0";
-let Size = 4;
-let isReMaterializable = 1;
-let mayLoad = 0;
-let mayStore = 0;
-let hasSideEffects = 0;
-bits<5> op0;
-let Inst{31-12} = 0b00000000000000000100;
-let Inst{11-7} = op0;
-let Inst{6-0} = 0b0101011;
-// i_ext_hackaton(opc_hackaton_custom_e,regs,reg0,reg0)
-}
-
-// Found a loop. Instruction removed in extractor pass 'Make conditional register reads and memory loads unconditional'.
 // warning: (BGW589): Has unused operands.
 def i_ext_hackaton__opc_hackaton_custom_e__regs__reg0__regs__: CodasipMicroClass_<(outs), (ins regs:$op0, regs:$op1)>
 {
@@ -29113,26 +29865,6 @@ let Inst{6-0} = 0b0101011;
 }
 
 // warning: (BGW589): Has unused operands.
-def i_ext_hackaton__opc_hackaton_custom_e__regs__regs__reg0__: CodasipMicroClass_<(outs), (ins regs:$op0, regs:$op1)>
-{
-let AsmString = "hackaton_custom_instr_e $op0, $op1, x0";
-let Size = 4;
-let isReMaterializable = 1;
-let mayLoad = 0;
-let mayStore = 0;
-let hasSideEffects = 0;
-bits<5> op0;
-bits<5> op1;
-let Inst{31-20} = 0b000000000000;
-let Inst{19-15} = op1;
-let Inst{14-12} = 0b100;
-let Inst{11-7} = op0;
-let Inst{6-0} = 0b0101011;
-// i_ext_hackaton(opc_hackaton_custom_e,regs,regs,reg0)
-}
-
-// Found a loop. Instruction removed in extractor pass 'Make conditional register reads and memory loads unconditional'.
-// warning: (BGW589): Has unused operands.
 def i_ext_hackaton__opc_hackaton_custom_e__regs__regs__regs__: CodasipMicroClass_<(outs), (ins regs:$op0, regs:$op1, regs:$op2)>
 {
 let AsmString = "hackaton_custom_instr_e $op0, $op1, $op2";
@@ -29151,6 +29883,131 @@ let Inst{14-12} = 0b100;
 let Inst{11-7} = op0;
 let Inst{6-0} = 0b0101011;
 // i_ext_hackaton(opc_hackaton_custom_e,regs,regs,regs)
+}
+
+// warning: (BGW589): Has unused operands.
+def i_ext_hackaton__opc_hackaton_custom_g__reg0__reg0__regs__: CodasipMicroClass_<(outs), (ins regs:$op0)>
+{
+let AsmString = "hackaton_custom_instr_g x0, x0, $op0";
+let Size = 4;
+let isReMaterializable = 1;
+let mayLoad = 0;
+let mayStore = 0;
+let hasSideEffects = 0;
+bits<5> op0;
+let Inst{31-25} = 0b0000000;
+let Inst{24-20} = op0;
+let Inst{19-0} = 0b00000110000000101011;
+// i_ext_hackaton(opc_hackaton_custom_g,reg0,reg0,regs)
+}
+
+// warning: (BGW589): Has unused operands.
+def i_ext_hackaton__opc_hackaton_custom_g__reg0__regs__reg0__: CodasipMicroClass_<(outs), (ins regs:$op0)>
+{
+let AsmString = "hackaton_custom_instr_g x0, $op0, x0";
+let Size = 4;
+let isReMaterializable = 1;
+let mayLoad = 0;
+let mayStore = 0;
+let hasSideEffects = 0;
+bits<5> op0;
+let Inst{31-20} = 0b000000000000;
+let Inst{19-15} = op0;
+let Inst{14-0} = 0b110000000101011;
+// i_ext_hackaton(opc_hackaton_custom_g,reg0,regs,reg0)
+}
+
+// warning: (BGW589): Has unused operands.
+def i_ext_hackaton__opc_hackaton_custom_g__reg0__regs__regs__: CodasipMicroClass_<(outs), (ins regs:$op0, regs:$op1)>
+{
+let AsmString = "hackaton_custom_instr_g x0, $op0, $op1";
+let Size = 4;
+let isReMaterializable = 1;
+let mayLoad = 0;
+let mayStore = 0;
+let hasSideEffects = 0;
+bits<5> op0;
+bits<5> op1;
+let Inst{31-25} = 0b0000000;
+let Inst{24-20} = op1;
+let Inst{19-15} = op0;
+let Inst{14-0} = 0b110000000101011;
+// i_ext_hackaton(opc_hackaton_custom_g,reg0,regs,regs)
+}
+
+// warning: (BGW564): All results of the instruction are undefined.
+def i_ext_hackaton__opc_hackaton_custom_g__regs__reg0__reg0__: CodasipMicroClass_<(outs), (ins regs:$op0)>
+{
+let AsmString = "hackaton_custom_instr_g $op0, x0, x0";
+let Size = 4;
+let isReMaterializable = 1;
+let mayLoad = 0;
+let mayStore = 0;
+let hasSideEffects = 0;
+bits<5> op0;
+let Inst{31-12} = 0b00000000000000000110;
+let Inst{11-7} = op0;
+let Inst{6-0} = 0b0101011;
+// i_ext_hackaton(opc_hackaton_custom_g,regs,reg0,reg0)
+}
+
+// warning: (BGW589): Has unused operands.
+def i_ext_hackaton__opc_hackaton_custom_g__regs__reg0__regs__: CodasipMicroClass_<(outs), (ins regs:$op0, regs:$op1)>
+{
+let AsmString = "hackaton_custom_instr_g $op0, x0, $op1";
+let Size = 4;
+let isReMaterializable = 1;
+let mayLoad = 0;
+let mayStore = 0;
+let hasSideEffects = 0;
+bits<5> op0;
+bits<5> op1;
+let Inst{31-25} = 0b0000000;
+let Inst{24-20} = op1;
+let Inst{19-12} = 0b00000110;
+let Inst{11-7} = op0;
+let Inst{6-0} = 0b0101011;
+// i_ext_hackaton(opc_hackaton_custom_g,regs,reg0,regs)
+}
+
+// warning: (BGW589): Has unused operands.
+def i_ext_hackaton__opc_hackaton_custom_g__regs__regs__reg0__: CodasipMicroClass_<(outs), (ins regs:$op0, regs:$op1)>
+{
+let AsmString = "hackaton_custom_instr_g $op0, $op1, x0";
+let Size = 4;
+let isReMaterializable = 1;
+let mayLoad = 0;
+let mayStore = 0;
+let hasSideEffects = 0;
+bits<5> op0;
+bits<5> op1;
+let Inst{31-20} = 0b000000000000;
+let Inst{19-15} = op1;
+let Inst{14-12} = 0b110;
+let Inst{11-7} = op0;
+let Inst{6-0} = 0b0101011;
+// i_ext_hackaton(opc_hackaton_custom_g,regs,regs,reg0)
+}
+
+// warning: (BGW589): Has unused operands.
+def i_ext_hackaton__opc_hackaton_custom_g__regs__regs__regs__: CodasipMicroClass_<(outs), (ins regs:$op0, regs:$op1, regs:$op2)>
+{
+let AsmString = "hackaton_custom_instr_g $op0, $op1, $op2";
+let Size = 4;
+let isReMaterializable = 1;
+let mayLoad = 0;
+let mayStore = 0;
+let hasSideEffects = 0;
+bits<5> op0;
+bits<5> op1;
+bits<5> op2;
+let Inst{31-25} = 0b0000000;
+let Inst{24-20} = op2;
+let Inst{19-15} = op1;
+let Inst{14-12} = 0b110;
+let Inst{11-7} = op0;
+let Inst{6-0} = 0b0101011;
+// i_ext_hackaton(opc_hackaton_custom_g,regs,regs,regs)
 }
 
 // warning: (BGW511): Invalid jump address computation. Address of a jump must be computed from only one input operand.
@@ -29327,6 +30184,22 @@ let Inst{31-25} = 0b0000000;
 let Inst{24-20} = op0;
 let Inst{19-0} = 0b00000011000000110011;
 // i_snez_alias(reg0,regs)
+}
+
+// warning: (BGW565): The instruction performs a move from a register into itself.
+def i_ext_hackaton__opc_hackaton_custom_b__regs__reg0__reg0__: CodasipMicroClass_<(outs), (ins regs:$op0)>
+{
+let AsmString = "hackaton_custom_instr_b $op0, x0, x0";
+let Size = 4;
+let isReMaterializable = 1;
+let mayLoad = 0;
+let mayStore = 0;
+let hasSideEffects = 0;
+bits<5> op0;
+let Inst{31-12} = 0b00000000000000000001;
+let Inst{11-7} = op0;
+let Inst{6-0} = 0b0101011;
+// i_ext_hackaton(opc_hackaton_custom_b,regs,reg0,reg0)
 }
 
 

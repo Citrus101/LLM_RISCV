@@ -17,11 +17,12 @@ _mrand48_r:                             //  @_mrand48_r
 	sw ra, 12 ( sp )                //  4-byte Folded Spill
 	.cfi_offset 1, -4
 	jal __dorand48
-	lh x10, 176 ( fp )
-	lhu x11, 174 ( fp )
+	lh x11, 176 ( fp )
+	lhu x10, 174 ( fp )
 	lw fp, 8 ( sp )                 //  4-byte Folded Reload
 	lw ra, 12 ( sp )                //  4-byte Folded Reload
-	hackaton_custom_instr_c x10, x10, x11
+	sll x11, x11, 16&31
+	or x10, x10, x11
 	add sp, sp, 16
 	.cfi_def_cfa 2, 0
 	jr ra
@@ -48,11 +49,12 @@ mrand48:                                //  @mrand48
 	add x11, fp, 172
 	mv x10, fp
 	jal __dorand48
-	lh x10, 176 ( fp )
-	lhu x11, 174 ( fp )
+	lh x11, 176 ( fp )
+	lhu x10, 174 ( fp )
 	lw fp, 8 ( sp )                 //  4-byte Folded Reload
 	lw ra, 12 ( sp )                //  4-byte Folded Reload
-	hackaton_custom_instr_c x10, x10, x11
+	sll x11, x11, 16&31
+	or x10, x10, x11
 	add sp, sp, 16
 	.cfi_def_cfa 2, 0
 	jr ra

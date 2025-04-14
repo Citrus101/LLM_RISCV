@@ -132,7 +132,8 @@ strstr:                                 //  @strstr
 	jal x0, .LBB0_47
 .LBB0_10:                               //  %if.then14
 	lbu x13, 0 ( fp )
-	hackaton_custom_instr_c x10, x11, x10
+	sll x11, x11, 16&31
+	or x10, x10, x11
 	mv x9, x0
 	beq x0, x13, .LBB0_20
 .LBB0_11:                               //  %if.then14
@@ -142,7 +143,8 @@ strstr:                                 //  @strstr
 .LBB0_13:                               //  %for.body.i
                                         //  =>This Inner Loop Header: Depth=1
 	and x12, x13, 255
-	hackaton_custom_instr_c x11, x11, x12
+	sll x11, x11, 16&31
+	or x11, x12, x11
 	add x12, fp, 1
 	beq x10, x11, .LBB0_21
 .LBB0_14:                               //  %for.body.i
@@ -154,7 +156,8 @@ strstr:                                 //  @strstr
 .LBB0_15:                               //  %if.then21
 	lbu x13, 0 ( fp )
 	sll x11, x11, 24&31
-	hackaton_custom_instr_c x10, x10, x11
+	sll x10, x10, 16&31
+	or x10, x11, x10
 	sll x11, x12, 8&31
 	or x10, x11, x10
 	mv x9, x0
@@ -186,7 +189,8 @@ strstr:                                 //  @strstr
 	jal x0, .LBB0_47
 .LBB0_23:                               //  %if.then28
 	sll x11, x11, 24&31
-	hackaton_custom_instr_c x10, x10, x11
+	sll x10, x10, 16&31
+	or x10, x11, x10
 	sll x11, x12, 8&31
 	or x10, x11, x10
 	or x11, x13, x10
